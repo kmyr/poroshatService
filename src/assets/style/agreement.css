@@ -55,10 +55,16 @@
   float: right;
 }
 .costs td {
-  border: 1px solid #000;
+  border: 1px #000;
+  border-style: double !important;
 }
 #hideOnPrintBtn {
   margin: 5px;
+}
+.costs {
+  width: 100%;
+  margin: auto;
+  padding-left: 100px;
 }
 
 @media print {

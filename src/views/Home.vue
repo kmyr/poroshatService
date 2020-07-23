@@ -14,12 +14,12 @@ export default {
   data() {
     return {
       status: null,
-      info: null,
+      info: null
     };
   },
   components: {
     infoForm: form,
-    agreement,
-  },
+    agreement
+  }
 };
 </script>
