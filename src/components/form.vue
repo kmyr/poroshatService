@@ -39,6 +39,16 @@
 
           <label>تاریخ پایان قرارداد</label>
           <input v-model="info.endDate" type="text" class="form-control" />
+
+          <label>حقوق</label>
+          <select class="form-control" v-model="info.salary">
+            <option>25،189،697</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
         </div>
         <button type="button" @click="submitForm" class="btn btn-primary">ثبت</button>
       </div>
@@ -49,6 +59,32 @@
 export default {
   data() {
     return {
+      salaryList: [
+        {
+          baseSalary: "18،354،270",
+          years: "0",
+          worker: "4،000،000",
+          housing: "1،000،000",
+          children: "1،835،427",
+          sumOfSalary: "25،189،697"
+        },
+        {
+          baseSalary: "a2",
+          years: "b2",
+          worker: "2",
+          housing: "2",
+          children: "2",
+          sumOfSalary: "2"
+        },
+        {
+          baseSalary: "a3",
+          years: "b3",
+          worker: "3",
+          housing: "3",
+          children: "3",
+          sumOfSalary: "3"
+        }
+      ],
       info: {
         name: "",
         fatherName: "",
@@ -58,7 +94,8 @@ export default {
         education: "",
         address: "",
         startDate: "",
-        endDate: ""
+        endDate: "",
+        salary: ""
       },
       status: false
     };
@@ -69,6 +106,12 @@ export default {
 
   methods: {
     submitForm() {
+      for (let i = 0; i < this.salaryList.length; i++) {
+        const selectedSalary = this.salaryList[i];
+        if (selectedSalary.sumOfSalary == this.info.salary) {
+          this.info.salary = selectedSalary;
+        }
+      }
       this.status = true;
       this.$parent.$data.status = this.status;
       this.$parent.$data.info = this.info;
