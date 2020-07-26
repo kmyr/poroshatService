@@ -12,6 +12,16 @@
           <label>تاریخ تولد</label>
           <input v-model="info.birthdayDate" type="text" class="form-control" />
 
+          <label>سمت</label>
+          <input v-model="info.role" type="text" class="form-control" />
+
+          <label>محل خدمت</label>
+          <select class="form-control" v-model="info.employmentPlace">
+            <option>تولید</option>
+            <option>دفتر مرکزی</option>
+            <option>فنی مهندسی</option>
+          </select>
+
           <label>کد ملی</label>
           <input v-model="info.idCard" type="number" class="form-control" />
 
@@ -66,7 +76,9 @@ export default {
           worker: "4،000،000",
           housing: "1،000،000",
           children: "1،835،427",
-          sumOfSalary: "25،189،697"
+          sumOfSalary: "25،189،697",
+          salaryLetter:
+            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال"
         },
         {
           baseSalary: "a2",
@@ -89,6 +101,8 @@ export default {
         name: "",
         fatherName: "",
         birthdayDate: "",
+        role: "",
+        employmentPlace: "",
         idCard: "",
         idNumber: "",
         education: "",
