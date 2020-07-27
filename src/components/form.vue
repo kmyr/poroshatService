@@ -1,35 +1,73 @@
 <template>
   <div>
-    <form>
+    <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="infoForm">
           <label>نام و نام خانوادگی</label>
-          <input v-model="info.name" type="text" class="form-control" required />
+          <input
+            name="fullname"
+            v-model="info.name"
+            type="text"
+            class="form-control"
+          />
 
           <label>نام پدر</label>
-          <input v-model="info.fatherName" type="text" class="form-control" required />
+          <input
+            name="fatherName"
+            v-model="info.fatherName"
+            type="text"
+            class="form-control"
+          />
 
           <label>تاریخ تولد</label>
-          <input v-model="info.birthdayDate" type="text" class="form-control" required />
+          <input
+            name="birthdayDate"
+            v-model="info.birthdayDate"
+            type="text"
+            class="form-control"
+          />
 
           <label>سمت</label>
-          <input v-model="info.role" type="text" class="form-control" required />
+          <input
+            name="role"
+            v-model="info.role"
+            type="text"
+            class="form-control"
+          />
 
           <label>محل خدمت</label>
-          <select class="form-control" v-model="info.employmentPlace">
+          <select
+            name="employmentPlace"
+            class="form-control"
+            v-model="info.employmentPlace"
+          >
             <option>تولید</option>
             <option>دفتر مرکزی</option>
             <option>فنی مهندسی</option>
           </select>
 
           <label>کد ملی</label>
-          <input v-model="info.idCard" type="number" class="form-control" required />
+          <input
+            name="idCard"
+            v-model="info.idCard"
+            type="number"
+            class="form-control"
+          />
 
           <label>شماره شناسنامه</label>
-          <input v-model="info.idNumber" type="number" class="form-control" required />
+          <input
+            name="idNumber"
+            v-model="info.idNumber"
+            type="number"
+            class="form-control"
+          />
 
           <label>تحصیلات</label>
-          <select class="form-control" v-model="info.education">
+          <select
+            name="education"
+            class="form-control"
+            v-model="info.education"
+          >
             <option>ابتدایی</option>
             <option>سیکل</option>
             <option>دیپلم</option>
@@ -43,39 +81,44 @@
 
           <label>آدرس</label>
           <input
+            name="address"
             v-model="info.address"
             type="text"
             class="form-control"
             style="margin-bottom:15px"
-            required
           />
 
           <label>تاریخ شروع قرارداد</label>
           <div class="form-row">
             <div class="col">
               <input
+                name="startMonth"
                 type="number"
                 class="form-control"
                 placeholder="Month"
                 v-model="info.startDate.month"
-                required
               />
             </div>
             <div class="col">
               <input
+                name="startDay"
                 type="number"
                 class="form-control"
                 placeholder="Day"
                 v-model="info.startDate.day"
-                required
               />
             </div>
           </div>
           <label>مدت قرارداد</label>
-          <input v-model="info.periodDate" type="number" class="form-control" required />
+          <input
+            name="contractPeriod"
+            v-model="info.periodDate"
+            type="number"
+            class="form-control"
+          />
 
           <label>حقوق</label>
-          <select class="form-control" v-model="info.salary">
+          <select name="salary" class="form-control" v-model="info.salary">
             <option>25،189،697</option>
             <option>2</option>
             <option>3</option>
@@ -84,12 +127,20 @@
             <option>6</option>
           </select>
         </div>
-        <input id="submitBtn" type="submit" @click="submitForm" class="btn btn-primary" value="ثبت" />
+        <button
+          id="submitBtn"
+          @click="inputValidation"
+          type="button"
+          class="btn btn-primary"
+        >
+          ثبت
+        </button>
       </div>
     </form>
   </div>
 </template>
 <script>
+import $ from "jquery";
 export default {
   data() {
     return {
@@ -102,7 +153,7 @@ export default {
           children: "1،835،427",
           sumOfSalary: "25،189،697",
           salaryLetter:
-            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال"
+            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال",
         },
         {
           baseSalary: "a2",
@@ -112,7 +163,7 @@ export default {
           children: "2",
           sumOfSalary: "2",
           salaryLetter:
-            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال"
+            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال",
         },
         {
           baseSalary: "a3",
@@ -122,8 +173,8 @@ export default {
           children: "3",
           sumOfSalary: "3",
           salaryLetter:
-            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال"
-        }
+            "بیست و سه میلیون و سیصد و پنجاه و چهار هزار و دویست و هفتاد ریال",
+        },
       ],
       info: {
         name: "",
@@ -137,14 +188,15 @@ export default {
         address: "",
         startDate: {
           month: "",
-          day: ""
+          day: "",
         },
         periodDate: 1,
-        salary: ""
+        salary: "",
       },
-      status: false
+      status: false,
     };
   },
+  mounted() {},
   created() {
     this.$parent.$data.status = this.status;
   },
@@ -161,9 +213,37 @@ export default {
       this.status = true;
       this.$parent.$data.status = this.status;
       this.$parent.$data.info = this.info;
-    }
-  }
+    },
+    inputValidation() {
+      if (
+        $("input[name='fullname']").val() == "" ||
+        $("input[name='fatherName']").val() == "" ||
+        $("input[name='birthdayDate']").val() == "" ||
+        $("input[name='role']").val() == "" ||
+        $("select[name='employmentPlace']").val() == "" ||
+        $("input[name='idCard']").val() == "" ||
+        $("input[name='idNumber']").val() == "" ||
+        $("select[name='education']").val() == "" ||
+        $("input[name='address']").val() == "" ||
+        $("input[name='startMonth']").val() == "" ||
+        $("input[name='startDay']").val() == "" ||
+        $("input[name='contractPeriod']").val() == "" ||
+        $("select[name='salary']").val() == ""
+      ) {
+        $("input,select")
+          .filter(function() {
+            return this.value == "";
+          })
+          .addClass("is-invalid");
+        $("input,select")
+          .filter(function() {
+            return this.value !== "";
+          })
+          .removeClass("is-invalid");
+      } else {
+        this.submitForm();
+      }
+    },
+  },
 };
 </script>
-
-

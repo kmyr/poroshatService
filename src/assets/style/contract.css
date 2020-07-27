@@ -23,11 +23,11 @@
 }
 .sheet.secondSheet {
   margin-top: 1%;
-} 
+}
 
 .previewSheet {
   padding: 30px;
-  margin-left: 10%;
+  float: right;
 }
 .bodyPart {
   width: 100%;
@@ -41,22 +41,24 @@
   margin: 5px;
 }
 
-
 @media print {
   .sheet {
     width: 100%;
     height: 39.9cm;
-    margin-bottom: 1px;
+    margin-bottom: 1%;
   }
   #hideOnPrintBtn {
     display: none;
   }
   .bodyPart {
-  padding: 25px;
-
+    padding: 25px;
   }
   .previewSheet {
     padding: 0;
     margin-left: 0;
   }
+}
+button,
+input {
+  font-family: zar;
 }

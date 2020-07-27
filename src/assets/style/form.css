@@ -1,13 +1,16 @@
 #infoForm {
-    padding: 3%;
-    width: 50%;
-    float: right;
+  padding: 3%;
+  width: 50%;
+  float: right;
 }
 #infoForm label {
-    text-align: right;
-    float: right;
+  text-align: right;
+  float: right;
 }
 #submitBtn {
-    position: fixed;
-    margin: 10px;
+  position: fixed;
+  margin: 10px;
+}
+.is-invalid {
+  border: 1px solid red;
 }
