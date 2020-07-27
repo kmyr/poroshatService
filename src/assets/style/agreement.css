@@ -12,6 +12,7 @@
   height: 40cm;
   border-style: double !important;
   margin-bottom: 30px;
+  position: relative;
 }
 .titr {
   font-family: titr !important;
@@ -23,30 +24,7 @@
 .sheet.secondSheet {
   margin-top: 1%;
 } 
-.header {
-  display: flex;
-}
-.headerDate,
-.headerTitle,
-.headerLogo {
-  height: 110px;
-  border: 1px solid black;
-}
-.headerDate,
-.headerLogo {
-  width: 30%;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-}
-.headerTitle {
-  width: 40%;
-  border-top: 0;
-  padding: 20px 0;
-  font-size: 20px;
-  text-align: center;
-  font-family: zar;
-}
+
 .previewSheet {
   padding: 30px;
   margin-left: 10%;

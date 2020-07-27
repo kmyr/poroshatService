@@ -1,4 +1,13 @@
 #infoForm {
     padding: 3%;
-    direction: rtl !important
+    width: 50%;
+    float: right;
+}
+#infoForm label {
+    text-align: right;
+    float: right;
+}
+#submitBtn {
+    position: fixed;
+    margin: 10px;
 }

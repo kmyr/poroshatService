@@ -1,0 +1,62 @@
+.header {
+    display: flex;
+  }
+  .headerDate,
+  .headerTitle,
+  .headerLogo {
+    height: 110px;
+    border: 1px solid black;
+  }
+  .headerDate,
+  .headerLogo {
+    width: 30%;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .headerDateValue,.headerNumberValue {
+    float: right;
+  }
+  .headerDate {
+    padding: 15px;
+    font-family: zar;
+    font-size: 20px;
+  }
+  .headerTitle {
+    width: 40%;
+    border-top: 0;
+    padding: 20px 0;
+    font-size: 20px;
+    text-align: center;
+    font-family: zar;
+  }
+  .headerLogoImg {
+    width: 120px;
+    margin-left: 30%;
+    margin-top: 5px;
+  }
+  
+  .footer {
+    position: absolute;
+    border-top: 1px solid #000;
+    bottom: 0 !important; 
+    width: 100%; 
+    height: 30px;   
+    display: flex;
+    font-family: zar;
+  }
+  .footerEdit,.footerNumber,.footerDate {
+    text-align: center;
+    padding: 3px 0 0 0;
+  }
+  .footerEdit,.footerNumber {
+    width: 30%;
+  }
+  .footerDate {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    width: 40%;
+
+  }
+  
+ 
