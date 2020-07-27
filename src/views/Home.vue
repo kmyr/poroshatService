@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <infoForm v-if="!status"></infoForm>
-    <agreement v-if="status"></agreement>
+    <contract v-if="status"></contract>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import form from "@/components/form";
-import agreement from "@/components/preview";
+import contract from "@/components/preview";
 
 export default {
   data() {
@@ -19,7 +19,7 @@ export default {
   },
   components: {
     infoForm: form,
-    agreement
+    contract
   }
 };
 </script>

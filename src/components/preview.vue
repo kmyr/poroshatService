@@ -498,7 +498,7 @@ export default {
 };
 </script>
 <style>
-@import url("../assets/style/agreement.css");
+@import url("../assets/style/contract.css");
 @import url("../assets/style/tables.css");
 @import url("../assets/style/header-footer.css");
 </style>

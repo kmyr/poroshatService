@@ -1,4 +1,4 @@
-# confrim
+# contract
 
 ## Project setup
 ```
