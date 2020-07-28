@@ -80,7 +80,7 @@
             <option v-for="(salary, i) in salaryList" :key="i">{{salary.sumOfSalary}}</option>
           </select>
         </div>
-        <button id="submitBtn" @click="submitForm" type="button" class="btn btn-primary">ثبت</button>
+        <button id="submitBtn" @click="inputValidation" type="button" class="btn btn-primary">ثبت</button>
       </div>
     </form>
   </div>
