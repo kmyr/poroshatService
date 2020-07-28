@@ -11,6 +11,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
 
+export const formData = new Vue();
+
 new Vue({
   router,
   render: h => h(App)

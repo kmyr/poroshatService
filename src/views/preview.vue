@@ -1,39 +1,27 @@
 <template>
   <div class="previewSheet">
-    <button
-      id="hideOnPrintBtn"
-      class="btn btn-outline-primary"
-      @click="printSheet"
-    >
-      پرینت
-    </button>
-    <button
-      id="hideOnPrintBtn"
-      class="btn btn-outline-danger backBtn"
-      @click="goBack"
-    >
-      انصراف
-    </button>
+    <button id="hideOnPrintBtn" class="btn btn-outline-primary" @click="printSheet">پرینت</button>
+    <button id="hideOnPrintBtn" class="btn btn-outline-danger backBtn" @click="goBack">انصراف</button>
 
     <div class="file">
       <div class="sheet" id="sheet">
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
-              <span
-                >1399/{{ info.startDate.month }}/{{
-                  info.startDate.day
+              <span>
+                1399/{{ info.startDate.month }}/{{
+                info.startDate.day
                 }}
-                :</span
-              >تاریخ
+                :
+              </span>تاریخ
             </span>
             <br />
-            <span class="headerNumberValue"> <span>:</span>شماره </span>
+            <span class="headerNumberValue">
+              <span>:</span>شماره
+            </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px"
-              >فرم قراردادکار موقت</span
-            >
+            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -64,7 +52,9 @@
           <span class="titr">ماده 1) مـوضـوع قـرارداد</span>
           <br />عبارتست از انجـام وظايف ذيـل تـوسـط همکار در پسـت سـازمـانـي،
           تحـت عنـوان
-          <span class="bold">{{ info.role }}</span>
+          <span
+            class="bold"
+          >{{ info.role }}</span>
           و هم چنین انجام ساير امـور محـوله و وظايف مرتبـط با شغـل كـارمنـد
           براسـاس دستـورات كـارفـرمـا
           <br />
@@ -117,23 +107,21 @@
                   جمع کل:
                   <span class="bold">{{ info.salary.salaryLetter }}</span>
                 </td>
-                <td class="salarySectionTable" colspan="2">
-                  {{ info.salary.sumOfSalary }}
-                </td>
+                <td class="salarySectionTable" colspan="2">{{ info.salary.sumOfSalary }}</td>
               </tr>
             </tbody>
           </table>
           <br />
           <br />
-          <span class="bold"
-            >لازم به ذکر است مبنای جدول حقوق و مزایای فوق افزایش حداقل دستمزد
-            مصوبه شورای عالی کار در سال 99 می باشد</span
-          >
+          <span class="bold">
+            لازم به ذکر است مبنای جدول حقوق و مزایای فوق افزایش حداقل دستمزد
+            مصوبه شورای عالی کار در سال 99 می باشد
+          </span>
           <br />
           <span class="titr">ماده 5) مـدت قـرارداد</span>
           <br />
           مـدت قـرارداد از تـاريـخ 1399/{{ info.startDate.month }}/{{
-            info.startDate.day
+          info.startDate.day
           }}
           لغـايـت 1399/{{ info.startDate.month }}/{{ currentFinishedDay }}
           مي بـاشـد
@@ -169,13 +157,13 @@
               یا تعطیل فعالیت، پایان پروژه، یا احکام مراجع صالحه اداری و قضایی
             </li>
             <li>عدم رضایت کارفرما از همکار</li>
-            <li>
-              طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)
-            </li>
+            <li>طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)</li>
           </ol>
         </div>
         <div class="footer">
-          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
+          <div class="footerNumber">
+            <span>PF0013 :</span>کد فرم
+          </div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -185,20 +173,20 @@
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
-              <span
-                >1399/{{ info.startDate.month }}/{{
-                  info.startDate.day
+              <span>
+                1399/{{ info.startDate.month }}/{{
+                info.startDate.day
                 }}
-                :</span
-              >تاریخ
+                :
+              </span>تاریخ
             </span>
             <br />
-            <span class="headerNumberValue"> <span>:</span>شماره </span>
+            <span class="headerNumberValue">
+              <span>:</span>شماره
+            </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px"
-              >فرم قراردادکار موقت</span
-            >
+            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -209,9 +197,7 @@
         <div class="bodyPart">
           <span class="titr">ماده 7) تعهدات همکار</span>
           <ol style="direction: rtl">
-            <li>
-              انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما
-            </li>
+            <li>انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما</li>
             <li>رعایت کلیة ضوابط و مقررات قانونی و داخلی شرکت</li>
             <li>
               در صورت عدم تمایل به همکاری 30 روز قبل از اتمام قرارداد باید
@@ -271,9 +257,7 @@
               معذوریت از کار، بروز حادثه ناشی از کار، بیماری، فوت و سایر تسهیلات
               مقرر در قانون،تابع قانون کار و تأمین اجتماعی خواهد بود
             </li>
-            <li>
-              کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند
-            </li>
+            <li>کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند</li>
             <li>
               هرگاه برای کارفرما اثبات گردد که همکار به هر طریق ممکن اطلاعات
               فنی، مهندسی، تحقیقاتی و یا اوراق، مدارك و اسناد مالی، اقتصادی و
@@ -329,7 +313,9 @@
           </table>
         </div>
         <div class="footer">
-          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
+          <div class="footerNumber">
+            <span>PF0013 :</span>کد فرم
+          </div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -341,19 +327,19 @@
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
-              <span
-                >1399/{{
-                  allMonths[parseInt(info.startDate.month) + month - 1].number
-                }}/1 :</span
-              >تاریخ
+              <span>
+                1399/{{
+                allMonths[parseInt(info.startDate.month) + month - 1].number
+                }}/1 :
+              </span>تاریخ
             </span>
             <br />
-            <span class="headerNumberValue"> <span>:</span>شماره </span>
+            <span class="headerNumberValue">
+              <span>:</span>شماره
+            </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px"
-              >فرم قراردادکار موقت</span
-            >
+            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -384,7 +370,9 @@
           <span class="titr">ماده 1) مـوضـوع قـرارداد</span>
           <br />عبارتست از انجـام وظايف ذيـل تـوسـط همکار در پسـت سـازمـانـي،
           تحـت عنـوان
-          <span class="bold">{{ info.role }}</span>
+          <span
+            class="bold"
+          >{{ info.role }}</span>
           و هم چنین انجام ساير امـور محـوله و وظايف مرتبـط با شغـل كـارمنـد
           براسـاس دستـورات كـارفـرمـا
           <br />
@@ -437,25 +425,23 @@
                   جمع کل:
                   <span class="bold">{{ info.salary.salaryLetter }}</span>
                 </td>
-                <td class="salarySectionTable" colspan="2">
-                  {{ info.salary.sumOfSalary }}
-                </td>
+                <td class="salarySectionTable" colspan="2">{{ info.salary.sumOfSalary }}</td>
               </tr>
             </tbody>
           </table>
           <br />
           <br />
-          <span class="bold"
-            >لازم به ذکر است مبنای جدول حقوق و مزایای فوق افزایش حداقل دستمزد
-            مصوبه شورای عالی کار در سال 99 می باشد</span
-          >
+          <span class="bold">
+            لازم به ذکر است مبنای جدول حقوق و مزایای فوق افزایش حداقل دستمزد
+            مصوبه شورای عالی کار در سال 99 می باشد
+          </span>
           <br />
           <span class="titr">ماده 5) مـدت قـرارداد</span>
           <br />
           مـدت قـرارداد از تـاريـخ 1399/{{
-            allMonths[parseInt(info.startDate.month) + month - 1].number
+          allMonths[parseInt(info.startDate.month) + month - 1].number
           }}/1 لغـايـت 1399/{{
-            allMonths[parseInt(info.startDate.month) + month - 1].number
+          allMonths[parseInt(info.startDate.month) + month - 1].number
           }}/{{ allMonths[parseInt(info.startDate.month) + month - 1].days }}
           مي بـاشـد
           <br />
@@ -490,13 +476,13 @@
               یا تعطیل فعالیت، پایان پروژه، یا احکام مراجع صالحه اداری و قضایی
             </li>
             <li>عدم رضایت کارفرما از همکار</li>
-            <li>
-              طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)
-            </li>
+            <li>طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)</li>
           </ol>
         </div>
         <div class="footer">
-          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
+          <div class="footerNumber">
+            <span>PF0013 :</span>کد فرم
+          </div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -506,19 +492,19 @@
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
-              <span
-                >1399/{{
-                  allMonths[parseInt(info.startDate.month) + month - 1].number
-                }}/1 :</span
-              >تاریخ
+              <span>
+                1399/{{
+                allMonths[parseInt(info.startDate.month) + month - 1].number
+                }}/1 :
+              </span>تاریخ
             </span>
             <br />
-            <span class="headerNumberValue"> <span>:</span>شماره </span>
+            <span class="headerNumberValue">
+              <span>:</span>شماره
+            </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px"
-              >فرم قراردادکار موقت</span
-            >
+            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -529,9 +515,7 @@
         <div class="bodyPart">
           <span class="titr">ماده 7) تعهدات همکار</span>
           <ol style="direction: rtl">
-            <li>
-              انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما
-            </li>
+            <li>انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما</li>
             <li>رعایت کلیة ضوابط و مقررات قانونی و داخلی شرکت</li>
             <li>
               در صورت عدم تمایل به همکاری 30 روز قبل از اتمام قرارداد باید
@@ -591,9 +575,7 @@
               معذوریت از کار، بروز حادثه ناشی از کار، بیماری، فوت و سایر تسهیلات
               مقرر در قانون،تابع قانون کار و تأمین اجتماعی خواهد بود
             </li>
-            <li>
-              کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند
-            </li>
+            <li>کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند</li>
             <li>
               هرگاه برای کارفرما اثبات گردد که همکار به هر طریق ممکن اطلاعات
               فنی، مهندسی، تحقیقاتی و یا اوراق، مدارك و اسناد مالی، اقتصادی و
@@ -649,7 +631,9 @@
           </table>
         </div>
         <div class="footer">
-          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
+          <div class="footerNumber">
+            <span>PF0013 :</span>کد فرم
+          </div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -674,32 +658,39 @@ export default {
         { name: "آذر", number: 9, days: 30 },
         { name: "دی", number: 10, days: 30 },
         { name: "بهمن", number: 11, days: 30 },
-        { name: "اسفند", number: 12, days: 29 },
+        { name: "اسفند", number: 12, days: 30 }
       ],
-      currentFinishedDay: "",
+      currentFinishedDay: ""
     };
   },
   created() {
-    this.info = this.$parent.$data.info;
-    if (this.info.startDate.month <= 6) {
-      this.currentFinishedDay = 31;
-    } else if (
-      this.info.startDate.month <= 11 &&
-      this.info.startDate.month >= 6
-    ) {
-      this.currentFinishedDay = 30;
-    } else {
-      this.currentFinishedDay = 29;
-    }
+    this.checkData();
+    this.setLastDayOfMonth();
   },
   methods: {
+    setLastDayOfMonth() {
+      if (this.info.startDate.month <= 6) {
+        this.currentFinishedDay = 31;
+      } else if (
+        this.info.startDate.month <= 11 &&
+        this.info.startDate.month >= 6
+      ) {
+        this.currentFinishedDay = 30;
+      }
+    },
+    checkData() {
+      this.info = this.$parent.$data.info;
+      if (this.info == null) {
+        this.$router.push("/");
+      }
+    },
     printSheet() {
       window.print();
     },
     goBack() {
-      this.$parent.$data.status = !this.$parent.$data.status;
-    },
-  },
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 <style>
