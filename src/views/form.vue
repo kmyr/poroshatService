@@ -226,7 +226,7 @@ export default {
   },
   watch: {
     "info.startDate.month": function() {
-      if (this.info.startDate.month > 13) {
+      if (this.info.startDate.month > 12) {
         this.info.startDate.month = 12;
       } else if (this.info.startDate.month < 1) {
         this.info.startDate.month = "";
