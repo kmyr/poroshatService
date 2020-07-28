@@ -229,7 +229,7 @@ export default {
       if (this.info.startDate.month > 13) {
         this.info.startDate.month = 12;
       } else if (this.info.startDate.month < 1) {
-        this.info.startDate.month = 1;
+        this.info.startDate.month = "";
       }
     },
     "info.startDate.day": function() {
@@ -241,7 +241,7 @@ export default {
         if (this.info.startDate.day > 31) {
           this.info.startDate.day = 31;
         } else if (this.info.startDate.day < 1) {
-          this.info.startDate.day = 1;
+          this.info.startDate.day = "";
         }
       }
     }
