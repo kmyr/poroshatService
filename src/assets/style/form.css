@@ -9,7 +9,8 @@
 }
 #submitBtn {
   position: fixed;
-  margin: 10px;
+  margin: 30px;
+  bottom: 0;
 }
 .is-invalid {
   border: 1px solid red;

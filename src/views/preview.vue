@@ -58,8 +58,6 @@
           <span class="bold">{{ info.fatherName }}</span>
           متولد:
           <span class="bold">{{ info.birthdayDate }}</span>
-          شماره شناسنامه :
-          <span class="bold">{{ info.idNumber }}</span>
           شماره ملی:
           <span class="bold">{{ info.idCard }}</span>
           میزان تحصیلات:
@@ -376,8 +374,6 @@
           <span class="bold">{{ info.fatherName }}</span>
           متولد:
           <span class="bold">{{ info.birthdayDate }}</span>
-          شماره شناسنامه :
-          <span class="bold">{{ info.idNumber }}</span>
           شماره ملی:
           <span class="bold">{{ info.idCard }}</span>
           میزان تحصیلات:
@@ -694,7 +690,7 @@ export default {
       if (this.info.startDate.month <= 6) {
         this.currentFinishedDay = 31;
       } else if (
-        this.info.startDate.month <= 11 &&
+        this.info.startDate.month <= 12 &&
         this.info.startDate.month >= 6
       ) {
         this.currentFinishedDay = 30;

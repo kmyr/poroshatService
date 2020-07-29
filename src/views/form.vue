@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="contractInfoForm">
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="infoForm">
@@ -25,9 +25,6 @@
 
           <label>کد ملی</label>
           <input name="idCard" v-model="info.idCard" type="text" class="form-control" />
-
-          <label>شماره شناسنامه</label>
-          <input name="idNumber" v-model="info.idNumber" type="text" class="form-control" />
 
           <label>تحصیلات</label>
           <select name="education" class="form-control" v-model="info.education">
@@ -167,7 +164,6 @@ export default {
         role: "",
         employmentPlace: "",
         idCard: "",
-        idNumber: "",
         education: "",
         address: "",
         startDate: {
@@ -179,8 +175,6 @@ export default {
       }
     };
   },
-  created() {},
-
   methods: {
     submitForm() {
       this.info.periodDate--;
