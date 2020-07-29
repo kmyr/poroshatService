@@ -62,3 +62,14 @@ button,
 input {
   font-family: zar;
 }
+.backBtn {
+  float: right;
+}
+.goTop {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}

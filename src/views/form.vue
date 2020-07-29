@@ -192,6 +192,7 @@ export default {
       }
       this.$parent.$data.info = this.info;
       this.$router.push("/preview");
+      $("html,body").animate({ scrollTop: 0 }, "slow");
     },
     inputValidation() {
       if (
@@ -243,6 +244,12 @@ export default {
         } else if (this.info.startDate.day < 1) {
           this.info.startDate.day = "";
         }
+      }
+    },
+    "info.periodDate": function() {
+      const remainingMonth = 13 - parseInt(this.info.startDate.month);
+      if (this.info.periodDate > remainingMonth) {
+        this.info.periodDate = remainingMonth;
       }
     }
   }
