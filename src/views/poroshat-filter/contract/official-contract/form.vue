@@ -3,12 +3,9 @@
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="infoForm">
-          <label>محل خدمت</label>
-          <select name="employmentPlace" class="form-control" v-model="info.employmentPlace">
-            <option>تولید</option>
-            <option>دفتر مرکزی</option>
-            <option>فنی مهندسی</option>
-            <option>انبار</option>
+          <label>کاربر های ذخیره شده</label>
+          <select name="savedUsers" class="form-control" v-model="savedUsers.selectedUser">
+            <option v-for="(user, i) in savedUsers.usersList" :key="i">{{user.name}}</option>
           </select>
 
           <label>نام و نام خانوادگی</label>
@@ -85,8 +82,13 @@
             <option v-for="(salary, i) in salaryList" :key="i">{{salary.sumOfSalary}}</option>
           </select>
 
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" v-model="saveThisUser" id="saveUser" />
+          <div class="form-check" v-if="!savedUsers.useSavedUsers">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              v-model="savedUsers.saveThisUser"
+              id="saveUser"
+            />
             <label class="saveUser-label" for="saveUser">ذخیره این کاربر</label>
           </div>
         </div>
@@ -196,20 +198,25 @@ export default {
         periodDate: 1,
         salary: ""
       },
-      saveThisUser: null,
-      savedUsers: []
+      savedUsers: {
+        saveThisUser: false,
+        usersList: [{}],
+        currentUser: "",
+        useSavedUsers: false,
+        selectedUser: ""
+      }
     };
   },
   mixins: [postData, getData],
   created() {
-    this.getData("savedUsers", this.savedUsers);
+    this.getData("savedUsers", this.savedUsers.usersList);
   },
   methods: {
     goBack() {
       this.$router.push("/");
     },
     submitForm() {
-      if (this.saveThisUser) {
+      if (this.savedUsers.saveThisUser) {
         this.postData("savedUsers", {
           name: this.info.name,
           fatherName: this.info.fatherName,
@@ -289,6 +296,42 @@ export default {
       const remainingMonth = 13 - parseInt(this.info.startDate.month);
       if (this.info.periodDate > remainingMonth) {
         this.info.periodDate = remainingMonth;
+      }
+    },
+    "savedUsers.selectedUser": function() {
+      if (this.savedUsers.selectedUser !== "") {
+        this.savedUsers.saveThisUser = false;
+        this.savedUsers.useSavedUsers = true;
+
+        for (let i = 0; i < this.savedUsers.usersList.length; i++) {
+          const selectedUser = this.savedUsers.usersList[i];
+          if (selectedUser.name == this.savedUsers.selectedUser) {
+            this.savedUsers.currentUser = selectedUser;
+            break;
+          }
+        }
+        //change input values
+        this.info.name = this.savedUsers.currentUser.name;
+        this.info.fatherName = this.savedUsers.currentUser.fatherName;
+        this.info.birthdayDate = this.savedUsers.currentUser.birthdayDate;
+        this.info.role = this.savedUsers.currentUser.role;
+        this.info.employmentPlace = this.savedUsers.currentUser.employmentPlace;
+        this.info.idCard = this.savedUsers.currentUser.idCard;
+        this.info.education = this.savedUsers.currentUser.education;
+        this.info.address = this.savedUsers.currentUser.address;
+        this.info.salary = this.savedUsers.currentUser.salary;
+      } else {
+        this.savedUsers.useSavedUsers = false;
+        //change input values to empty
+        this.info.name = "";
+        this.info.fatherName = "";
+        this.info.birthdayDate = "";
+        this.info.role = "";
+        this.info.employmentPlace = "";
+        this.info.idCard = "";
+        this.info.education = "";
+        this.info.address = "";
+        this.info.salary = "";
       }
     }
   }

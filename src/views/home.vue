@@ -23,6 +23,17 @@ export default {
               title: "Official Contract"
             }
           ]
+        },
+        {
+          href: "",
+          title: "Users",
+          icon: "fa fa-users",
+          child: [
+            {
+              href: "/users/poroshat-filter",
+              title: "Poroshat Filter Users"
+            }
+          ]
         }
       ]
     };

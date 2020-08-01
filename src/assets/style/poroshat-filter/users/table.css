@@ -1,0 +1,10 @@
+#usersTable{
+    direction: rtl !important;
+    float: right;
+}
+#usersTable  {
+    text-align: right !important;
+}
+#actionBtn {
+    border: 0 !important;
+}

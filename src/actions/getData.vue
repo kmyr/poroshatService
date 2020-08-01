@@ -1,11 +1,6 @@
 <script>
 import db from "../datastore/firebaseInit";
 export default {
-  data() {
-    return {
-      items: []
-    };
-  },
   methods: {
     getData(document, arr) {
       db.collection(document)
