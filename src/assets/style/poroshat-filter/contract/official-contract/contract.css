@@ -1,0 +1,75 @@
+@font-face {
+  font-family: titr;
+  src: url(../../../../font/titr.ttf);
+}
+@font-face {
+  font-family: zar;
+  src: url(../../../../font/zar.ttf);
+}
+
+.sheet {
+  width: 26cm;
+  height: 40cm;
+  border-style: double !important;
+  margin-bottom: 30px;
+  position: relative;
+}
+.titr {
+  font-family: titr !important;
+  font-size: 16px;
+}
+.bold {
+  font-weight: 900;
+}
+.sheet.secondSheet {
+  margin-top: 1%;
+}
+
+.previewSheet {
+  padding: 30px;
+  float: right;
+}
+.bodyPart {
+  width: 100%;
+  text-align: right;
+  font-family: zar;
+  padding: 10px;
+  font-size: 21px;
+}
+
+#hideOnPrintBtn {
+  margin: 5px;
+}
+
+@media print {
+  .sheet {
+    width: 100%;
+    height: 39.9cm;
+    margin-bottom: 1%;
+  }
+  #hideOnPrintBtn {
+    display: none;
+  }
+  .bodyPart {
+    padding: 25px;
+  }
+  .previewSheet {
+    padding: 0;
+    margin-left: 0;
+  }
+}
+button,
+input {
+  font-family: zar;
+}
+.backBtn {
+  float: right;
+}
+.goTop {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}

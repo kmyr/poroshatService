@@ -820,6 +820,30 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@fortawesome/fontawesome-common-types@^0.2.30":
+  version "0.2.30"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.30.tgz#2f1cc5b46bd76723be41d0013a8450c9ba92b777"
+  integrity sha512-TsRwpTuKwFNiPhk1UfKgw7zNPeV5RhNp2Uw3pws+9gDAkPGKrtjR1y2lI3SYn7+YzyfuNknflpBA1LRKjt7hMg==
+
+"@fortawesome/fontawesome-svg-core@^1.2.30":
+  version "1.2.30"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.30.tgz#f56dc6791861fe5d1af04fb8abddb94658c576db"
+  integrity sha512-E3sAXATKCSVnT17HYmZjjbcmwihrNOCkoU7dVMlasrcwiJAHxSKeZ+4WN5O+ElgO/FaYgJmASl8p9N7/B/RttA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.30"
+
+"@fortawesome/free-solid-svg-icons@^5.14.0":
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.14.0.tgz#970453f5e8c4915ad57856c3a0252ac63f6fec18"
+  integrity sha512-M933RDM8cecaKMWDSk3FRYdnzWGW7kBBlGNGfvqLVwcwhUPNj9gcw+xZMrqBdRqxnSXdl3zWzTCNNGEtFUq67Q==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.30"
+
+"@fortawesome/vue-fontawesome@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.1.10.tgz#eeeec1e4e8850bed0468f938292b06cda793bf34"
+  integrity sha512-b2+SLF31h32LSepVcXe+BQ63yvbq5qmTCy4KfFogCYm2bn68H5sDWUnX+U7MBqnM2aeEk9M7xSoqGnu+wSdY6w==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.npm.taobao.org/@hapi/address/download/@hapi/address-2.1.4.tgz?cache=0&sync_timestamp=1593994300472&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40hapi%2Faddress%2Fdownload%2F%40hapi%2Faddress-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -3738,6 +3762,11 @@ follow-redirects@^1.0.0:
   resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.12.1.tgz?cache=0&sync_timestamp=1592518230545&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.12.1.tgz#de54a6205311b93d60398ebc01cf7015682312b6"
   integrity sha1-3lSmIFMRuT1gOY68Ac9wFWgjErY=
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/for-in/download/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -4707,6 +4736,11 @@ is-wsl@^2.1.1:
   integrity sha1-dKTHbnfKn9P5MvKQwX6jJs0VcnE=
   dependencies:
     is-docker "^2.0.0"
+
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
 
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
@@ -5895,6 +5929,13 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
+
+path-to-regexp@^1.7.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.8.0.tgz#887b3ba9d84393e87a0a0b9f4cb756198b53548a"
+  integrity sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==
+  dependencies:
+    isarray "0.0.1"
 
 path-type@^3.0.0:
   version "3.0.0"
@@ -7963,7 +8004,6 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha1-UylVzB6yCKPZkLOp+acFdGV+CPI=
 
-
 vue-loader@^15.9.2:
   version "15.9.3"
   resolved "https://registry.npm.taobao.org/vue-loader/download/vue-loader-15.9.3.tgz#0de35d9e555d3ed53969516cac5ce25531299dda"
@@ -7979,6 +8019,14 @@ vue-router@^3.2.0:
   version "3.3.4"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"
   integrity sha1-Tjirw0oRxBtsPYJERJouNjumJQs=
+
+vue-sidebar-menu@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/vue-sidebar-menu/-/vue-sidebar-menu-4.6.2.tgz#1be3861b98a67ab1ec3d18c75ffe7f61b765d4ae"
+  integrity sha512-SQtu/EYMpygIRB5QLU3ji/VcB9bIVK2Pzn6gd2Wd+A3+TPWDvOyHyaTmzLY06mihuUAqkZQEyq6lpViArUg0oA==
+  dependencies:
+    path-to-regexp "^1.7.0"
+    vue "^2.5.21"
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
@@ -8001,7 +8049,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
 
-vue@^2.6.11:
+vue@^2.5.21, vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==

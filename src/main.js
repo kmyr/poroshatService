@@ -2,6 +2,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+
+Vue.use(VueSidebarMenu)
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
