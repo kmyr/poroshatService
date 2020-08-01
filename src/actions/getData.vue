@@ -1,9 +1,9 @@
+<script>
 import db from "../datastore/firebaseInit";
 export default {
-  name: "dashboard",
   data() {
     return {
-      items: [],
+      items: []
     };
   },
   methods: {
@@ -13,22 +13,15 @@ export default {
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
             const data = {
-              
-            };
-            arr.push(data);
-          });
-        });
-    },
-    getCr(document, arr) {
-      db.collection(document)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            const data = {
-              id: doc.id,
               name: doc.data().name,
-              weight: doc.data().weight,
-              type: doc.data().type
+              fatherName: doc.data().fatherName,
+              birthdayDate: doc.data().birthdayDate,
+              role: doc.data().role,
+              employmentPlace: doc.data().employmentPlace,
+              idCard: doc.data().idCard,
+              education: doc.data().education,
+              address: doc.data().address,
+              salary: doc.data().salary
             };
             arr.push(data);
           });
@@ -36,3 +29,4 @@ export default {
     }
   }
 };
+</script>

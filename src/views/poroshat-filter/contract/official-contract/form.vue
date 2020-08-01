@@ -3,6 +3,14 @@
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="infoForm">
+          <label>محل خدمت</label>
+          <select name="employmentPlace" class="form-control" v-model="info.employmentPlace">
+            <option>تولید</option>
+            <option>دفتر مرکزی</option>
+            <option>فنی مهندسی</option>
+            <option>انبار</option>
+          </select>
+
           <label>نام و نام خانوادگی</label>
           <input name="fullname" v-model="info.name" type="text" class="form-control" />
 
@@ -76,6 +84,11 @@
           <select name="salary" class="form-control" v-model="info.salary">
             <option v-for="(salary, i) in salaryList" :key="i">{{salary.sumOfSalary}}</option>
           </select>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" v-model="saveThisUser" id="saveUser" />
+            <label class="saveUser-label" for="saveUser">ذخیره این کاربر</label>
+          </div>
         </div>
         <div class="col">
           <button id="backBtn" @click="goBack()" type="button" class="btn btn-outline-danger">بازگشت</button>
@@ -92,6 +105,8 @@
 </template>
 <script>
 import $ from "jquery";
+import postData from "../../../../actions/postData";
+import getData from "../../../../actions/getData";
 export default {
   data() {
     return {
@@ -180,14 +195,33 @@ export default {
         },
         periodDate: 1,
         salary: ""
-      }
+      },
+      saveThisUser: null,
+      savedUsers: []
     };
+  },
+  mixins: [postData, getData],
+  created() {
+    this.getData("savedUsers", this.savedUsers);
   },
   methods: {
     goBack() {
       this.$router.push("/");
     },
     submitForm() {
+      if (this.saveThisUser) {
+        this.postData("savedUsers", {
+          name: this.info.name,
+          fatherName: this.info.fatherName,
+          birthdayDate: this.info.birthdayDate,
+          role: this.info.role,
+          employmentPlace: this.info.employmentPlace,
+          idCard: this.info.idCard,
+          education: this.info.education,
+          address: this.info.address,
+          salary: this.info.salary
+        });
+      }
       this.info.periodDate--;
       for (let i = 0; i < this.salaryList.length; i++) {
         const selectedSalary = this.salaryList[i];
