@@ -77,7 +77,15 @@
             <option v-for="(salary, i) in salaryList" :key="i">{{salary.sumOfSalary}}</option>
           </select>
         </div>
-        <button id="submitBtn" @click="inputValidation" type="button" class="btn btn-primary">ثبت</button>
+        <div class="col">
+          <button id="backBtn" @click="goBack()" type="button" class="btn btn-outline-danger">بازگشت</button>
+          <button
+            id="submitBtn"
+            @click="inputValidation()"
+            type="button"
+            class="btn btn-primary"
+          >ثبت</button>
+        </div>
       </div>
     </form>
   </div>
@@ -176,6 +184,9 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.push("/");
+    },
     submitForm() {
       this.info.periodDate--;
       for (let i = 0; i < this.salaryList.length; i++) {

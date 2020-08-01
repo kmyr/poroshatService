@@ -724,7 +724,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 @import url("../../../../assets/style/poroshat-filter/contract/official-contract/contract.css");
 @import url("../../../../assets/style/poroshat-filter/contract/official-contract/tables.css");
 @import url("../../../../assets/style/poroshat-filter/contract/official-contract/header-footer.css");

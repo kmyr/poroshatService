@@ -7,10 +7,13 @@
   text-align: right;
   float: right;
 }
-#submitBtn {
+#submitBtn,#backBtn {
   position: fixed;
   margin: 30px;
   bottom: 0;
+}
+#backBtn {
+  left: 100px
 }
 .is-invalid {
   border: 1px solid red;
