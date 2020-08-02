@@ -68,6 +68,22 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Modal -->
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="toggleModal('newUserModal')"
+    >Launch demo modal</button>
+    <b-modal id="newUserModal" class="modal" title="همکار جدید" hide-footer>
+      <hr class="my-4" />
+
+      <div class="d-flex flex-row-reverse bd-highlight mb-2" id="btnGroup">
+        <button type="button" class="btn btn-primary" @click="addUser()">ثبت</button>
+        <button type="button" class="btn btn-outline-dark" @click="toggleModal('newUserModal')">لغو</button>
+      </div>
+    </b-modal>
   </div>
 </template>
 <script>
@@ -82,9 +98,15 @@ export default {
   mixins: [getData],
   created() {
     this.getData("savedUsers", this.users);
+  },
+  methods: {
+    toggleModal(action) {
+      this.$root.$emit("bv::toggle::modal", action, "#btnToggle");
+    }
   }
 };
 </script>
 <style scoped>
 @import url("../../../assets/style/poroshat-filter/users/table.css");
+@import url("../../../assets/style/poroshat-filter/users/modal.css");
 </style>
