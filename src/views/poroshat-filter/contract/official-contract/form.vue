@@ -2,26 +2,31 @@
   <div class="contractInfoForm">
     <form class="contractForm">
       <div class="col-md-12">
-        <div class="form-group" id="infoForm">
+        <div class="form-group" id="poroshatUserInfoForm">
           <label>کاربر های ذخیره شده</label>
           <select name="savedUsers" class="form-control" v-model="savedUsers.selectedUser">
             <option v-for="(user, i) in savedUsers.usersList" :key="i">{{user.name}}</option>
           </select>
 
           <label>نام و نام خانوادگی</label>
-          <input name="fullname" v-model="info.name" type="text" class="form-control" />
+          <input name="fullname" v-model="userInfo.name" type="text" class="form-control" />
 
           <label>نام پدر</label>
-          <input name="fatherName" v-model="info.fatherName" type="text" class="form-control" />
+          <input name="fatherName" v-model="userInfo.fatherName" type="text" class="form-control" />
 
           <label>تاریخ تولد</label>
-          <input name="birthdayDate" v-model="info.birthdayDate" type="text" class="form-control" />
+          <input
+            name="birthdayDate"
+            v-model="userInfo.birthdayDate"
+            type="text"
+            class="form-control"
+          />
 
           <label>سمت</label>
-          <input name="role" v-model="info.role" type="text" class="form-control" />
+          <input name="role" v-model="userInfo.role" type="text" class="form-control" />
 
-          <label>محل خدمت</label>
-          <select name="employmentPlace" class="form-control" v-model="info.employmentPlace">
+          <label>محل اشتغال</label>
+          <select name="employmentPlace" class="form-control" v-model="userInfo.employmentPlace">
             <option>تولید</option>
             <option>دفتر مرکزی</option>
             <option>فنی مهندسی</option>
@@ -29,10 +34,10 @@
           </select>
 
           <label>کد ملی</label>
-          <input name="idCard" v-model="info.idCard" type="text" class="form-control" />
+          <input name="idCard" v-model="userInfo.idCard" type="text" class="form-control" />
 
           <label>تحصیلات</label>
-          <select name="education" class="form-control" v-model="info.education">
+          <select name="education" class="form-control" v-model="userInfo.education">
             <option>ابتدایی</option>
             <option>سیکل</option>
             <option>دیپلم</option>
@@ -47,7 +52,7 @@
           <label>آدرس</label>
           <input
             name="address"
-            v-model="info.address"
+            v-model="userInfo.address"
             type="text"
             class="form-control"
             style="margin-bottom:15px"
@@ -61,7 +66,7 @@
                 type="number"
                 class="form-control"
                 placeholder="ماه"
-                v-model="info.startDate.month"
+                v-model="userInfo.startDate.month"
               />
             </div>
             <div class="col">
@@ -70,15 +75,20 @@
                 type="number"
                 class="form-control"
                 placeholder="روز"
-                v-model="info.startDate.day"
+                v-model="userInfo.startDate.day"
               />
             </div>
           </div>
           <label>(ماه) مدت قرارداد</label>
-          <input name="contractPeriod" v-model="info.periodDate" type="number" class="form-control" />
+          <input
+            name="contractPeriod"
+            v-model="userInfo.periodDate"
+            type="number"
+            class="form-control"
+          />
 
           <label>حقوق</label>
-          <select name="salary" class="form-control" v-model="info.salary">
+          <select name="salary" class="form-control" v-model="userInfo.salary">
             <option v-for="(salary, i) in salaryList" :key="i">{{salary.sumOfSalary}}</option>
           </select>
 
@@ -92,8 +102,14 @@
             <label class="saveUser-label" for="saveUser">ذخیره این کاربر</label>
           </div>
         </div>
-        <div class="col">
-          <button id="backBtn" @click="goBack()" type="button" class="btn btn-outline-danger">بازگشت</button>
+        <div class="buttonSection">
+          <button
+            id="backBtn"
+            @click="goBack('/')"
+            type="button"
+            class="btn btn-outline-danger"
+          >بازگشت</button>
+          <br />
           <button
             id="submitBtn"
             @click="inputValidation()"
@@ -109,80 +125,12 @@
 import $ from "jquery";
 import postData from "../../../../actions/postData";
 import getData from "../../../../actions/getData";
+import { salaryList } from "../../../../datastore/poroshat-filterData";
 export default {
   data() {
     return {
-      salaryList: [
-        {
-          baseSalary: "19,104,270",
-          years: "1،000،000",
-          worker: "4،000،000",
-          housing: "3،000،000",
-          children: "1,910,427",
-          sumOfSalary: "29,014,697",
-          salaryLetter: "بیست و نه میلیون و چهارده هزار و ششصد و نود و هفت ریال"
-        },
-        {
-          baseSalary: "19,104,270",
-          years: "0",
-          worker: "4,000,000",
-          housing: "3,000,000",
-          children: "1,910,427",
-          sumOfSalary: "28,014,697",
-          salaryLetter:
-            "بیست و هشت میلیون و چهارده هزار و ششصد و نود و هفت ریال"
-        },
-        {
-          baseSalary: "19,104,270",
-          years: "1،000،000",
-          worker: "4,000,000",
-          housing: "3،000،000",
-          children: "3,820,854",
-          sumOfSalary: "30,925,124",
-          salaryLetter:
-            "سی میلیون و نهصد و بیست و پنج هزار و صد و بیست و چهار ریال"
-        },
-        {
-          baseSalary: "19,104,270",
-          years: "0",
-          worker: "4,000,000",
-          housing: "3،000،000",
-          children: "3,820,854",
-          sumOfSalary: "29,925,124",
-          salaryLetter:
-            "بیست و نه میلیون و  نهصد و  بیست و پنج هزار و صد و بیست و چهار ریال"
-        },
-        {
-          baseSalary: "19,104,270",
-          years: "1،000،000",
-          worker: "4,000,000",
-          housing: "3،000،000",
-          children: "0",
-          sumOfSalary: "27,104,270",
-          salaryLetter:
-            "بیست و هفت میلیون و صد و چهار هزار و دویست و هفتاد ریال"
-        },
-        {
-          baseSalary: "19,104,270",
-          years: "0",
-          worker: "4,000,000",
-          housing: "3،000،000",
-          children: "0",
-          sumOfSalary: "26,104,270",
-          salaryLetter: "بیست و شش میلیون و صد و چهار هزار و دویست و هفتاد ریال"
-        },
-        {
-          baseSalary: "21،703،260",
-          years: "1,000,000",
-          worker: "4,000,000",
-          housing: "3،000،000",
-          children: "1،910،427",
-          sumOfSalary: "31،613،687",
-          salaryLetter:
-            "سی و یک میلیون و ششصد و سیزده هزار و ششصد و هشتاد و هفت ریال"
-        }
-      ],
-      info: {
+      salaryList: null,
+      userInfo: {
         name: "",
         fatherName: "",
         birthdayDate: "",
@@ -210,33 +158,34 @@ export default {
   mixins: [postData, getData],
   created() {
     this.getData("savedUsers", this.savedUsers.usersList);
+    this.salaryList = salaryList;
   },
   methods: {
-    goBack() {
-      this.$router.push("/");
+    goBack(target) {
+      this.$router.push(target);
     },
     submitForm() {
       if (this.savedUsers.saveThisUser) {
         this.postData("savedUsers", {
-          name: this.info.name,
-          fatherName: this.info.fatherName,
-          birthdayDate: this.info.birthdayDate,
-          role: this.info.role,
-          employmentPlace: this.info.employmentPlace,
-          idCard: this.info.idCard,
-          education: this.info.education,
-          address: this.info.address,
-          salary: this.info.salary
+          name: this.userInfo.name,
+          fatherName: this.userInfo.fatherName,
+          birthdayDate: this.userInfo.birthdayDate,
+          role: this.userInfo.role,
+          employmentPlace: this.userInfo.employmentPlace,
+          idCard: this.userInfo.idCard,
+          education: this.userInfo.education,
+          address: this.userInfo.address,
+          salary: this.userInfo.salary
         });
       }
-      this.info.periodDate--;
+      this.userInfo.periodDate--;
       for (let i = 0; i < this.salaryList.length; i++) {
         const selectedSalary = this.salaryList[i];
-        if (selectedSalary.sumOfSalary == this.info.salary) {
-          this.info.salary = selectedSalary;
+        if (selectedSalary.sumOfSalary == this.userInfo.salary) {
+          this.userInfo.salary = selectedSalary;
         }
       }
-      this.$parent.$data.info = this.info;
+      this.$parent.$data.poroshatOfficialContractInfo = this.userInfo;
       this.$router.push("/contract/official-contract/preview");
       $("html,body").animate({ scrollTop: 0 }, "slow");
     },
@@ -272,30 +221,33 @@ export default {
     }
   },
   watch: {
-    "info.startDate.month": function() {
-      if (this.info.startDate.month > 12) {
-        this.info.startDate.month = 12;
-      } else if (this.info.startDate.month < 1) {
-        this.info.startDate.month = "";
+    "userInfo.startDate.month": function() {
+      if (this.userInfo.startDate.month > 12) {
+        this.userInfo.startDate.month = 12;
+      } else if (this.userInfo.startDate.month < 1) {
+        this.userInfo.startDate.month = "";
       }
     },
-    "info.startDate.day": function() {
-      if (this.info.startDate.month >= 7 && this.info.startDate.month <= 12) {
-        if (this.info.startDate.day > 30) {
-          this.info.startDate.day = 30;
+    "userInfo.startDate.day": function() {
+      if (
+        this.userInfo.startDate.month >= 7 &&
+        this.userInfo.startDate.month <= 12
+      ) {
+        if (this.userInfo.startDate.day > 30) {
+          this.userInfo.startDate.day = 30;
         }
       } else {
-        if (this.info.startDate.day > 31) {
-          this.info.startDate.day = 31;
-        } else if (this.info.startDate.day < 1) {
-          this.info.startDate.day = "";
+        if (this.userInfo.startDate.day > 31) {
+          this.userInfo.startDate.day = 31;
+        } else if (this.userInfo.startDate.day < 1) {
+          this.userInfo.startDate.day = "";
         }
       }
     },
-    "info.periodDate": function() {
-      const remainingMonth = 13 - parseInt(this.info.startDate.month);
-      if (this.info.periodDate > remainingMonth) {
-        this.info.periodDate = remainingMonth;
+    "userInfo.periodDate": function() {
+      const remainingMonth = 13 - parseInt(this.userInfo.startDate.month);
+      if (this.userInfo.periodDate > remainingMonth) {
+        this.userInfo.periodDate = remainingMonth;
       }
     },
     "savedUsers.selectedUser": function() {
@@ -311,32 +263,32 @@ export default {
           }
         }
         //change input values
-        this.info.name = this.savedUsers.currentUser.name;
-        this.info.fatherName = this.savedUsers.currentUser.fatherName;
-        this.info.birthdayDate = this.savedUsers.currentUser.birthdayDate;
-        this.info.role = this.savedUsers.currentUser.role;
-        this.info.employmentPlace = this.savedUsers.currentUser.employmentPlace;
-        this.info.idCard = this.savedUsers.currentUser.idCard;
-        this.info.education = this.savedUsers.currentUser.education;
-        this.info.address = this.savedUsers.currentUser.address;
-        this.info.salary = this.savedUsers.currentUser.salary;
+        this.userInfo.name = this.savedUsers.currentUser.name;
+        this.userInfo.fatherName = this.savedUsers.currentUser.fatherName;
+        this.userInfo.birthdayDate = this.savedUsers.currentUser.birthdayDate;
+        this.userInfo.role = this.savedUsers.currentUser.role;
+        this.userInfo.employmentPlace = this.savedUsers.currentUser.employmentPlace;
+        this.userInfo.idCard = this.savedUsers.currentUser.idCard;
+        this.userInfo.education = this.savedUsers.currentUser.education;
+        this.userInfo.address = this.savedUsers.currentUser.address;
+        this.userInfo.salary = this.savedUsers.currentUser.salary;
       } else {
         this.savedUsers.useSavedUsers = false;
         //change input values to empty
-        this.info.name = "";
-        this.info.fatherName = "";
-        this.info.birthdayDate = "";
-        this.info.role = "";
-        this.info.employmentPlace = "";
-        this.info.idCard = "";
-        this.info.education = "";
-        this.info.address = "";
-        this.info.salary = "";
+        this.userInfo.name = "";
+        this.userInfo.fatherName = "";
+        this.userInfo.birthdayDate = "";
+        this.userInfo.role = "";
+        this.userInfo.employmentPlace = "";
+        this.userInfo.idCard = "";
+        this.userInfo.education = "";
+        this.userInfo.address = "";
+        this.userInfo.salary = "";
       }
     }
   }
 };
 </script>
-<style>
+<style scoped>
 @import url("../../../../assets/style/poroshat-filter/contract/official-contract/form.css");
 </style>

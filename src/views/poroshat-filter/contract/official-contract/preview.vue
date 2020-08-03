@@ -1,7 +1,11 @@
 <template>
   <div class="previewSheet">
     <button id="hideOnPrintBtn" class="btn btn-outline-primary" @click="printSheet">پرینت</button>
-    <button id="hideOnPrintBtn" class="btn btn-outline-danger backBtn" @click="goBack">انصراف</button>
+    <button
+      id="hideOnPrintBtn"
+      class="btn btn-outline-danger cancelBtn"
+      @click="goBack('/contract/official-contract')"
+    >انصراف</button>
     <button class="btn btn-primary goTop" id="hideOnPrintBtn" @click="goTop()">
       <svg
         width="1em"
@@ -27,8 +31,8 @@
           <div class="headerDate">
             <span class="headerDateValue">
               <span>
-                1399/{{ info.startDate.month }}/{{
-                info.startDate.day
+                1399/{{ userInfo.startDate.month }}/{{
+                userInfo.startDate.day
                 }}
                 :
               </span>تاریخ
@@ -53,30 +57,30 @@
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
           مي گردد
           <br />آقای/خانم:
-          <span class="bold">{{ info.name }}</span>
+          <span class="bold">{{ userInfo.name }}</span>
           فرزند:
-          <span class="bold">{{ info.fatherName }}</span>
+          <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
-          <span class="bold">{{ info.birthdayDate }}</span>
+          <span class="bold">{{ userInfo.birthdayDate }}</span>
           شماره ملی:
-          <span class="bold">{{ info.idCard }}</span>
+          <span class="bold">{{ userInfo.idCard }}</span>
           میزان تحصیلات:
-          <span class="bold">{{ info.education }}</span>
+          <span class="bold">{{ userInfo.education }}</span>
           <br />به نشانی:
-          <span class="bold">{{ info.address }}</span>
+          <span class="bold">{{ userInfo.address }}</span>
           <br />
           <span class="titr">ماده 1) مـوضـوع قـرارداد</span>
           <br />عبارتست از انجـام وظايف ذيـل تـوسـط همکار در پسـت سـازمـانـي،
           تحـت عنـوان
           <span
             class="bold"
-          >{{ info.role }}</span>
+          >{{ userInfo.role }}</span>
           و هم چنین انجام ساير امـور محـوله و وظايف مرتبـط با شغـل كـارمنـد
           براسـاس دستـورات كـارفـرمـا
           <br />
           <span class="titr">ماده 2) محل خدمت و انجام موضوع قـرارداد</span>
           <br />
-          محل خدمت و انجام موضوع قرارداد، در {{ info.employmentPlace }} مي باشد
+          محل خدمت و انجام موضوع قرارداد، در {{ userInfo.employmentPlace }} مي باشد
           ليكن با توجه به بنـد « د » ماده 10 قانون كار،‌ همکار اختيار تغيير محل
           خدمت خـود را به كارفرما تفويض مي نمايد. بنابراين كارفرما حـق خواهد
           داشت با توجه نياز شركت، در هر زمان كه اقتضا نمايد محل خدمت كارمند را
@@ -95,35 +99,35 @@
             <tbody>
               <tr>
                 <td class="salaryTableTitle">حقوق پایه</td>
-                <td class="salarySectionTable">{{ info.salary.baseSalary }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.baseSalary }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">پایه سنوات</td>
-                <td class="salarySectionTable">{{ info.salary.years }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.years }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">بن کارگری</td>
-                <td class="salarySectionTable">{{ info.salary.worker }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.worker }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق مسکن</td>
-                <td class="salarySectionTable">{{ info.salary.housing }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.housing }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق عائله مندی و اولاد</td>
-                <td class="salarySectionTable">{{ info.salary.children }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.children }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">
                   جمع کل:
-                  <span class="bold">{{ info.salary.salaryLetter }}</span>
+                  <span class="bold">{{ userInfo.salary.salaryLetter }}</span>
                 </td>
-                <td class="salarySectionTable" colspan="2">{{ info.salary.sumOfSalary }}</td>
+                <td class="salarySectionTable" colspan="2">{{ userInfo.salary.sumOfSalary }}</td>
               </tr>
             </tbody>
           </table>
@@ -136,10 +140,10 @@
           <br />
           <span class="titr">ماده 5) مـدت قـرارداد</span>
           <br />
-          مـدت قـرارداد از تـاريـخ 1399/{{ info.startDate.month }}/{{
-          info.startDate.day
+          مـدت قـرارداد از تـاريـخ 1399/{{ userInfo.startDate.month }}/{{
+          userInfo.startDate.day
           }}
-          لغـايـت 1399/{{ info.startDate.month }}/{{ currentFinishedDay }}
+          لغـايـت 1399/{{ userInfo.startDate.month }}/{{ currentFinishedDay }}
           مي بـاشـد
           <br />
           <span class="titr">ماده 6) موارد فسـخ قـرارداد</span>
@@ -190,8 +194,8 @@
           <div class="headerDate">
             <span class="headerDateValue">
               <span>
-                1399/{{ info.startDate.month }}/{{
-                info.startDate.day
+                1399/{{ userInfo.startDate.month }}/{{
+                userInfo.startDate.day
                 }}
                 :
               </span>تاریخ
@@ -338,14 +342,14 @@
       </div>
     </div>
 
-    <div class="file" v-for="(month, i) in parseInt(info.periodDate)" :key="i">
+    <div class="file" v-for="(month, i) in parseInt(userInfo.periodDate)" :key="i">
       <div class="sheet" id="sheet">
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
               <span>
                 1399/{{
-                allMonths[parseInt(info.startDate.month) + month - 1].number
+                allMonths[parseInt(userInfo.startDate.month) + month - 1].number
                 }}/1 :
               </span>تاریخ
             </span>
@@ -369,30 +373,30 @@
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
           مي گردد
           <br />آقای/خانم:
-          <span class="bold">{{ info.name }}</span>
+          <span class="bold">{{ userInfo.name }}</span>
           فرزند:
-          <span class="bold">{{ info.fatherName }}</span>
+          <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
-          <span class="bold">{{ info.birthdayDate }}</span>
+          <span class="bold">{{ userInfo.birthdayDate }}</span>
           شماره ملی:
-          <span class="bold">{{ info.idCard }}</span>
+          <span class="bold">{{ userInfo.idCard }}</span>
           میزان تحصیلات:
-          <span class="bold">{{ info.education }}</span>
+          <span class="bold">{{ userInfo.education }}</span>
           <br />به نشانی:
-          <span class="bold">{{ info.address }}</span>
+          <span class="bold">{{ userInfo.address }}</span>
           <br />
           <span class="titr">ماده 1) مـوضـوع قـرارداد</span>
           <br />عبارتست از انجـام وظايف ذيـل تـوسـط همکار در پسـت سـازمـانـي،
           تحـت عنـوان
           <span
             class="bold"
-          >{{ info.role }}</span>
+          >{{ userInfo.role }}</span>
           و هم چنین انجام ساير امـور محـوله و وظايف مرتبـط با شغـل كـارمنـد
           براسـاس دستـورات كـارفـرمـا
           <br />
           <span class="titr">ماده 2) محل خدمت و انجام موضوع قـرارداد</span>
           <br />
-          محل خدمت و انجام موضوع قرارداد، در {{ info.employmentPlace }} مي باشد
+          محل خدمت و انجام موضوع قرارداد، در {{ userInfo.employmentPlace }} مي باشد
           ليكن با توجه به بنـد « د » ماده 10 قانون كار،‌ همکار اختيار تغيير محل
           خدمت خـود را به كارفرما تفويض مي نمايد. بنابراين كارفرما حـق خواهد
           داشت با توجه نياز شركت، در هر زمان كه اقتضا نمايد محل خدمت كارمند را
@@ -411,35 +415,35 @@
             <tbody>
               <tr>
                 <td class="salaryTableTitle">حقوق پایه</td>
-                <td class="salarySectionTable">{{ info.salary.baseSalary }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.baseSalary }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">پایه سنوات</td>
-                <td class="salarySectionTable">{{ info.salary.years }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.years }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">بن کارگری</td>
-                <td class="salarySectionTable">{{ info.salary.worker }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.worker }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق مسکن</td>
-                <td class="salarySectionTable">{{ info.salary.housing }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.housing }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق عائله مندی و اولاد</td>
-                <td class="salarySectionTable">{{ info.salary.children }}</td>
+                <td class="salarySectionTable">{{ userInfo.salary.children }}</td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">
                   جمع کل:
-                  <span class="bold">{{ info.salary.salaryLetter }}</span>
+                  <span class="bold">{{ userInfo.salary.salaryLetter }}</span>
                 </td>
-                <td class="salarySectionTable" colspan="2">{{ info.salary.sumOfSalary }}</td>
+                <td class="salarySectionTable" colspan="2">{{ userInfo.salary.sumOfSalary }}</td>
               </tr>
             </tbody>
           </table>
@@ -453,10 +457,10 @@
           <span class="titr">ماده 5) مـدت قـرارداد</span>
           <br />
           مـدت قـرارداد از تـاريـخ 1399/{{
-          allMonths[parseInt(info.startDate.month) + month - 1].number
+          allMonths[parseInt(userInfo.startDate.month) + month - 1].number
           }}/1 لغـايـت 1399/{{
-          allMonths[parseInt(info.startDate.month) + month - 1].number
-          }}/{{ allMonths[parseInt(info.startDate.month) + month - 1].days }}
+          allMonths[parseInt(userInfo.startDate.month) + month - 1].number
+          }}/{{ allMonths[parseInt(userInfo.startDate.month) + month - 1].days }}
           مي بـاشـد
           <br />
           <span class="titr">ماده 6) موارد فسـخ قـرارداد</span>
@@ -508,7 +512,7 @@
             <span class="headerDateValue">
               <span>
                 1399/{{
-                allMonths[parseInt(info.startDate.month) + month - 1].number
+                allMonths[parseInt(userInfo.startDate.month) + month - 1].number
                 }}/1 :
               </span>تاریخ
             </span>
@@ -687,26 +691,26 @@ export default {
   },
   methods: {
     setLastDayOfMonth() {
-      if (this.info.startDate.month <= 6) {
+      if (this.userInfo.startDate.month <= 6) {
         this.currentFinishedDay = 31;
       } else if (
-        this.info.startDate.month <= 12 &&
-        this.info.startDate.month >= 6
+        this.userInfo.startDate.month <= 12 &&
+        this.userInfo.startDate.month >= 6
       ) {
         this.currentFinishedDay = 30;
       }
     },
     checkData() {
-      this.info = this.$parent.$data.info;
-      if (this.info == null) {
+      this.userInfo = this.$parent.$data.poroshatOfficialContractInfo;
+      if (this.userInfo == null) {
         this.$router.push("/contract/official-contract");
       }
     },
     printSheet() {
       window.print();
     },
-    goBack() {
-      this.$router.push("/contract/official-contract");
+    goBack(target) {
+      this.$router.push(target);
     },
     showOnScroll() {
       $(document).scroll(function() {

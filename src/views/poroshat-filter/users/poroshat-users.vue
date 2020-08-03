@@ -44,7 +44,12 @@
                 </svg>
               </span>
             </button>
-            <button id="actionBtn" class="btn btn-outline-primary" ref="btnToggle">
+            <button
+              @click="editUser(user)"
+              id="actionBtn"
+              class="btn btn-outline-primary"
+              ref="btnToggle"
+            >
               <span class="glyphicon">
                 <svg
                   class="bi bi-pencil-square"
@@ -73,33 +78,87 @@
 
     <button
       type="button"
-      class="btn btn-primary"
-      @click="toggleModal('newUserModal')"
-    >Launch demo modal</button>
-    <b-modal id="newUserModal" class="modal" title="همکار جدید" hide-footer>
+      class="btn btn-outline-success"
+      id="addUserBtn"
+      @click="toggleModal('userActionModal')"
+    >
+      <svg
+        width="1em"
+        height="1em"
+        viewBox="0 0 16 16"
+        class="bi bi-plus-circle"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+        />
+      </svg>
+    </button>
+    <b-modal id="userActionModal" class="modal" title="همکار جدید" hide-footer>
+      <userActionsForm :pendingUser="pendingUser"></userActionsForm>
       <hr class="my-4" />
 
       <div class="d-flex flex-row-reverse bd-highlight mb-2" id="btnGroup">
-        <button type="button" class="btn btn-primary" @click="addUser()">ثبت</button>
-        <button type="button" class="btn btn-outline-dark" @click="toggleModal('newUserModal')">لغو</button>
+        <button type="button" class="btn btn-primary" @click="checkUserInfo()">ثبت</button>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          @click="toggleModal('userActionModal')"
+        >لغو</button>
       </div>
     </b-modal>
+    <div class="buttonSection">
+      <button @click="goBack('/')" class="btn btn-outline-danger" id="backBtn">بازگشت</button>
+    </div>
   </div>
 </template>
 <script>
+import { userActions } from "../../../datastore/poroshat-filterData";
 import getData from "../../../actions/getData";
-
+import postData from "../../../actions/postData";
+import userActionsForm from "./components/usersActionsForm";
 export default {
   data() {
     return {
-      users: []
+      users: [],
+      pendingUser: ""
     };
   },
-  mixins: [getData],
+  components: {
+    userActionsForm
+  },
+  mixins: [getData, postData],
+  mounted() {
+    userActions.$on("addUser", userInfo => {
+      this.postData("savedUsers", userInfo);
+    });
+  },
   created() {
     this.getData("savedUsers", this.users);
   },
   methods: {
+    editUser(i) {
+      this.pendingUser = i;
+      userActions.$emit("fillInputOut");
+      this.toggleModal("userActionModal");
+      // localStorage.user = i;
+    },
+    checkUserInfo() {
+      userActions.$emit("inputValidate");
+    },
+    goBack(target) {
+      this.$router.push(target);
+    },
     toggleModal(action) {
       this.$root.$emit("bv::toggle::modal", action, "#btnToggle");
     }

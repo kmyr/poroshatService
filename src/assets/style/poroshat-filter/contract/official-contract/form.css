@@ -1,20 +1,22 @@
-#infoForm {
+#poroshatUserInfoForm {
   padding: 3%;
   width: 50%;
   float: right;
 }
-#infoForm label {
+#poroshatUserInfoForm label {
   text-align: right;
   float: right;
 }
-#submitBtn,#backBtn {
+div.buttonSection {
   position: fixed;
   margin: 30px;
   bottom: 0;
 }
-#backBtn {
-  left: 100px
+#backBtn, #submitBtn {
+  min-width: 80px;
+  margin-top: 5px;
 }
+
 .is-invalid {
   border: 1px solid red;
 }
