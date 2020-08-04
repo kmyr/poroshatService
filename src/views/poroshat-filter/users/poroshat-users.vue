@@ -10,7 +10,7 @@
           <th scope="col">کد ملی</th>
           <th scope="col">محل اشتغال</th>
           <th scope="col">تحصیلات</th>
-          <th scope="col">حقوق</th>
+          <!-- <th scope="col">حقوق</th> -->
           <th scope="col">آدرس</th>
           <th scope="col"></th>
         </tr>
@@ -24,10 +24,15 @@
           <td>{{ user.idCard }}</td>
           <td>{{ user.employmentPlace }}</td>
           <td>{{ user.education }}</td>
-          <td>{{ user.salary }}</td>
+          <!-- <td>{{ user.salary }}</td> -->
           <td>{{ user.address }}</td>
           <td>
-            <button id="actionBtn" class="btn btn-outline-danger" ref="btnToggle">
+            <button
+              id="actionBtn"
+              @click="deleteUser(user)"
+              class="btn btn-outline-danger"
+              ref="btnToggle"
+            >
               <span class="glyphicon">
                 <svg
                   class="bi bi-trash-fill"
@@ -45,7 +50,7 @@
               </span>
             </button>
             <button
-              @click="editUser(user)"
+              @click="editUserModal(user)"
               id="actionBtn"
               class="btn btn-outline-primary"
               ref="btnToggle"
@@ -76,12 +81,7 @@
 
     <!-- Modal -->
 
-    <button
-      type="button"
-      class="btn btn-outline-success"
-      id="addUserBtn"
-      @click="toggleModal('userActionModal')"
-    >
+    <button type="button" class="btn btn-outline-success" id="addUserBtn" @click="newUserModal()">
       <svg
         width="1em"
         height="1em"
@@ -104,12 +104,107 @@
         />
       </svg>
     </button>
-    <b-modal id="userActionModal" class="modal" title="همکار جدید" hide-footer>
-      <userActionsForm :pendingUser="pendingUser"></userActionsForm>
+    <b-modal id="userActionModal" class="modal" :title="modalStatus.title" hide-footer>
+      <form class="userActionsForm">
+        <label>نام و نام خانوادگی</label>
+        <input
+          name="address"
+          v-model="prepareUser.name"
+          type="text"
+          class="form-control"
+          style="margin-bottom:15px"
+        />
+
+        <label>نام پدر</label>
+        <input
+          name="fatherName"
+          v-model="prepareUser.fatherName"
+          type="text"
+          class="form-control"
+          style="margin-bottom:15px"
+        />
+
+        <label>تاریخ تولد</label>
+        <input
+          name="birthdayDate"
+          v-model="prepareUser.birthdayDate"
+          type="text"
+          class="form-control"
+          style="margin-bottom:15px"
+        />
+
+        <label>کد ملی</label>
+        <input
+          name="idCard"
+          v-model="prepareUser.idCard"
+          type="text"
+          class="form-control"
+          style="margin-bottom:15px"
+        />
+
+        <label>سمت</label>
+        <input
+          name="role"
+          v-model="prepareUser.role"
+          type="text"
+          class="form-control"
+          style="margin-bottom:15px"
+        />
+
+        <label>محل اشتغال</label>
+        <select name="employmentPlace" class="form-control" v-model="prepareUser.employmentPlace">
+          <option>تولید</option>
+          <option>دفتر مرکزی</option>
+          <option>دفتر فنی مهندسی</option>
+          <option>انبار</option>
+        </select>
+
+        <label>تحصیلات</label>
+        <select name="education" class="form-control" v-model="prepareUser.education">
+          <option>ابتدایی</option>
+          <option>سیکل</option>
+          <option>دیپلم</option>
+          <option>فوق دیپلم</option>
+          <option>لیسانس</option>
+          <option>فوق لیسانس</option>
+          <option>کارشناسی</option>
+          <option>کارشناسی ارشد</option>
+          <option>دکترا</option>
+        </select>
+
+        <label>آدرس محل سکونت</label>
+        <input
+          name="address"
+          v-model="prepareUser.address"
+          type="text"
+          class="form-control"
+          style="margin-bottom:15px"
+        />
+
+        <!-- <label>حقوق</label>
+        <select name="salary" class="form-control" v-model="prepareUser.salary">
+          <option
+            v-for="(salary, i) in salaryList"
+            :key="i"
+            :value="salary.sumOfSalary"
+          >{{salary.sumOfSalary}}-{{salary.description}}</option>
+        </select>-->
+      </form>
       <hr class="my-4" />
 
       <div class="d-flex flex-row-reverse bd-highlight mb-2" id="btnGroup">
-        <button type="button" class="btn btn-primary" @click="checkUserInfo()">ثبت</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          v-if="modalStatus.newUser"
+          @click="inputValidation('submitUser')"
+        >ثبت</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          v-if="!modalStatus.newUser"
+          @click="inputValidation(updateUser)"
+        >ویرایش</button>
         <button
           type="button"
           class="btn btn-outline-dark"
@@ -123,38 +218,90 @@
   </div>
 </template>
 <script>
-import { userActions } from "../../../datastore/poroshat-filterData";
+import $ from "jquery";
+import { salaryList } from "../../../datastore/poroshat-filterData";
 import getData from "../../../actions/getData";
 import postData from "../../../actions/postData";
-import userActionsForm from "./components/usersActionsForm";
+import updateData from "../../../actions/updateData";
+import deleteData from "../../../actions/deleteData";
 export default {
   data() {
     return {
       users: [],
-      pendingUser: ""
+      editingUser: null,
+      prepareUser: {},
+      modalStatus: {
+        title: "همکار جدید",
+        newUser: true
+      }
     };
   },
-  components: {
-    userActionsForm
-  },
-  mixins: [getData, postData],
-  mounted() {
-    userActions.$on("addUser", userInfo => {
-      this.postData("savedUsers", userInfo);
-    });
-  },
+  mixins: [getData, postData, updateData, deleteData],
   created() {
+    this.salaryList = salaryList;
     this.getData("savedUsers", this.users);
   },
   methods: {
-    editUser(i) {
-      this.pendingUser = i;
-      userActions.$emit("fillInputOut");
-      this.toggleModal("userActionModal");
-      // localStorage.user = i;
+    inputValidation(command) {
+      if (
+        $("input[name='fullname']").val() == "" ||
+        $("input[name='fatherName']").val() == "" ||
+        $("input[name='birthdayDate']").val() == "" ||
+        $("input[name='role']").val() == "" ||
+        $("select[name='employmentPlace']").val() == "" ||
+        $("input[name='idCard']").val() == "" ||
+        $("input[name='idNumber']").val() == "" ||
+        $("select[name='education']").val() == "" ||
+        $("input[name='address']").val() == ""
+        // || $("input[name='salary']").val() == ""
+      ) {
+        $("input,select")
+          .filter(function() {
+            return this.value == "";
+          })
+          .addClass("is-invalid");
+        $("input,select")
+          .filter(function() {
+            return this.value !== "";
+          })
+          .removeClass("is-invalid");
+      } else {
+        if (command == "submitUser") {
+          this.sumbitUser();
+        } else {
+          this.updateUser();
+        }
+      }
     },
-    checkUserInfo() {
-      userActions.$emit("inputValidate");
+
+    newUserModal() {
+      this.prepareUser = {};
+      this.modalStatus = {
+        title: "همکار جدید",
+        newUser: true
+      };
+      this.toggleModal("userActionModal");
+    },
+    editUserModal(user) {
+      this.modalStatus = {
+        title: "ویرایش اطلاعات همکار",
+        newUser: false
+      };
+      this.prepareUser = user;
+      this.toggleModal("userActionModal");
+    },
+    sumbitUser() {
+      this.postData("savedUsers", this.prepareUser);
+      this.toggleModal("userActionModal");
+    },
+    updateUser() {
+      this.updateData("savedUsers", this.prepareUser);
+      this.toggleModal("userActionModal");
+    },
+    deleteUser(user) {
+      if (confirm(`${user.name} پاک شود؟`)) {
+        this.deleteData("savedUsers", user);
+      }
     },
     goBack(target) {
       this.$router.push(target);
@@ -168,4 +315,5 @@ export default {
 <style scoped>
 @import url("../../../assets/style/poroshat-filter/users/table.css");
 @import url("../../../assets/style/poroshat-filter/users/modal.css");
+@import url("../../../assets/style/poroshat-filter/users/form.css");
 </style>

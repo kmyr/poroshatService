@@ -1,16 +1,14 @@
 <script>
-import db from "../components/firebaseInit";
+import db from "../datastore/firebaseInit";
 export default {
   methods: {
-    updateData(obj, document) {
+    updateData(document, obj) {
       db.collection(document)
         .where("name", "==", obj.name)
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            doc.ref.update(obj).then(() => {
-              location.reload();
-            });
+            doc.ref.update(obj).then(() => {});
           });
         });
     }

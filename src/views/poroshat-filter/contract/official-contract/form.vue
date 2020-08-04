@@ -89,7 +89,11 @@
 
           <label>حقوق</label>
           <select name="salary" class="form-control" v-model="userInfo.salary">
-            <option v-for="(salary, i) in salaryList" :key="i">{{salary.sumOfSalary}}</option>
+            <option
+              v-for="(salary, i) in salaryList"
+              :key="i"
+              :value="salary.sumOfSalary"
+            >{{salary.sumOfSalary}}-{{salary.description}}</option>
           </select>
 
           <div class="form-check" v-if="!savedUsers.useSavedUsers">
@@ -99,7 +103,7 @@
               v-model="savedUsers.saveThisUser"
               id="saveUser"
             />
-            <label class="saveUser-label" for="saveUser">ذخیره این کاربر</label>
+            <label class="saveUser-label" for="saveUser">ذخیره مشخصات</label>
           </div>
         </div>
         <div class="buttonSection">
@@ -131,19 +135,10 @@ export default {
     return {
       salaryList: null,
       userInfo: {
-        name: "",
-        fatherName: "",
-        birthdayDate: "",
-        role: "",
-        employmentPlace: "",
-        idCard: "",
-        education: "",
-        address: "",
         startDate: {
           month: "",
           day: ""
         },
-        periodDate: 1,
         salary: ""
       },
       savedUsers: {
@@ -271,7 +266,6 @@ export default {
         this.userInfo.idCard = this.savedUsers.currentUser.idCard;
         this.userInfo.education = this.savedUsers.currentUser.education;
         this.userInfo.address = this.savedUsers.currentUser.address;
-        this.userInfo.salary = this.savedUsers.currentUser.salary;
       } else {
         this.savedUsers.useSavedUsers = false;
         //change input values to empty
