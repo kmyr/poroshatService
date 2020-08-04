@@ -15,23 +15,23 @@ export default {
         },
         {
           href: "",
-          title: "Contracts",
+          title: "قرارداد ها",
           icon: "fa fa-file",
           child: [
             {
               href: "/contract/official-contract",
-              title: "Official Contract"
+              title: "قرارداد رسمی"
             }
           ]
         },
         {
           href: "",
-          title: "Users",
+          title: "همکاران",
           icon: "fa fa-users",
           child: [
             {
               href: "/users/poroshat-filter",
-              title: "Poroshat Filter Users"
+              title: "همکاران پروشات فیلتر"
             }
           ]
         }
