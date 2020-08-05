@@ -1,10 +1,27 @@
 #usersTable{
     direction: rtl !important;
     float: right;
-}
-#usersTable  {
     text-align: right !important;
+
 }
 #actionBtn {
     border: 0 !important;
 }
+#addUserBtn {
+    font-size: 28px;
+    border: 1 !important;
+    padding-bottom: 8px;
+    padding-top: 0;
+    border-radius: 50px;
+    margin-left: 15px;
+}
+.usersTable-btnSection {
+    right:0 !important;
+}
+
+.usersTable-backBtn {
+    /* margin: 10px !important; */
+    left: 0 !important;
+}
+
+/*  */

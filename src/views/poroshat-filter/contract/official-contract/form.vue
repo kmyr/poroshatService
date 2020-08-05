@@ -161,17 +161,20 @@ export default {
     },
     submitForm() {
       if (this.savedUsers.saveThisUser) {
-        this.postData("savedUsers", {
-          name: this.userInfo.name,
-          fatherName: this.userInfo.fatherName,
-          birthdayDate: this.userInfo.birthdayDate,
-          role: this.userInfo.role,
-          employmentPlace: this.userInfo.employmentPlace,
-          idCard: this.userInfo.idCard,
-          education: this.userInfo.education,
-          address: this.userInfo.address,
-          salary: this.userInfo.salary
-        });
+        this.postData(
+          "savedUsers",
+          {
+            name: this.userInfo.name,
+            fatherName: this.userInfo.fatherName,
+            birthdayDate: this.userInfo.birthdayDate,
+            role: this.userInfo.role,
+            employmentPlace: this.userInfo.employmentPlace,
+            idCard: this.userInfo.idCard,
+            education: this.userInfo.education,
+            address: this.userInfo.address
+          },
+          false
+        );
       }
       this.userInfo.periodDate--;
       for (let i = 0; i < this.salaryList.length; i++) {

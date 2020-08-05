@@ -10,7 +10,6 @@
           <th scope="col">کد ملی</th>
           <th scope="col">محل اشتغال</th>
           <th scope="col">تحصیلات</th>
-          <!-- <th scope="col">حقوق</th> -->
           <th scope="col">آدرس</th>
           <th scope="col"></th>
         </tr>
@@ -24,7 +23,6 @@
           <td>{{ user.idCard }}</td>
           <td>{{ user.employmentPlace }}</td>
           <td>{{ user.education }}</td>
-          <!-- <td>{{ user.salary }}</td> -->
           <td>{{ user.address }}</td>
           <td>
             <button
@@ -77,33 +75,80 @@
           </td>
         </tr>
       </tbody>
+      <div class="d-flex flex-row-reverse bd-highlight mb-12">
+        <button
+          @click="goBack('/')"
+          class="btn btn-outline-danger usersTable-backBtn"
+          id="backBtn"
+        >بازگشت</button>
+        <button
+          type="button"
+          class="btn btn-success usersTable-btnSection"
+          id="addUserBtn"
+          @click="newUserModal()"
+        >
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-plus-circle"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+          </svg>
+        </button>
+      </div>
     </table>
 
+    <!-- <button
+      @click="goBack('/')"
+      class="btn btn-outline-danger usersTable-backBtn"
+      id="backBtn"
+    >بازگشت</button>
+    <div class="buttonSection">
+      <button
+        type="button"
+        class="btn btn-success usersTable-btnSection"
+        id="addUserBtn"
+        @click="newUserModal()"
+      >
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-plus-circle"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          />
+        </svg>
+      </button>
+    </div>-->
     <!-- Modal -->
 
-    <button type="button" class="btn btn-outline-success" id="addUserBtn" @click="newUserModal()">
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        class="bi bi-plus-circle"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-        />
-        <path
-          fill-rule="evenodd"
-          d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
-        />
-        <path
-          fill-rule="evenodd"
-          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-        />
-      </svg>
-    </button>
     <b-modal id="userActionModal" class="modal" :title="modalStatus.title" hide-footer>
       <form class="userActionsForm">
         <label>نام و نام خانوادگی</label>
@@ -180,15 +225,6 @@
           class="form-control"
           style="margin-bottom:15px"
         />
-
-        <!-- <label>حقوق</label>
-        <select name="salary" class="form-control" v-model="prepareUser.salary">
-          <option
-            v-for="(salary, i) in salaryList"
-            :key="i"
-            :value="salary.sumOfSalary"
-          >{{salary.sumOfSalary}}-{{salary.description}}</option>
-        </select>-->
       </form>
       <hr class="my-4" />
 
@@ -212,14 +248,10 @@
         >لغو</button>
       </div>
     </b-modal>
-    <div class="buttonSection">
-      <button @click="goBack('/')" class="btn btn-outline-danger" id="backBtn">بازگشت</button>
-    </div>
   </div>
 </template>
 <script>
 import $ from "jquery";
-import { salaryList } from "../../../datastore/poroshat-filterData";
 import getData from "../../../actions/getData";
 import postData from "../../../actions/postData";
 import updateData from "../../../actions/updateData";
@@ -238,7 +270,6 @@ export default {
   },
   mixins: [getData, postData, updateData, deleteData],
   created() {
-    this.salaryList = salaryList;
     this.getData("savedUsers", this.users);
   },
   methods: {
@@ -253,7 +284,6 @@ export default {
         $("input[name='idNumber']").val() == "" ||
         $("select[name='education']").val() == "" ||
         $("input[name='address']").val() == ""
-        // || $("input[name='salary']").val() == ""
       ) {
         $("input,select")
           .filter(function() {
@@ -284,18 +314,27 @@ export default {
     },
     editUserModal(user) {
       this.modalStatus = {
-        title: "ویرایش اطلاعات همکار",
+        title: ` ویرایش اطلاعات ${user.name}`,
         newUser: false
       };
       this.prepareUser = user;
       this.toggleModal("userActionModal");
     },
     sumbitUser() {
-      this.postData("savedUsers", this.prepareUser);
+      this.postData("savedUsers", this.prepareUser, true);
       this.toggleModal("userActionModal");
     },
     updateUser() {
-      this.updateData("savedUsers", this.prepareUser);
+      this.updateData("savedUsers", {
+        name: this.prepareUser.name,
+        fatherName: this.prepareUser.fatherName,
+        idCard: this.prepareUser.idCard,
+        education: this.prepareUser.education,
+        employmentPlace: this.prepareUser.employmentPlace,
+        birthdayDate: this.prepareUser.birthdayDate,
+        address: this.prepareUser.address,
+        role: this.prepareUser.role
+      });
       this.toggleModal("userActionModal");
     },
     deleteUser(user) {

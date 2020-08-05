@@ -8,7 +8,9 @@ export default {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            doc.ref.update(obj).then(() => {});
+            doc.ref.update(obj).then(() => {
+              location.reload();
+            });
           });
         });
     }

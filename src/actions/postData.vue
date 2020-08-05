@@ -2,10 +2,15 @@
 import db from "../datastore/firebaseInit";
 export default {
   methods: {
-    postData(document, obj) {
+    postData(document, obj, reloadPage) {
       db.collection(document)
         .add(obj)
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .then(() => {
+          if (reloadPage) {
+            location.reload();
+          }
+        });
     }
   }
 };
