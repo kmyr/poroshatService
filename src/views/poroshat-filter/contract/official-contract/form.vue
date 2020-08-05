@@ -163,7 +163,8 @@ export default {
       salaryOptions: {
         salaryListOldVersion: null,
         salaryList: null,
-        useOldSalary: false
+        useOldSalary: false,
+        selectedSalary: null
       },
       userInfo: {
         startDate: {
@@ -192,6 +193,7 @@ export default {
       this.$router.push(target);
     },
     submitForm() {
+      this.findOutSelectedSalary();
       if (this.savedUsers.saveThisUser) {
         this.postData(
           "savedUsers",
@@ -209,15 +211,23 @@ export default {
         );
       }
       this.userInfo.periodDate--;
-      for (let i = 0; i < this.salaryList.length; i++) {
-        const selectedSalary = this.salaryList[i];
+
+      this.$parent.$data.poroshatOfficialContractInfo = this.userInfo;
+      this.$router.push("/contract/official-contract/preview");
+      $("html,body").animate({ scrollTop: 0 }, "slow");
+    },
+    findOutSelectedSalary() {
+      let selectedSalaryList = this.salaryOptions.salaryList;
+
+      if (this.salaryOptions.useOldSalary) {
+        selectedSalaryList = this.salaryOptions.salaryListOldVersion;
+      }
+      for (let i = 0; i < selectedSalaryList.length; i++) {
+        const selectedSalary = selectedSalaryList[i];
         if (selectedSalary.sumOfSalary == this.userInfo.salary) {
           this.userInfo.salary = selectedSalary;
         }
       }
-      this.$parent.$data.poroshatOfficialContractInfo = this.userInfo;
-      this.$router.push("/contract/official-contract/preview");
-      $("html,body").animate({ scrollTop: 0 }, "slow");
     },
     inputValidation() {
       if (
