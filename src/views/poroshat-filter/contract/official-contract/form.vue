@@ -88,14 +88,41 @@
           />
 
           <label>حقوق</label>
-          <select name="salary" class="form-control" v-model="userInfo.salary">
+          <select
+            name="salary"
+            class="form-control"
+            v-model="userInfo.salary"
+            v-if="!salaryOptions.useOldSalary"
+          >
             <option
-              v-for="(salary, i) in salaryList"
+              v-for="(salary, i) in salaryOptions.salaryList"
               :key="i"
               :value="salary.sumOfSalary"
             >{{salary.sumOfSalary}}-{{salary.description}}</option>
           </select>
-
+          <select
+            name="salary"
+            class="form-control"
+            v-model="userInfo.salary"
+            v-if="salaryOptions.useOldSalary"
+          >
+            <option
+              v-for="(salary, i) in salaryOptions.salaryListOldVersion"
+              :key="i"
+              :value="salary.sumOfSalary"
+            >{{salary.sumOfSalary}}-{{salary.description}}</option>
+          </select>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              v-model="salaryOptions.useOldSalary"
+              id="saveUser"
+            />
+            <label class="saveUser-label" for="saveUser">پایه سنوات قدیمی</label>
+          </div>
+          <br />
+          <br />
           <div class="form-check" v-if="!savedUsers.useSavedUsers">
             <input
               type="checkbox"
@@ -133,7 +160,11 @@ import { salaryList } from "../../../../datastore/poroshat-filterData";
 export default {
   data() {
     return {
-      salaryList: null,
+      salaryOptions: {
+        salaryListOldVersion: null,
+        salaryList: null,
+        useOldSalary: false
+      },
       userInfo: {
         startDate: {
           month: "",
@@ -153,7 +184,8 @@ export default {
   mixins: [postData, getData],
   created() {
     this.getData("savedUsers", this.savedUsers.usersList);
-    this.salaryList = salaryList;
+    this.salaryOptions.salaryList = salaryList.newSalaryList;
+    this.salaryOptions.salaryListOldVersion = salaryList.salaryListOldVersion;
   },
   methods: {
     goBack(target) {
