@@ -25,7 +25,11 @@
           <td>{{ user.education }}</td>
           <td>{{ user.address }}</td>
           <td>
-            <button class="btn btn-outline-danger" @click="deleteUser(user)" ref="btnToggle">
+            <button
+              class="btn btn-outline-danger actionBtn"
+              @click="deleteUser(user)"
+              ref="btnToggle"
+            >
               <span class="glyphicon">
                 <svg
                   class="bi bi-trash-fill"
@@ -42,7 +46,11 @@
                 </svg>
               </span>
             </button>
-            <button @click="editUserModal(user)" class="btn btn-outline-primary" ref="btnToggle">
+            <button
+              @click="editUserModal(user)"
+              class="btn btn-outline-primary actionBtn"
+              ref="btnToggle"
+            >
               <span class="glyphicon">
                 <svg
                   class="bi bi-pencil-square"
@@ -68,8 +76,8 @@
       <div class="d-flex flex-row-reverse bd-highlight mb-12 flex-button-section">
         <button
           @click="goBack('/')"
-          class="btn btn-outline-danger usersTable-backBtn"
-          id="backBtn"
+          class="btn btn-outline-danger backBtn"
+          id="usersTable-backBtn"
         >بازگشت</button>
         <button
           type="button"

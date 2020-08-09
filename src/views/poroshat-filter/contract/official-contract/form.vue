@@ -135,18 +135,13 @@
         </div>
         <div class="buttonSection">
           <button
-            id="backBtn"
+            id
             @click="goBack('/')"
             type="button"
-            class="btn btn-outline-danger"
+            class="btn btn-outline-danger backBtn"
           >بازگشت</button>
           <br />
-          <button
-            id="submitBtn"
-            @click="inputValidation()"
-            type="button"
-            class="btn btn-primary"
-          >ثبت</button>
+          <button id @click="inputValidation()" type="button" class="btn btn-primary submitBtn">ثبت</button>
         </div>
       </div>
     </form>
