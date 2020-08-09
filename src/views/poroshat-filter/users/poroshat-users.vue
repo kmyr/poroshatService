@@ -205,7 +205,8 @@ export default {
       modalStatus: {
         title: "همکار جدید",
         newUser: true
-      }
+      },
+      targetName: null
     };
   },
   mixins: [getData, postData, updateData, deleteData],
@@ -258,6 +259,7 @@ export default {
         newUser: false
       };
       this.prepareUser = user;
+      this.targetName = user.name;
       this.toggleModal("userActionModal");
     },
     sumbitUser() {
@@ -265,16 +267,20 @@ export default {
       this.toggleModal("userActionModal");
     },
     updateUser() {
-      this.updateData("savedUsers", {
-        name: this.prepareUser.name,
-        fatherName: this.prepareUser.fatherName,
-        idCard: this.prepareUser.idCard,
-        education: this.prepareUser.education,
-        employmentPlace: this.prepareUser.employmentPlace,
-        birthdayDate: this.prepareUser.birthdayDate,
-        address: this.prepareUser.address,
-        role: this.prepareUser.role
-      });
+      this.updateData(
+        "savedUsers",
+        {
+          name: this.prepareUser.name,
+          fatherName: this.prepareUser.fatherName,
+          idCard: this.prepareUser.idCard,
+          education: this.prepareUser.education,
+          employmentPlace: this.prepareUser.employmentPlace,
+          birthdayDate: this.prepareUser.birthdayDate,
+          address: this.prepareUser.address,
+          role: this.prepareUser.role
+        },
+        this.targetName
+      );
       this.toggleModal("userActionModal");
     },
     deleteUser(user) {

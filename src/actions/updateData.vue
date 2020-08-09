@@ -2,9 +2,12 @@
 import db from "../datastore/firebaseInit";
 export default {
   methods: {
-    updateData(document, obj) {
+    updateData(document, obj, targetName) {
+      if (targetName == undefined) {
+        targetName = obj.name;
+      }
       db.collection(document)
-        .where("name", "==", obj.name)
+        .where("name", "==", targetName)
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
