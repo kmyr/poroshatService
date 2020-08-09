@@ -119,7 +119,7 @@
               v-model="salaryOptions.useOldSalary"
               id="saveUser"
             />
-            <label class="saveUser-label" for="saveUser">پایه سنوات قدیمی</label>
+            <label id="saveUser-label" for="saveUser">پایه سنوات قدیمی</label>
           </div>
           <br />
           <br />
@@ -130,7 +130,7 @@
               v-model="savedUsers.saveThisUser"
               id="saveUser"
             />
-            <label class="saveUser-label" for="saveUser">ذخیره مشخصات</label>
+            <label id="saveUser-label" for="saveUser">ذخیره مشخصات</label>
           </div>
         </div>
         <div class="buttonSection">

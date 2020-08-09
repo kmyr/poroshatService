@@ -21,15 +21,15 @@
 .bold {
   font-weight: 900;
 }
-.sheet.secondSheet {
+.sheet.second-sheet {
   margin-top: 1%;
 }
 
-.previewSheet {
+.preview-sheet {
   padding: 30px;
   float: right;
 }
-.bodyPart {
+.body-part {
   width: 100%;
   text-align: right;
   font-family: zar;
@@ -37,7 +37,7 @@
   font-size: 21px;
 }
 
-#hideOnPrintBtn {
+.hide-on-print {
   margin: 5px;
 }
 
@@ -47,13 +47,13 @@
     height: 39.9cm;
     margin-bottom: 1%;
   }
-  #hideOnPrintBtn {
-    display: none;
+  .hide-on-print {
+    display: none !important;
   }
-  .bodyPart {
+  .body-part {
     padding: 25px;
   }
-  .previewSheet {
+  .preview-sheet {
     padding: 0;
     margin-left: 0;
   }
@@ -62,10 +62,10 @@ button,
 input {
   font-family: zar;
 }
-.cancelBtn {
+#cancelBtn {
   float: right;
 }
-.goTop {
+#scrollTop {
   display: none;
   position: fixed;
   left: 0;

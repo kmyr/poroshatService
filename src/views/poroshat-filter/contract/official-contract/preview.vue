@@ -1,12 +1,12 @@
 <template>
-  <div class="previewSheet">
-    <button id="hideOnPrintBtn" class="btn btn-outline-primary" @click="printSheet">پرینت</button>
+  <div class="preview-sheet">
+    <button id class="btn btn-outline-primary hide-on-print" @click="printSheet">پرینت</button>
     <button
-      id="hideOnPrintBtn"
-      class="btn btn-outline-danger cancelBtn"
+      id="cancelBtn"
+      class="btn btn-outline-danger hide-on-print"
       @click="goBack('/contract/official-contract')"
     >انصراف</button>
-    <button class="btn btn-primary goTop" id="hideOnPrintBtn" @click="goTop()">
+    <button class="btn btn-primary hide-on-print" id="scrollTop" @click="scrollTop()">
       <svg
         width="1em"
         height="1em"
@@ -51,7 +51,7 @@
             <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
           </div>
         </div>
-        <div class="bodyPart">
+        <div class="body-part">
           اين قرارداد في‌مابين شركت صنایع پالایش پروشات پالاد به نمايندگي آقای
           نصیر صفاری كه در اين قرارداد اختصاراً «كـارفرمـا» ناميده می‌شود و طرف
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
@@ -189,7 +189,7 @@
         </div>
       </div>
 
-      <div class="sheet secondSheet">
+      <div class="sheet second-sheet">
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
@@ -214,7 +214,7 @@
             <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
           </div>
         </div>
-        <div class="bodyPart">
+        <div class="body-part">
           <span class="titr">ماده 7) تعهدات همکار</span>
           <ol style="direction: rtl">
             <li>انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما</li>
@@ -367,7 +367,7 @@
             <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
           </div>
         </div>
-        <div class="bodyPart">
+        <div class="body-part">
           اين قرارداد في‌مابين شركت صنایع پالایش پروشات پالاد به نمايندگي آقای
           نصیر صفاری كه در اين قرارداد اختصاراً «كـارفرمـا» ناميده می‌شود و طرف
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
@@ -506,7 +506,7 @@
         </div>
       </div>
 
-      <div class="sheet secondSheet">
+      <div class="sheet second-sheet">
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
@@ -530,7 +530,7 @@
             <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
           </div>
         </div>
-        <div class="bodyPart">
+        <div class="body-part">
           <span class="titr">ماده 7) تعهدات همکار</span>
           <ol style="direction: rtl">
             <li>انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما</li>
@@ -716,13 +716,13 @@ export default {
       $(document).scroll(function() {
         var y = $(this).scrollTop();
         if (y > 200) {
-          $(".goTop").fadeIn();
+          $("#scrollTop").fadeIn();
         } else {
-          $(".goTop").fadeOut();
+          $("#scrollTop").fadeOut();
         }
       });
     },
-    goTop() {
+    scrollTop() {
       $("html,body").animate({ scrollTop: 0 }, "slow");
     }
   }

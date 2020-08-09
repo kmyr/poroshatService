@@ -4,7 +4,7 @@
     text-align: right !important;
 
 }
-#actionBtn {
+.actionBtn {
     border: 0 !important;
 }
 #addUserBtn {
