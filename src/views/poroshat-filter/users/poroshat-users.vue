@@ -280,6 +280,7 @@ export default {
     deleteUser(user) {
       if (confirm(`${user.name} پاک شود؟`)) {
         this.deleteData("savedUsers", user);
+        this.postData("deleteItemsLog", user, true);
       }
     },
     goBack(target) {
