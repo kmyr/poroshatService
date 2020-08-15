@@ -1,4 +1,4 @@
-#usersTable{
+.users-table{
     direction: rtl !important;
     float: right;
     text-align: right !important;
@@ -7,14 +7,19 @@
 .actionBtn {
     border: 0 !important;
 }
-#addUserBtn {
+.addUserBtn {
     margin-left: 15px;
     margin-top: 5px;
 }
 
 
-#usersTable-backBtn {
+.backBtn {
     left: 0 !important;
 }
-
-/*  */
+.flex-button-section {
+    /* width: 10px !important; */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}

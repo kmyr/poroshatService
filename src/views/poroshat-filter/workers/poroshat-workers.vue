@@ -1,7 +1,7 @@
 <template>
   <div>
-    <table class="table" id="usersTable">
-      <thead class="thead-dark" id="usersTableHead">
+    <table class="table users-table" id="workersTable">
+      <thead class="thead-dark" id="workersTableHead">
         <tr>
           <th scope="col">نام</th>
           <th scope="col">نام پدر</th>
@@ -15,19 +15,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user,i) in users" :key="i">
-          <th>{{ user.name }}</th>
-          <td>{{ user.fatherName }}</td>
-          <td>{{ user.birthdayDate }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.idCard }}</td>
-          <td>{{ user.employmentPlace }}</td>
-          <td>{{ user.education }}</td>
-          <td>{{ user.address }}</td>
+        <tr v-for="(worker,i) in workers" :key="i">
+          <th>{{ worker.name }}</th>
+          <td>{{ worker.fatherName }}</td>
+          <td>{{ worker.birthdayDate }}</td>
+          <td>{{ worker.role }}</td>
+          <td>{{ worker.idCard }}</td>
+          <td>{{ worker.employmentPlace }}</td>
+          <td>{{ worker.education }}</td>
+          <td>{{ worker.address }}</td>
           <td>
             <button
               class="btn btn-outline-danger actionBtn"
-              @click="deleteUser(user)"
+              @click="deleteWorker(worker)"
               ref="btnToggle"
             >
               <span class="glyphicon">
@@ -47,7 +47,7 @@
               </span>
             </button>
             <button
-              @click="editUserModal(user)"
+              @click="editWorkerModal(worker)"
               class="btn btn-outline-primary actionBtn"
               ref="btnToggle"
             >
@@ -73,28 +73,24 @@
           </td>
         </tr>
       </tbody>
-      <div class="d-flex flex-row-reverse bd-highlight mb-12 flex-button-section">
-        <button
-          @click="goBack('/')"
-          class="btn btn-outline-danger backBtn"
-          id="usersTable-backBtn"
-        >بازگشت</button>
-        <button
-          type="button"
-          class="btn btn-outline-success"
-          id="addUserBtn"
-          @click="newUserModal()"
-        >افزودن</button>
-      </div>
     </table>
+    <div class="d-flex flex bd-highlight mb-12 flex-button-section">
+      <button @click="goBack('/')" class="btn btn-danger backBtn" id="workersTable-backBtn">بازگشت</button>
+      <button
+        type="button"
+        class="btn btn-success addUserBtn"
+        id="addWorkerBtn"
+        @click="newWorkerModal()"
+      >افزودن</button>
+    </div>
     <!-- Modal -->
 
-    <b-modal id="userActionModal" class="modal" :title="modalStatus.title" hide-footer>
-      <form class="userActionsForm">
+    <b-modal id="workerActionModal" class="modal" :title="modalStatus.title" hide-footer>
+      <form id="workerActionsForm">
         <label>نام و نام خانوادگی</label>
         <input
           name="address"
-          v-model="prepareUser.name"
+          v-model="prepareWorker.name"
           type="text"
           class="form-control"
           style="margin-bottom:15px"
@@ -103,7 +99,7 @@
         <label>نام پدر</label>
         <input
           name="fatherName"
-          v-model="prepareUser.fatherName"
+          v-model="prepareWorker.fatherName"
           type="text"
           class="form-control"
           style="margin-bottom:15px"
@@ -112,7 +108,7 @@
         <label>تاریخ تولد</label>
         <input
           name="birthdayDate"
-          v-model="prepareUser.birthdayDate"
+          v-model="prepareWorker.birthdayDate"
           type="text"
           class="form-control"
           style="margin-bottom:15px"
@@ -121,7 +117,7 @@
         <label>کد ملی</label>
         <input
           name="idCard"
-          v-model="prepareUser.idCard"
+          v-model="prepareWorker.idCard"
           type="text"
           class="form-control"
           style="margin-bottom:15px"
@@ -130,14 +126,14 @@
         <label>سمت</label>
         <input
           name="role"
-          v-model="prepareUser.role"
+          v-model="prepareWorker.role"
           type="text"
           class="form-control"
           style="margin-bottom:15px"
         />
 
         <label>محل اشتغال</label>
-        <select name="employmentPlace" class="form-control" v-model="prepareUser.employmentPlace">
+        <select name="employmentPlace" class="form-control" v-model="prepareWorker.employmentPlace">
           <option>تولید</option>
           <option>دفتر مرکزی</option>
           <option>دفتر فنی مهندسی</option>
@@ -145,7 +141,7 @@
         </select>
 
         <label>تحصیلات</label>
-        <select name="education" class="form-control" v-model="prepareUser.education">
+        <select name="education" class="form-control" v-model="prepareWorker.education">
           <option>ابتدایی</option>
           <option>سیکل</option>
           <option>دیپلم</option>
@@ -160,7 +156,7 @@
         <label>آدرس محل سکونت</label>
         <input
           name="address"
-          v-model="prepareUser.address"
+          v-model="prepareWorker.address"
           type="text"
           class="form-control"
           style="margin-bottom:15px"
@@ -172,19 +168,19 @@
         <button
           type="button"
           class="btn btn-primary"
-          v-if="modalStatus.newUser"
-          @click="inputValidation('submitUser')"
+          v-if="modalStatus.newWorker"
+          @click="inputValidation('submitWorker')"
         >ثبت</button>
         <button
           type="button"
           class="btn btn-primary"
-          v-if="!modalStatus.newUser"
-          @click="inputValidation(updateUser)"
+          v-if="!modalStatus.newWorker"
+          @click="inputValidation(updateWorker)"
         >ویرایش</button>
         <button
           type="button"
           class="btn btn-outline-dark"
-          @click="toggleModal('userActionModal')"
+          @click="toggleModal('workerActionModal')"
         >لغو</button>
       </div>
     </b-modal>
@@ -199,19 +195,19 @@ import deleteData from "../../../actions/deleteData";
 export default {
   data() {
     return {
-      users: [],
-      editingUser: null,
-      prepareUser: {},
+      workers: [],
+      editingWorker: null,
+      prepareWorker: {},
       modalStatus: {
         title: "همکار جدید",
-        newUser: true
+        newWorker: true
       },
       targetName: null
     };
   },
   mixins: [getData, postData, updateData, deleteData],
   created() {
-    this.getData("savedUsers", this.users);
+    this.getData("savedWorkers", this.workers);
   },
   methods: {
     inputValidation(command) {
@@ -237,56 +233,43 @@ export default {
           })
           .removeClass("is-invalid");
       } else {
-        if (command == "submitUser") {
-          this.sumbitUser();
+        if (command == "submitWorker") {
+          this.sumbitWorker();
         } else {
-          this.updateUser();
+          this.updateWorker();
         }
       }
     },
 
-    newUserModal() {
-      this.prepareUser = {};
+    newWorkerModal() {
+      this.prepareWorker = {};
       this.modalStatus = {
         title: "همکار جدید",
-        newUser: true
+        newWorker: true
       };
-      this.toggleModal("userActionModal");
+      this.toggleModal("workerActionModal");
     },
-    editUserModal(user) {
+    editWorkerModal(worker) {
       this.modalStatus = {
-        title: ` ویرایش اطلاعات ${user.name}`,
-        newUser: false
+        title: ` ویرایش اطلاعات ${worker.name}`,
+        newWorker: false
       };
-      this.prepareUser = user;
-      this.targetName = user.name;
-      this.toggleModal("userActionModal");
+      this.prepareWorker = worker;
+      this.targetName = worker.name;
+      this.toggleModal("workerActionModal");
     },
-    sumbitUser() {
-      this.postData("savedUsers", this.prepareUser, true);
-      this.toggleModal("userActionModal");
+    sumbitWorker() {
+      this.postData("savedWorkers", this.prepareWorker, true);
+      this.toggleModal("workerActionModal");
     },
-    updateUser() {
-      this.updateData(
-        "savedUsers",
-        {
-          name: this.prepareUser.name,
-          fatherName: this.prepareUser.fatherName,
-          idCard: this.prepareUser.idCard,
-          education: this.prepareUser.education,
-          employmentPlace: this.prepareUser.employmentPlace,
-          birthdayDate: this.prepareUser.birthdayDate,
-          address: this.prepareUser.address,
-          role: this.prepareUser.role
-        },
-        this.targetName
-      );
-      this.toggleModal("userActionModal");
+    updateWorker() {
+      this.updateData("savedWorkers", this.prepareWorker, this.targetName);
+      this.toggleModal("workerActionModal");
     },
-    deleteUser(user) {
-      if (confirm(`${user.name} پاک شود؟`)) {
-        this.deleteData("savedUsers", user);
-        this.postData("deleteItemsLog", user, true);
+    deleteWorker(worker) {
+      if (confirm(`${worker.name} پاک شود؟`)) {
+        this.deleteData("savedWorkers", worker);
+        this.postData("deleteItemsLog", worker, true);
       }
     },
     goBack(target) {
@@ -299,7 +282,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../../assets/style/poroshat-filter/users/table.css");
-@import url("../../../assets/style/poroshat-filter/users/modal.css");
-@import url("../../../assets/style/poroshat-filter/users/form.css");
+@import url("../../../assets/style/poroshat-filter/workers/table.css");
+@import url("../../../assets/style/poroshat-filter/workers/modal.css");
+@import url("../../../assets/style/poroshat-filter/workers/form.css");
 </style>

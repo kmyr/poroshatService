@@ -4,15 +4,20 @@ import home from "../views/home";
 //poroshatfilter
 import form from "../views/poroshat-filter/contract/official-contract/form";
 import preview from "../views/poroshat-filter/contract/official-contract/preview";
-import users from "../views/poroshat-filter/users/poroshat-users";
+import workers from "../views/poroshat-filter/workers/poroshat-workers";
+import users from "../views/users/manage-users";
+import login from "../views/login";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    // component: form,
     component: home,
+  },
+  {
+    path: "/login",
+    component: login,
   },
   {
     path: "/contract/official-contract",
@@ -23,7 +28,11 @@ const routes = [
     component: preview,
   },
   {
-    path: "/users/poroshat-filter",
+    path: "/workers/poroshat-filter",
+    component: workers,
+  },
+  {
+    path: "/users",
     component: users,
   },
 ];

@@ -19,8 +19,14 @@ export default {
           icon: "fa fa-file",
           child: [
             {
-              href: "/contract/official-contract",
-              title: "قرارداد رسمی"
+              title: "قرارداد پروشات فیلتر",
+              icon: "poroshatfilter-icn",
+              child: [
+                {
+                  href: "/contract/official-contract",
+                  title: "قرارداد رسمی"
+                }
+              ]
             }
           ]
         },
@@ -30,17 +36,23 @@ export default {
           icon: "fa fa-users",
           child: [
             {
-              href: "/users/poroshat-filter",
+              href: "/workers/poroshat-filter",
               title: "همکاران پروشات فیلتر"
             }
           ]
+        },
+        {
+          href: "/users",
+          title: "مدیریت کاربران",
+          icon: "fa fa-user"
         }
-      ]
+      ],
+
     };
   },
   methods: {}
 };
-</script>
+</script> 
 <style>
 @import url("../assets/style/font-awesome/css/all.css");
 </style>

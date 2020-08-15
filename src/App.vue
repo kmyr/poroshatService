@@ -7,8 +7,20 @@
 export default {
   data() {
     return {
-      poroshatOfficialContractInfo: null
+      poroshatOfficialContractInfo: null,
+      userStatus: {
+        logedIn: false,
+        username: ""
+      }
     };
+  },
+  created() {
+    this.logedIn = localStorage.logedIn;
+    if (this.$router.currentRoute.path !== "/login") {
+      if (this.logedIn == "false") {
+        this.$router.push("/login");
+      }
+    }
   }
 };
 </script>
