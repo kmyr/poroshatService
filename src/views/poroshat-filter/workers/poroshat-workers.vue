@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(worker,i) in workers" :key="i">
+        <tr v-for="(worker, i) in workers" :key="i">
           <th>{{ worker.name }}</th>
           <td>{{ worker.fatherName }}</td>
           <td>{{ worker.birthdayDate }}</td>
@@ -86,82 +86,8 @@
     <!-- Modal -->
 
     <b-modal id="workerActionModal" class="modal" :title="modalStatus.title" hide-footer>
-      <form id="workerActionsForm">
-        <label>نام و نام خانوادگی</label>
-        <input
-          name="address"
-          v-model="prepareWorker.name"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
+      <fields :editingWorkerInfo="editingWorker"></fields>
 
-        <label>نام پدر</label>
-        <input
-          name="fatherName"
-          v-model="prepareWorker.fatherName"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-
-        <label>تاریخ تولد</label>
-        <input
-          name="birthdayDate"
-          v-model="prepareWorker.birthdayDate"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-
-        <label>کد ملی</label>
-        <input
-          name="idCard"
-          v-model="prepareWorker.idCard"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-
-        <label>سمت</label>
-        <input
-          name="role"
-          v-model="prepareWorker.role"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-
-        <label>محل اشتغال</label>
-        <select name="employmentPlace" class="form-control" v-model="prepareWorker.employmentPlace">
-          <option>تولید</option>
-          <option>دفتر مرکزی</option>
-          <option>دفتر فنی مهندسی</option>
-          <option>انبار</option>
-        </select>
-
-        <label>تحصیلات</label>
-        <select name="education" class="form-control" v-model="prepareWorker.education">
-          <option>ابتدایی</option>
-          <option>سیکل</option>
-          <option>دیپلم</option>
-          <option>فوق دیپلم</option>
-          <option>لیسانس</option>
-          <option>فوق لیسانس</option>
-          <option>کارشناسی</option>
-          <option>کارشناسی ارشد</option>
-          <option>دکترا</option>
-        </select>
-
-        <label>آدرس محل سکونت</label>
-        <input
-          name="address"
-          v-model="prepareWorker.address"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-      </form>
       <hr class="my-4" />
 
       <div class="d-flex flex-row-reverse bd-highlight mb-2" id="btnGroup">
@@ -169,13 +95,13 @@
           type="button"
           class="btn btn-primary"
           v-if="modalStatus.newWorker"
-          @click="inputValidation('submitWorker')"
+          @click="saveWorker()"
         >ثبت</button>
         <button
           type="button"
           class="btn btn-primary"
           v-if="!modalStatus.newWorker"
-          @click="inputValidation(updateWorker)"
+          @click="updateWorker()"
         >ویرایش</button>
         <button
           type="button"
@@ -187,17 +113,18 @@
   </div>
 </template>
 <script>
-import $ from "jquery";
+// import $ from "jquery";
+import { formFields } from "../../../main";
 import getData from "../../../actions/getData";
 import postData from "../../../actions/postData";
 import updateData from "../../../actions/updateData";
 import deleteData from "../../../actions/deleteData";
+import fields from "../forms/contractFields";
 export default {
   data() {
     return {
       workers: [],
       editingWorker: null,
-      prepareWorker: {},
       modalStatus: {
         title: "همکار جدید",
         newWorker: true
@@ -205,64 +132,42 @@ export default {
       targetName: null
     };
   },
+
+  components: { fields },
   mixins: [getData, postData, updateData, deleteData],
   created() {
     this.getData("savedWorkers", this.workers);
   },
-  methods: {
-    inputValidation(command) {
-      if (
-        $("input[name='fullname']").val() == "" ||
-        $("input[name='fatherName']").val() == "" ||
-        $("input[name='birthdayDate']").val() == "" ||
-        $("input[name='role']").val() == "" ||
-        $("select[name='employmentPlace']").val() == "" ||
-        $("input[name='idCard']").val() == "" ||
-        $("input[name='idNumber']").val() == "" ||
-        $("select[name='education']").val() == "" ||
-        $("input[name='address']").val() == ""
-      ) {
-        $("input,select")
-          .filter(function() {
-            return this.value == "";
-          })
-          .addClass("is-invalid");
-        $("input,select")
-          .filter(function() {
-            return this.value !== "";
-          })
-          .removeClass("is-invalid");
-      } else {
-        if (command == "submitWorker") {
-          this.sumbitWorker();
-        } else {
-          this.updateWorker();
-        }
-      }
-    },
 
+  methods: {
+    editWorkerModal(worker) {
+      this.modalStatus = {
+        title: ` ویرایش اطلاعات ${worker.name}`,
+        newWorker: false
+      };
+      this.editingWorker = worker;
+      this.targetName = worker.name;
+      this.toggleModal("workerActionModal");
+    },
+    saveWorker() {
+      formFields.$emit("newWorkerEmit");
+    },
+    updateWorker() {
+      formFields.$emit("updateWorkerEmit", this.targetName);
+    },
     newWorkerModal() {
       this.prepareWorker = {};
       this.modalStatus = {
         title: "همکار جدید",
         newWorker: true
       };
+      this.clearForm();
       this.toggleModal("workerActionModal");
     },
-    editWorkerModal(worker) {
-      this.modalStatus = {
-        title: ` ویرایش اطلاعات ${worker.name}`,
-        newWorker: false
-      };
-      this.prepareWorker = worker;
-      this.targetName = worker.name;
-      this.toggleModal("workerActionModal");
+    clearForm() {
+      this.editingWorker = {};
     },
-    sumbitWorker() {
-      this.postData("savedWorkers", this.prepareWorker, true);
-      this.toggleModal("workerActionModal");
-    },
-    updateWorker() {
+    updateWorker1() {
       this.updateData("savedWorkers", this.prepareWorker, this.targetName);
       this.toggleModal("workerActionModal");
     },
@@ -282,7 +187,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../../assets/style/poroshat-filter/workers/table.css");
-@import url("../../../assets/style/poroshat-filter/workers/modal.css");
-@import url("../../../assets/style/poroshat-filter/workers/form.css");
+@import url("../../../assets/style/poroshat-filter/persons/table.css");
+@import url("../../../assets/style/poroshat-filter/persons/modal.css");
+@import url("../../../assets/style/poroshat-filter/persons/form.css");
 </style>
