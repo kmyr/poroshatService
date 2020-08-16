@@ -51,6 +51,7 @@
 <script>
 import getData from "../actions/getData";
 import $ from "jquery";
+import { userActions } from "../main";
 export default {
   data() {
     return {
@@ -84,7 +85,7 @@ export default {
           currentUser.email == this.userInfo.username &&
           currentUser.userPassword == this.userInfo.password
         ) {
-          alert("sssssisfdiysfr");
+          userActions.$emit("userLogedIn");
         } else {
           $("input,select")
             .filter(function() {
