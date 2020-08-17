@@ -86,7 +86,7 @@
     <!-- Modal -->
 
     <b-modal id="workerActionModal" class="modal" :title="modalStatus.title" hide-footer>
-      <fields :editingWorkerInfo="editingWorker"></fields>
+      <fields :editingWorkerInfo="editingWorker" :targetUpdateName="targetName"></fields>
 
       <hr class="my-4" />
 
@@ -114,7 +114,7 @@
 </template>
 <script>
 // import $ from "jquery";
-import { formFields } from "../../../main";
+import { formFields } from "../../../datastore/globalData";
 import getData from "../../../actions/getData";
 import postData from "../../../actions/postData";
 import updateData from "../../../actions/updateData";
@@ -149,9 +149,6 @@ export default {
       this.targetName = worker.name;
       this.toggleModal("workerActionModal");
     },
-    saveWorker() {
-      formFields.$emit("newWorkerEmit");
-    },
     updateWorker() {
       formFields.$emit("updateWorkerEmit", this.targetName);
     },
@@ -164,12 +161,12 @@ export default {
       this.clearForm();
       this.toggleModal("workerActionModal");
     },
+    saveWorker() {
+      formFields.$emit("newWorkerEmit");
+    },
     clearForm() {
       this.editingWorker = {};
-    },
-    updateWorker1() {
-      this.updateData("savedWorkers", this.prepareWorker, this.targetName);
-      this.toggleModal("workerActionModal");
+      this.targetName = null;
     },
     deleteWorker(worker) {
       if (confirm(`${worker.name} پاک شود؟`)) {

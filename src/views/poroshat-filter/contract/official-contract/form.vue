@@ -151,7 +151,7 @@
 import $ from "jquery";
 import postData from "../../../../actions/postData";
 import getData from "../../../../actions/getData";
-import { salaryList } from "../../../../datastore/poroshat-filterData";
+import { salaryList } from "../../../../datastore/globalData";
 export default {
   data() {
     return {

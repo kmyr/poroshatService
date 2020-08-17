@@ -51,7 +51,7 @@
 <script>
 import getData from "../actions/getData";
 import $ from "jquery";
-import { userActions } from "../main";
+import { userActions } from "../datastore/globalData";
 export default {
   data() {
     return {

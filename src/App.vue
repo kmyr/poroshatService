@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { userActions } from "./main";
+import { userActions } from "./datastore/globalData";
 
 export default {
   data() {

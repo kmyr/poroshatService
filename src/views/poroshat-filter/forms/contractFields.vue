@@ -19,6 +19,11 @@
         style="margin-bottom:15px"
       />
 
+      <label>جنسیت</label>
+      <select name="gender" class="form-control" v-model="prepareWorker.gender">
+        <option v-for="(gender,i) in dropdownData.genderList" :key="i">{{gender}}</option>
+      </select>
+
       <label>تاریخ تولد</label>
       <input
         name="birthdayDate"
@@ -54,17 +59,14 @@
         <option>انبار</option>
       </select>
 
+      <label>واحد مربوطه</label>
+      <select name="department" class="form-control" v-model="prepareWorker.department">
+        <option v-for="(department,i) in dropdownData.departmentList" :key="i">{{department}}</option>
+      </select>
+
       <label>تحصیلات</label>
       <select name="education" class="form-control" v-model="prepareWorker.education">
-        <option>ابتدایی</option>
-        <option>سیکل</option>
-        <option>دیپلم</option>
-        <option>فوق دیپلم</option>
-        <option>لیسانس</option>
-        <option>فوق لیسانس</option>
-        <option>کارشناسی</option>
-        <option>کارشناسی ارشد</option>
-        <option>دکترا</option>
+        <option v-for="(education,i) in dropdownData.educationList" :key="i">{{education}}</option>
       </select>
 
       <label>آدرس محل سکونت</label>
@@ -80,27 +82,38 @@
 </template>
 <script>
 import $ from "jquery";
-import { formFields } from "../../../main";
+import { formFields } from "../../../datastore/globalData";
+import { education, gender, department } from "../../../datastore/globalData";
 import postData from "../../../actions/postData";
+import updateData from "../../../actions/updateData";
 
 export default {
   data() {
     return {
-      prepareWorker: {}
+      prepareWorker: {},
+      targetName: null,
+      dropdownData: null
     };
   },
   props: {
-    editingWorkerInfo: Object
+    editingWorkerInfo: Object,
+    targetUpdateName: String
   },
 
-  mixins: [postData],
-  created() {},
+  mixins: [postData, updateData],
+  created() {
+    this.dropdownData = {
+      educationList: education,
+      genderList: gender,
+      departmentList: department
+    };
+  },
   mounted() {
     formFields.$on("newWorkerEmit", () => {
       this.inputValidation("newWorker");
     });
     formFields.$on("updateWorkerEmit", () => {
-      this.inputValidation("newWorker");
+      this.inputValidation("updateWorker");
     });
   },
   methods: {
@@ -108,12 +121,14 @@ export default {
       if (
         $("input[name='fullname']").val() == "" ||
         $("input[name='fatherName']").val() == "" ||
+        $("input[name='gender']").val() == "" ||
         $("input[name='birthdayDate']").val() == "" ||
         $("input[name='role']").val() == "" ||
         $("select[name='employmentPlace']").val() == "" ||
         $("input[name='idCard']").val() == "" ||
         $("input[name='idNumber']").val() == "" ||
         $("select[name='education']").val() == "" ||
+        $("select[name='department']").val() == "" ||
         $("input[name='address']").val() == ""
       ) {
         $("input,select")
@@ -129,6 +144,8 @@ export default {
       } else {
         if (command == "newWorker") {
           this.postData("savedWorkers", this.prepareWorker, true);
+        } else if (command == "updateWorker") {
+          this.updateData("savedWorkers", this.prepareWorker, this.targetName);
         }
       }
     }
@@ -137,6 +154,12 @@ export default {
     editingWorkerInfo: {
       handler(worker) {
         this.prepareWorker = worker;
+      },
+      immediate: true
+    },
+    targetUpdateName: {
+      handler(name) {
+        this.targetName = name;
       },
       immediate: true
     }

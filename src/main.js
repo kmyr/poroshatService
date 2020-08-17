@@ -15,8 +15,6 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.config.productionTip = false;
 
-export const userActions = new Vue();
-export const formFields = new Vue();
 
 new Vue({
   router,
