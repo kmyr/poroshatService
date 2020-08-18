@@ -4,6 +4,7 @@ import router from "./router";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import VueSidebarMenu from "vue-sidebar-menu";
 import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
+// const moment = require('moment-jalaali')
 
 Vue.use(VueSidebarMenu);
 

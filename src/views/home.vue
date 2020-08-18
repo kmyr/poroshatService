@@ -46,8 +46,7 @@ export default {
           title: "مدیریت کاربران",
           icon: "fa fa-user"
         }
-      ],
-
+      ]
     };
   },
   methods: {}

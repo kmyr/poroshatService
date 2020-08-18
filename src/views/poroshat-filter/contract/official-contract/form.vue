@@ -115,22 +115,26 @@
           <div class="form-check">
             <input
               type="checkbox"
-              class="form-check-input"
+              class="form-check-input checkbox"
               v-model="salaryOptions.useOldSalary"
-              id="saveUser"
+              id="perviousSalary"
             />
-            <label id="saveUser-label" for="saveUser">پایه سنوات قدیمی</label>
+            <label
+              id="perviousSalary-label"
+              class="checkbox-label"
+              for="perviousSalaryCheckbox"
+            >پایه سنوات قدیمی</label>
           </div>
           <br />
           <br />
           <div class="form-check" v-if="!savedUsers.useSavedUsers">
             <input
               type="checkbox"
-              class="form-check-input"
+              class="form-check-input checkbox"
               v-model="savedUsers.saveThisUser"
-              id="saveUser"
+              id="saveUserCheckbox"
             />
-            <label id="saveUser-label" for="saveUser">ذخیره مشخصات</label>
+            <label id="saveUser-label" class="checkbox-label" for="saveUser">ذخیره مشخصات</label>
           </div>
         </div>
         <div class="buttonSection">

@@ -150,9 +150,11 @@ export const salaryList = {
 
 export const gender = ['مذکر', 'مونث'];
 export const education = ['ابتدایی', 'سیکل', 'دیپلم', 'کاردانی', 'کارشناسی', 'کارشناسی ارشد', 'دکترا']
-export const department = ['فروش', 'تولید', 'خرید', 'انبار', 'فنی مهندسی', 'اداری', 'منابع انسانی', 'it', 'تضمین کیفیت', 'کنترل کیفیت']
+export const department = ['فروش', 'تولید', 'خرید', 'انبار', 'فنی مهندسی', 'اداری', 'منابع انسانی', 'IT', 'تضمین کیفیت', 'کنترل کیفیت']
 
 
 //emits 
 export const userActions = new Vue();
 export const formFields = new Vue();
+
+//conditions data 

@@ -7,7 +7,8 @@ export default {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            const data = doc.data();
+            console.log();
+            const data = { ...doc.data(), _ID: doc.id };
             arr.push(data);
           });
         });

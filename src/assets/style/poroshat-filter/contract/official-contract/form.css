@@ -20,9 +20,12 @@ div.buttonSection {
 .is-invalid {
   border: 1px solid red;
 }
-#saveUser {
-  right: 0;
+.checkbox {
+  right: 0 ;
 }
-.saveUser-label {
+.checkbox-label{
   margin-right: 20px;
+}
+.checkbox-section {
+  display: block;
 }

@@ -86,7 +86,7 @@
     <!-- Modal -->
 
     <b-modal id="workerActionModal" class="modal" :title="modalStatus.title" hide-footer>
-      <fields :editingWorkerInfo="editingWorker" :targetUpdateName="targetName"></fields>
+      <fields :editingWorkerInfo="editingWorker"></fields>
 
       <hr class="my-4" />
 
@@ -128,8 +128,7 @@ export default {
       modalStatus: {
         title: "همکار جدید",
         newWorker: true
-      },
-      targetName: null
+      }
     };
   },
 
@@ -141,16 +140,16 @@ export default {
 
   methods: {
     editWorkerModal(worker) {
+      const workerFullName = `${worker.firstName} ${worker.lastName}`;
       this.modalStatus = {
-        title: ` ویرایش اطلاعات ${worker.name}`,
+        title: ` ویرایش اطلاعات ${workerFullName}`,
         newWorker: false
       };
       this.editingWorker = worker;
-      this.targetName = worker.name;
       this.toggleModal("workerActionModal");
     },
     updateWorker() {
-      formFields.$emit("updateWorkerEmit", this.targetName);
+      formFields.$emit("updateWorkerEmit");
     },
     newWorkerModal() {
       this.prepareWorker = {};
@@ -166,7 +165,6 @@ export default {
     },
     clearForm() {
       this.editingWorker = {};
-      this.targetName = null;
     },
     deleteWorker(worker) {
       if (confirm(`${worker.name} پاک شود؟`)) {
