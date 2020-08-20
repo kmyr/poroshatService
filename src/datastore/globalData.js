@@ -150,7 +150,18 @@ export const salaryList = {
 
 export const gender = ['مذکر', 'مونث'];
 export const education = ['ابتدایی', 'سیکل', 'دیپلم', 'کاردانی', 'کارشناسی', 'کارشناسی ارشد', 'دکترا']
-export const department = ['فروش', 'تولید', 'خرید', 'انبار', 'فنی مهندسی', 'اداری', 'منابع انسانی', 'IT', 'تضمین کیفیت', 'کنترل کیفیت']
+export const department = [
+    { name: 'منابع انسانی', title: 'hr' },
+    { name: 'اداری', title: 'adminstrator' },
+    { name: 'فنی مهندسی', title: 'r&d' },
+    { name: 'خرید', title: 'purchase' },
+    { name: 'فروش', title: 'sales' },
+    { name: 'انبار', title: 'warehouse' },
+    { name: 'تولید', title: 'production' },
+    { name: 'کنترل کیفی', title: 'qc' },
+    { name: 'تضمین کیفیت', title: 'qa' },
+    { name: 'it', title: 'it' }
+]
 
 
 //emits 
@@ -158,3 +169,4 @@ export const userActions = new Vue();
 export const formFields = new Vue();
 
 //conditions data 
+'فروش', 'تولید', 'خرید', 'انبار', 'فنی مهندسی', 'اداری', '', 'IT', 'تضمین کیفیت', 'کنترل کیفیت'

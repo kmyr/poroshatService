@@ -2,40 +2,47 @@
 import $ from "jquery";
 export default {
   data() {
-    return {
-      selectedDepartment: []
-    };
+    return {};
   },
   methods: {
     inputValidation(command) {
-      if (command == "newWorker") {
-        this.postData("savedWorkers", this.prepareWorker, true);
-      } else if (command == "updateWorker") {
-        this.updateData("savedWorkers", this.prepareWorker);
+      this.detectEmptyData();
+      if (this.detectEmptyData() == true) {
+        if (command == "newWorker") {
+          this.postData("savedWorkers", this.prepareWorker, true);
+        } else if (command == "updateWorker") {
+          this.updateData("savedWorkers", this.prepareWorker);
+        }
       }
     },
     detectEmptyData() {
-      let mountOfInputs = 0;
-      $("input[name='required']").each(() => {
-        mountOfInputs++;
-      });
-      $("input[name='required']").each(() => {
+      let emptyInputs = 0;
+      $("input[name='required']").each(function() {
+        emptyInputs++;
         if ($(this).val() == "") {
-          $("input,select")
+          $(this)
             .filter(function() {
               return this.value == "";
             })
             .addClass("is-invalid");
-          $("input,select")
+          $(this)
             .filter(function() {
               return this.value !== "";
             })
             .removeClass("is-invalid");
-        } else {
-          mountOfInputs--;
-          console.log();
+        } else if ($(this).val() !== "") {
+          emptyInputs--;
+
+          $(this)
+            .filter(function() {
+              return this.value !== "";
+            })
+            .removeClass("is-invalid");
         }
       });
+      if (emptyInputs == 0) {
+        return true;
+      }
     }
   }
 };

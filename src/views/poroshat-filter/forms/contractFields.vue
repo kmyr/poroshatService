@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="detectEmptyData()">d</button>
     <form id="workerActionsForm">
       <label>نام</label>
       <input
@@ -102,9 +103,26 @@
       />
 
       <label>واحد مربوطه</label>
-      <select name="required" class="form-control" v-model="prepareWorker.department">
+      <!-- <select name="required" class="form-control" v-model="prepareWorker.department">
         <option v-for="(department,i) in dropdownData.departmentList" :key="i">{{department}}</option>
-      </select>
+      </select>-->
+      <br />
+      <br />
+      <template v-for="(department,i) in dropdownData.departmentList">
+        <div class="form-check checkbox-section" :key="i">
+          <input
+            type="checkbox"
+            name="departmentCheck"
+            :id="'departmentIndex'+ i"
+            :value="department"
+            v-model="prepareWorker.department[i].status"
+            class="form-check-input checkbox"
+          />
+          <label :for="'departmentIndex'+ i" class="checkbox-label">{{department.name}}</label>
+          <br />
+          <br />
+        </div>
+      </template>
 
       <label>محل اشتغال</label>
       <select name="required" class="form-control" v-model="prepareWorker.employmentPlace">
@@ -163,6 +181,18 @@ export default {
       genderList: gender,
       departmentList: department
     };
+    let dataValue = [];
+    for (let i = 0; i < this.dropdownData.departmentList.length; i++) {
+      const departmentItem = this.dropdownData.departmentList[i];
+      dataValue.push({
+        name: departmentItem.name,
+        title: departmentItem.title,
+        status: false
+      });
+      // console.log(element);
+    }
+    this.prepareWorker.department = dataValue;
+    console.log(dataValue);
   },
 
   mounted() {
