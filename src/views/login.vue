@@ -85,7 +85,7 @@ export default {
           currentUser.email == this.userInfo.username &&
           currentUser.userPassword == this.userInfo.password
         ) {
-          userActions.$emit("userLogedIn");
+          userActions.$emit("userLogedIn", currentUser);
         } else {
           $("input,select")
             .filter(function() {

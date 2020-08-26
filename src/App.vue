@@ -25,8 +25,10 @@ export default {
     this.checkLogedIn();
   },
   mounted() {
-    userActions.$on("userLogedIn", () => {
+    userActions.$on("userLogedIn", user => {
       localStorage.logedIn = "true";
+      localStorage.username = user.name;
+      localStorage.userRole = user.role;
       location.reload();
     });
   },

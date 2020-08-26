@@ -14,19 +14,12 @@ export default {
           hiddenOnCollapse: true
         },
         {
-          href: "",
-          title: "قرارداد ها",
+          title: "قرارداد پروشات فیلتر",
           icon: "fa fa-file",
           child: [
             {
-              title: "قرارداد پروشات فیلتر",
-              icon: "poroshatfilter-icn",
-              child: [
-                {
-                  href: "/official-contract",
-                  title: "قرارداد رسمی"
-                }
-              ]
+              href: "/official-contract",
+              title: "قرارداد رسمی"
             }
           ]
         },
@@ -40,15 +33,11 @@ export default {
               title: "همکاران پروشات فیلتر"
             }
           ]
-        },
-        {
-          href: "/users",
-          title: "مدیریت کاربران",
-          icon: "fa fa-user"
         }
       ]
     };
   },
+
   methods: {}
 };
 </script> 
