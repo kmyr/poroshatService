@@ -232,7 +232,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../assets/style/poroshat-filter/persons/table.css");
-@import url("../../assets/style/poroshat-filter/persons/modal.css");
-@import url("../../assets/style/poroshat-filter/persons/form.css");
+@import url("../../assets/style/persons/table.css");
+@import url("../../assets/style/persons/modal.css");
+@import url("../../assets/style/persons/form.css");
 </style>

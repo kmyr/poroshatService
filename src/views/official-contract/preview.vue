@@ -4,7 +4,7 @@
     <button
       id="cancelBtn"
       class="btn btn-outline-danger hide-on-print"
-      @click="goBack('/contract/official-contract')"
+      @click="goBack('/official-contract')"
     >انصراف</button>
     <button class="btn btn-primary hide-on-print" id="scrollTop" @click="scrollTop()">
       <svg
@@ -48,7 +48,7 @@
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
           <div class="headerLogo">
-            <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
+            <img class="headerLogoImg" src="../../img/poroshat-logo.png" alt />
           </div>
         </div>
         <div class="body-part">
@@ -57,7 +57,7 @@
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
           مي گردد
           <br />آقای/خانم:
-          <span class="bold">{{ userInfo.name }}</span>
+          <span class="bold">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
           فرزند:
           <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
@@ -211,7 +211,7 @@
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
           <div class="headerLogo">
-            <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
+            <img class="headerLogoImg" src="../../img/poroshat-logo.png" alt />
           </div>
         </div>
         <div class="body-part">
@@ -364,7 +364,7 @@
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
           <div class="headerLogo">
-            <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
+            <img class="headerLogoImg" src="../../img/poroshat-logo.png" alt />
           </div>
         </div>
         <div class="body-part">
@@ -373,7 +373,7 @@
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
           مي گردد
           <br />آقای/خانم:
-          <span class="bold">{{ userInfo.name }}</span>
+          <span class="bold">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
           فرزند:
           <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
@@ -527,7 +527,7 @@
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
           <div class="headerLogo">
-            <img class="headerLogoImg" src="../../../../img/poroshat-logo.png" alt />
+            <img class="headerLogoImg" src="../../img/poroshat-logo.png" alt />
           </div>
         </div>
         <div class="body-part">
@@ -703,7 +703,7 @@ export default {
     checkData() {
       this.userInfo = this.$parent.$data.poroshatOfficialContractInfo;
       if (this.userInfo == null) {
-        this.$router.push("/contract/official-contract");
+        this.$router.push("/official-contract");
       }
     },
     printSheet() {
@@ -729,7 +729,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../../../assets/style/poroshat-filter/contract/official-contract/contract.css");
-@import url("../../../../assets/style/poroshat-filter/contract/official-contract/tables.css");
-@import url("../../../../assets/style/poroshat-filter/contract/official-contract/header-footer.css");
+@import url("../../assets/style/official-contract/contract.css");
+@import url("../../assets/style/official-contract/tables.css");
+@import url("../../assets/style/official-contract/header-footer.css");
 </style>

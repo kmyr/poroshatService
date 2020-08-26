@@ -13,5 +13,4 @@ export default {
     }
   }
 };
-// firebase.firestore.FieldPath.documentId()
 </script>

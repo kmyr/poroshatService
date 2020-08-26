@@ -5,18 +5,9 @@ export default {
     return {};
   },
   methods: {
-    inputValidation(command) {
-      this.detectEmptyData();
-      if (this.detectEmptyData() == true) {
-        if (command == "newWorker") {
-          this.postData("savedWorkers", this.prepareWorker, true);
-        } else if (command == "updateWorker") {
-          this.updateData("savedWorkers", this.prepareWorker);
-        }
-      }
-    },
     detectEmptyData() {
       let emptyInputs = 0;
+      let emptySelects = 0;
       $("input[name='required']").each(function() {
         emptyInputs++;
         if ($(this).val() == "") {
@@ -40,7 +31,19 @@ export default {
             .removeClass("is-invalid");
         }
       });
-      if (emptyInputs == 0) {
+      $("select[name='required']").each(function() {
+        emptySelects++;
+        const thisElement = $(this).children(":selected");
+
+        if (thisElement.val() == undefined) {
+          $(this).addClass("is-invalid");
+        } else if (thisElement.val() !== undefined) {
+          emptySelects--;
+
+          $(this).removeClass("is-invalid");
+        }
+      });
+      if (emptyInputs == 0 && emptySelects == 0) {
         return true;
       }
     }

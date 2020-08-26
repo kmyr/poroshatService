@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr v-for="(worker, i) in workers" :key="i">
-          <th>{{ worker.name }}</th>
+          <th>{{ worker.firstName }} {{ worker.lastName }}</th>
           <td>{{ worker.fatherName }}</td>
           <td>{{ worker.birthdayDate }}</td>
           <td>{{ worker.role }}</td>
@@ -86,7 +86,7 @@
     <!-- Modal -->
 
     <b-modal id="workerActionModal" class="modal" :title="modalStatus.title" hide-footer>
-      <fields :editingWorkerInfo="editingWorker"></fields>
+      <fields :editingWorkerInfo="editingWorker" :specialInfo="true"></fields>
 
       <hr class="my-4" />
 
@@ -114,11 +114,11 @@
 </template>
 <script>
 // import $ from "jquery";
-import { formFields } from "../../../datastore/globalData";
-import getData from "../../../actions/getData";
-import postData from "../../../actions/postData";
-import updateData from "../../../actions/updateData";
-import deleteData from "../../../actions/deleteData";
+import { formFields } from "../../datastore/globalData";
+import getData from "../../actions/getData";
+import postData from "../../actions/postData";
+import updateData from "../../actions/updateData";
+import deleteData from "../../actions/deleteData";
 import fields from "../forms/contractFields";
 export default {
   data() {
@@ -164,10 +164,10 @@ export default {
       formFields.$emit("newWorkerEmit");
     },
     clearForm() {
-      this.editingWorker = {};
+      this.editingWorker = null;
     },
     deleteWorker(worker) {
-      if (confirm(`${worker.name} پاک شود؟`)) {
+      if (confirm(`${worker.firstName} ${worker.lastName} پاک شود؟`)) {
         this.deleteData("savedWorkers", worker);
         this.postData("deleteItemsLog", worker, true);
       }
@@ -182,7 +182,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../../assets/style/poroshat-filter/persons/table.css");
-@import url("../../../assets/style/poroshat-filter/persons/modal.css");
-@import url("../../../assets/style/poroshat-filter/persons/form.css");
+@import url("../../assets/style/persons/table.css");
+@import url("../../assets/style/persons/modal.css");
+@import url("../../assets/style/persons/form.css");
 </style>

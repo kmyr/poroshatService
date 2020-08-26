@@ -23,7 +23,7 @@ export default {
               icon: "poroshatfilter-icn",
               child: [
                 {
-                  href: "/contract/official-contract",
+                  href: "/official-contract",
                   title: "قرارداد رسمی"
                 }
               ]

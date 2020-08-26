@@ -7,56 +7,7 @@
           <select name="savedUsers" class="form-control" v-model="savedUsers.selectedUser">
             <option v-for="(user, i) in savedUsers.usersList" :key="i">{{user.name}}</option>
           </select>
-
-          <label>نام و نام خانوادگی</label>
-          <input name="fullname" v-model="userInfo.name" type="text" class="form-control" />
-
-          <label>نام پدر</label>
-          <input name="fatherName" v-model="userInfo.fatherName" type="text" class="form-control" />
-
-          <label>تاریخ تولد</label>
-          <input
-            name="birthdayDate"
-            v-model="userInfo.birthdayDate"
-            type="text"
-            class="form-control"
-          />
-
-          <label>سمت</label>
-          <input name="role" v-model="userInfo.role" type="text" class="form-control" />
-
-          <label>محل اشتغال</label>
-          <select name="employmentPlace" class="form-control" v-model="userInfo.employmentPlace">
-            <option>تولید</option>
-            <option>دفتر مرکزی</option>
-            <option>فنی مهندسی</option>
-            <option>انبار</option>
-          </select>
-
-          <label>کد ملی</label>
-          <input name="idCard" v-model="userInfo.idCard" type="text" class="form-control" />
-
-          <label>تحصیلات</label>
-          <select name="education" class="form-control" v-model="userInfo.education">
-            <option>ابتدایی</option>
-            <option>سیکل</option>
-            <option>دیپلم</option>
-            <option>فوق دیپلم</option>
-            <option>لیسانس</option>
-            <option>فوق لیسانس</option>
-            <option>کارشناسی</option>
-            <option>کارشناسی ارشد</option>
-            <option>دکترا</option>
-          </select>
-
-          <label>آدرس</label>
-          <input
-            name="address"
-            v-model="userInfo.address"
-            type="text"
-            class="form-control"
-            style="margin-bottom:15px"
-          />
+          <fields></fields>
 
           <label>تاریخ شروع قرارداد</label>
           <div class="form-row">
@@ -117,7 +68,7 @@
               type="checkbox"
               class="form-check-input checkbox"
               v-model="salaryOptions.useOldSalary"
-              id="perviousSalary"
+              id="perviousSalaryCheckbox"
             />
             <label
               id="perviousSalary-label"
@@ -134,7 +85,7 @@
               v-model="savedUsers.saveThisUser"
               id="saveUserCheckbox"
             />
-            <label id="saveUser-label" class="checkbox-label" for="saveUser">ذخیره مشخصات</label>
+            <label id="saveUser-label" class="checkbox-label" for="saveUserCheckbox">ذخیره مشخصات</label>
           </div>
         </div>
         <div class="buttonSection">
@@ -145,7 +96,12 @@
             class="btn btn-outline-danger backBtn"
           >بازگشت</button>
           <br />
-          <button id @click="inputValidation()" type="button" class="btn btn-primary submitBtn">ثبت</button>
+          <button
+            id
+            @click="submitContractForm()"
+            type="button"
+            class="btn btn-primary submitBtn"
+          >ثبت</button>
         </div>
       </div>
     </form>
@@ -153,9 +109,11 @@
 </template>
 <script>
 import $ from "jquery";
-import postData from "../../../../actions/postData";
-import getData from "../../../../actions/getData";
-import { salaryList } from "../../../../datastore/globalData";
+import postData from "../../actions/postData";
+import getData from "../../actions/getData";
+import { salaryList } from "../../datastore/globalData";
+import { formFields } from "../../datastore/globalData";
+import fields from "../forms/contractFields";
 export default {
   data() {
     return {
@@ -165,54 +123,51 @@ export default {
         useOldSalary: false,
         selectedSalary: null
       },
-      userInfo: {
-        startDate: {
-          month: "",
-          day: ""
-        },
-        salary: ""
-      },
+      userInfo: {},
       savedUsers: {
         saveThisUser: false,
-        usersList: [{}],
+        usersList: [],
         currentUser: "",
         useSavedUsers: false,
         selectedUser: ""
       }
     };
   },
+  components: { fields },
+
   mixins: [postData, getData],
+
   created() {
     this.getData("savedUsers", this.savedUsers.usersList);
-    this.salaryOptions.salaryList = salaryList.newSalaryList;
-    this.salaryOptions.salaryListOldVersion = salaryList.salaryListOldVersion;
+    this.salaryOptions = {
+      salaryList: salaryList.newSalaryList,
+      salaryListOldVersion: salaryList.salaryListOldVersion
+    };
   },
+
+  mounted() {
+    if (this.userInfo.startDate == undefined) {
+      this.userInfo = {
+        startDate: {
+          month: "",
+          day: ""
+        }
+      };
+    }
+  },
+
   methods: {
     goBack(target) {
       this.$router.push(target);
     },
-    submitForm() {
+    submitContractForm() {
+      formFields.$emit("submitContractForm");
       this.findOutSelectedSalary();
-      if (this.savedUsers.saveThisUser) {
-        this.postData(
-          "savedUsers",
-          {
-            name: this.userInfo.name,
-            fatherName: this.userInfo.fatherName,
-            birthdayDate: this.userInfo.birthdayDate,
-            role: this.userInfo.role,
-            employmentPlace: this.userInfo.employmentPlace,
-            idCard: this.userInfo.idCard,
-            education: this.userInfo.education,
-            address: this.userInfo.address
-          },
-          false
-        );
-      }
+
       this.userInfo.periodDate--;
 
       this.$parent.$data.poroshatOfficialContractInfo = this.userInfo;
-      this.$router.push("/contract/official-contract/preview");
+      this.$router.push("/official-contract/preview");
       $("html,body").animate({ scrollTop: 0 }, "slow");
     },
     findOutSelectedSalary() {
@@ -227,38 +182,9 @@ export default {
           this.userInfo.salary = selectedSalary;
         }
       }
-    },
-    inputValidation() {
-      if (
-        $("input[name='fullname']").val() == "" ||
-        $("input[name='fatherName']").val() == "" ||
-        $("input[name='birthdayDate']").val() == "" ||
-        $("input[name='role']").val() == "" ||
-        $("select[name='employmentPlace']").val() == "" ||
-        $("input[name='idCard']").val() == "" ||
-        $("input[name='idNumber']").val() == "" ||
-        $("select[name='education']").val() == "" ||
-        $("input[name='address']").val() == "" ||
-        $("input[name='startMonth']").val() == "" ||
-        $("input[name='startDay']").val() == "" ||
-        $("input[name='contractPeriod']").val() == "" ||
-        $("select[name='salary']").val() == ""
-      ) {
-        $("input,select")
-          .filter(function() {
-            return this.value == "";
-          })
-          .addClass("is-invalid");
-        $("input,select")
-          .filter(function() {
-            return this.value !== "";
-          })
-          .removeClass("is-invalid");
-      } else {
-        this.submitForm();
-      }
     }
   },
+
   watch: {
     "userInfo.startDate.month": function() {
       if (this.userInfo.startDate.month > 12) {
@@ -302,31 +228,17 @@ export default {
           }
         }
         //change input values
-        this.userInfo.name = this.savedUsers.currentUser.name;
-        this.userInfo.fatherName = this.savedUsers.currentUser.fatherName;
-        this.userInfo.birthdayDate = this.savedUsers.currentUser.birthdayDate;
-        this.userInfo.role = this.savedUsers.currentUser.role;
-        this.userInfo.employmentPlace = this.savedUsers.currentUser.employmentPlace;
-        this.userInfo.idCard = this.savedUsers.currentUser.idCard;
-        this.userInfo.education = this.savedUsers.currentUser.education;
-        this.userInfo.address = this.savedUsers.currentUser.address;
+
+        this.userInfo = this.savedUsers.currentUser;
       } else {
         this.savedUsers.useSavedUsers = false;
         //change input values to empty
-        this.userInfo.name = "";
-        this.userInfo.fatherName = "";
-        this.userInfo.birthdayDate = "";
-        this.userInfo.role = "";
-        this.userInfo.employmentPlace = "";
-        this.userInfo.idCard = "";
-        this.userInfo.education = "";
-        this.userInfo.address = "";
-        this.userInfo.salary = "";
+        this.userInfo = {};
       }
     }
   }
 };
 </script>
 <style scoped>
-@import url("../../../../assets/style/poroshat-filter/contract/official-contract/form.css");
+@import url("../../assets/style/official-contract/form.css");
 </style>
