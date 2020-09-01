@@ -161,6 +161,7 @@
 import { formFields } from "../../datastore/globalData";
 import { education, gender, department } from "../../datastore/globalData";
 import postData from "../../actions/postData";
+import getData from "../../actions/getData";
 import updateData from "../../actions/updateData";
 import dataValidate from "../../mixins/dataValidations";
 export default {
@@ -177,7 +178,7 @@ export default {
     specialInfo: Boolean
   },
 
-  mixins: [postData, updateData, dataValidate],
+  mixins: [postData, updateData, getData, dataValidate],
   created() {
     this.dropdownData = {
       educationList: education,
@@ -186,6 +187,24 @@ export default {
     };
     this.setDepartmentDefaults();
   },
+
+  mounted() {
+    formFields.$on("newWorkerEmit", () => {
+      this.inputValidation("newWorker");
+    });
+
+    formFields.$on("updateWorkerEmit", () => {
+      this.inputValidation("updateWorker");
+    });
+
+    formFields.$on("submitContractForm", () => {
+      this.$parent.$data.userInfo = {
+        ...this.$parent.$data.userInfo,
+        ...this.prepareWorker
+      };
+    });
+  },
+
   methods: {
     inputValidation(command) {
       this.detectEmptyData();
@@ -212,20 +231,6 @@ export default {
       }
     }
   },
-  mounted() {
-    formFields.$on("newWorkerEmit", () => {
-      this.inputValidation("newWorker");
-    });
-    formFields.$on("updateWorkerEmit", () => {
-      this.inputValidation("updateWorker");
-    });
-    formFields.$on("submitContractForm", () => {
-      this.$parent.$data.userInfo = {
-        ...this.$parent.$data.userInfo,
-        ...this.prepareWorker
-      };
-    });
-  },
 
   watch: {
     editingWorkerInfo: {
@@ -242,7 +247,6 @@ export default {
     },
     specialInfo: {
       handler(status) {
-        console.log(status);
         if (status == null || status == undefined) {
           this.showSpecialInfo = true;
         } else {

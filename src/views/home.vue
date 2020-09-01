@@ -9,9 +9,10 @@ export default {
     return {
       menu: [
         {
-          header: true,
-          title: "Poroshat Service",
-          hiddenOnCollapse: true
+          title: localStorage.username,
+          hiddenOnCollapse: true,
+          icon: "fas fa-power-off",
+          href: "/logout"
         },
         {
           title: "قرارداد پروشات فیلتر",
@@ -38,9 +39,26 @@ export default {
     };
   },
 
-  methods: {}
+  created() {
+    this.menuAccess();
+  },
+
+  methods: {
+    menuAccess() {
+      if (localStorage.userRole == "admin") {
+        this.menu.push({
+          title: "کاربران",
+          icon: "fa fa-user",
+          href: "/users"
+        });
+      }
+    }
+  }
 };
 </script> 
 <style>
 @import url("../assets/style/font-awesome/css/all.css");
+.vsm--icon.fas.fa-power-off {
+  color: red;
+}
 </style>

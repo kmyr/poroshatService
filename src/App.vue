@@ -28,7 +28,7 @@ export default {
     userActions.$on("userLogedIn", user => {
       localStorage.logedIn = "true";
       localStorage.username = user.name;
-      localStorage.userRole = user.role;
+      localStorage.userRole = user.accessLevel;
       location.reload();
     });
   },

@@ -3,10 +3,6 @@
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="poroshatUserInfoForm">
-          <label>کاربر های ذخیره شده</label>
-          <select name="savedUsers" class="form-control" v-model="savedUsers.selectedUser">
-            <option v-for="(user, i) in savedUsers.usersList" :key="i">{{user.name}}</option>
-          </select>
           <fields></fields>
 
           <label>تاریخ شروع قرارداد</label>
@@ -78,15 +74,6 @@
           </div>
           <br />
           <br />
-          <div class="form-check" v-if="!savedUsers.useSavedUsers">
-            <input
-              type="checkbox"
-              class="form-check-input checkbox"
-              v-model="savedUsers.saveThisUser"
-              id="saveUserCheckbox"
-            />
-            <label id="saveUser-label" class="checkbox-label" for="saveUserCheckbox">ذخیره مشخصات</label>
-          </div>
         </div>
         <div class="buttonSection">
           <button
@@ -110,7 +97,6 @@
 <script>
 import $ from "jquery";
 import postData from "../../actions/postData";
-import getData from "../../actions/getData";
 import { salaryList } from "../../datastore/globalData";
 import { formFields } from "../../datastore/globalData";
 import fields from "../forms/contractFields";
@@ -123,43 +109,33 @@ export default {
         useOldSalary: false,
         selectedSalary: null
       },
-      userInfo: {},
-      savedUsers: {
-        saveThisUser: false,
-        usersList: [],
-        currentUser: "",
-        useSavedUsers: false,
-        selectedUser: ""
-      }
+      userInfo: {}
     };
   },
+
   components: { fields },
 
-  mixins: [postData, getData],
+  mixins: [postData],
 
   created() {
-    this.getData("savedUsers", this.savedUsers.usersList);
+    this.userInfo = {
+      startDate: {
+        month: "",
+        day: ""
+      }
+    };
+
     this.salaryOptions = {
       salaryList: salaryList.newSalaryList,
       salaryListOldVersion: salaryList.salaryListOldVersion
     };
   },
 
-  mounted() {
-    if (this.userInfo.startDate == undefined) {
-      this.userInfo = {
-        startDate: {
-          month: "",
-          day: ""
-        }
-      };
-    }
-  },
-
   methods: {
     goBack(target) {
       this.$router.push(target);
     },
+
     submitContractForm() {
       formFields.$emit("submitContractForm");
       this.findOutSelectedSalary();
@@ -170,6 +146,7 @@ export default {
       this.$router.push("/official-contract/preview");
       $("html,body").animate({ scrollTop: 0 }, "slow");
     },
+
     findOutSelectedSalary() {
       let selectedSalaryList = this.salaryOptions.salaryList;
 
@@ -193,6 +170,7 @@ export default {
         this.userInfo.startDate.month = "";
       }
     },
+
     "userInfo.startDate.day": function() {
       if (
         this.userInfo.startDate.month >= 7 &&
@@ -209,36 +187,17 @@ export default {
         }
       }
     },
+
     "userInfo.periodDate": function() {
       const remainingMonth = 13 - parseInt(this.userInfo.startDate.month);
       if (this.userInfo.periodDate > remainingMonth) {
         this.userInfo.periodDate = remainingMonth;
       }
-    },
-    "savedUsers.selectedUser": function() {
-      if (this.savedUsers.selectedUser !== "") {
-        this.savedUsers.saveThisUser = false;
-        this.savedUsers.useSavedUsers = true;
-
-        for (let i = 0; i < this.savedUsers.usersList.length; i++) {
-          const selectedUser = this.savedUsers.usersList[i];
-          if (selectedUser.name == this.savedUsers.selectedUser) {
-            this.savedUsers.currentUser = selectedUser;
-            break;
-          }
-        }
-        //change input values
-
-        this.userInfo = this.savedUsers.currentUser;
-      } else {
-        this.savedUsers.useSavedUsers = false;
-        //change input values to empty
-        this.userInfo = {};
-      }
     }
   }
 };
 </script>
+
 <style scoped>
 @import url("../../assets/style/official-contract/form.css");
 </style>

@@ -7,6 +7,7 @@ import preview from '../views/official-contract/preview';
 import workers from '../views/workers/poroshat-workers';
 import users from '../views/users/manage-users';
 import login from '../views/login';
+import logout from '../views/logout';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,10 @@ const routes = [
 	{
 		path: '/users',
 		component: users
+	},
+	{
+		path: '/logout',
+		component: logout
 	}
 ];
 

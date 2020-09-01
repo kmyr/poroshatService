@@ -55,13 +55,9 @@ import { userActions } from "../datastore/globalData";
 export default {
   data() {
     return {
-      userInfo: {
-        username: "",
-        password: ""
-      },
+      userInfo: {},
       userStatus: {
-        logedIn: false,
-        username: ""
+        logedIn: false
       },
       users: []
     };
@@ -80,23 +76,14 @@ export default {
     },
     logUserIn() {
       for (let i = 0; i < this.users.length; i++) {
-        const currentUser = this.users[i];
+        const checkingUser = this.users[i];
         if (
-          currentUser.email == this.userInfo.username &&
-          currentUser.userPassword == this.userInfo.password
+          checkingUser.email == this.userInfo.username &&
+          checkingUser.userPassword == this.userInfo.password
         ) {
-          userActions.$emit("userLogedIn", currentUser);
+          userActions.$emit("userLogedIn", checkingUser);
         } else {
-          $("input,select")
-            .filter(function() {
-              return this.value == "";
-            })
-            .addClass("is-invalid");
-          $("input,select")
-            .filter(function() {
-              return this.value !== "";
-            })
-            .removeClass("is-invalid");
+          $("input").addClass("is-invalid");
         }
       }
     }
