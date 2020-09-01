@@ -30,7 +30,7 @@ export default {
           icon: "fa fa-users",
           child: [
             {
-              href: "/workers/poroshat-filter",
+              href: "/workers",
               title: "همکاران پروشات فیلتر"
             }
           ]

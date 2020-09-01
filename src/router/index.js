@@ -5,6 +5,7 @@ import home from '../views/home';
 import form from '../views/official-contract/form';
 import preview from '../views/official-contract/preview';
 import workers from '../views/workers/poroshat-workers';
+import workerDetails from '../views/workers/worker-details';
 import users from '../views/users/manage-users';
 import login from '../views/login';
 import logout from '../views/logout';
@@ -29,8 +30,12 @@ const routes = [
 		component: preview
 	},
 	{
-		path: '/workers/poroshat-filter',
+		path: '/workers',
 		component: workers
+	},
+	{
+		path: '/workers/:id',
+		component: workerDetails
 	},
 	{
 		path: '/users',

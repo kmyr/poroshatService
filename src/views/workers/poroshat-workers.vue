@@ -16,7 +16,9 @@
       </thead>
       <tbody>
         <tr v-for="(worker, i) in workers" :key="i">
-          <th>{{ worker.firstName }} {{ worker.lastName }}</th>
+          <th>
+            <router-link :to="'/workers/'+ worker._ID">{{ worker.firstName }} {{ worker.lastName }}</router-link>
+          </th>
           <td>{{ worker.fatherName }}</td>
           <td>{{ worker.birthdayDate }}</td>
           <td>{{ worker.role }}</td>
