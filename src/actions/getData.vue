@@ -12,6 +12,16 @@ export default {
             arr.push(data);
           });
         });
+    },
+    getDocument(document, docId, object) {
+      db.collection(document)
+        .doc(docId)
+        .get()
+        .then(doc => {
+          const data = { ...doc.data(), _ID: doc.id };
+          object = data;
+          console.log(object);
+        });
     }
   }
 };
