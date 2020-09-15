@@ -1,6 +1,11 @@
 <script>
 import db from "../datastore/firebaseInit";
 export default {
+  data() {
+    return {
+      showingWorker: {}
+    };
+  },
   methods: {
     getData(document, arr) {
       db.collection(document)
@@ -19,7 +24,7 @@ export default {
         .get()
         .then(doc => {
           const data = { ...doc.data(), _ID: doc.id };
-          object = data;
+          object = [data];
           console.log(object);
         });
     }

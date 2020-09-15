@@ -3,79 +3,62 @@
     <h3 class="center-text" id="worker-name">{{showingWorker.firstName}} {{showingWorker.lastName}}</h3>
     <hr />
     <div>
-      <div>
-        <p>Upload an image to Firebase:</p>
-        <input type="file" @change="previewImage" accept="image/*" />
-      </div>
-      <div>
-        <p>
-          Progress: {{uploadValue.toFixed()+"%"}}
-          <progress
-            id="progress"
-            :value="uploadValue"
-            max="100"
-          ></progress>
-        </p>
-      </div>
-      <div v-if="imageData!=null">
-        <img class="preview" :src="picture" />
+      <div class="container">
+        <div class="input-group">
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              @change="previewImage"
+              accept="image/*"
+              id="profilePicture"
+            />
+            <label class="custom-file-label" for="profilePicture">عکس پرسنلی</label>
+          </div>
+          <div v-if="imageData!=null" class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" @click="onUpload">بارگذاری</button>
+          </div>
+        </div>
         <br />
-        <button @click="onUpload">Upload</button>
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            :style="'width:'+  uploadValue.toFixed()+'%'"
+          ></div>
+        </div>
+      </div>
+
+      <div></div>
+      <div>
+        <br />
+        <button>Upload</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
 import getData from "../../actions/getData";
+import postData from "../../actions/postData";
 export default {
   data() {
     return {
       workersList: [],
       showingWorker: {},
       imageData: null,
-      picture: null,
+      uploadedImg: null,
       uploadValue: 0
     };
   },
 
-  mixins: [getData],
+  mixins: [getData, postData],
 
   created() {
-    this.getDocument("savedWorkers", this.$route.params.id, this.showingWorker);
+    this.getData("savedWorkers", this.workersList);
   },
 
-  methods: {
-    previewImage(event) {
-      this.uploadValue = 0;
-      this.picture = null;
-      this.imageData = event.target.files[0];
-    },
-    onUpload() {
-      this.picture = null;
-      const storageRef = firebase
-        .storage()
-        .ref(`${this.imageData.name}`)
-        .put(this.imageData);
-      storageRef.on(
-        `state_changed`,
-        snapshot => {
-          this.uploadValue =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        error => {
-          console.log(error.message);
-        },
-        () => {
-          this.uploadValue = 100;
-          storageRef.snapshot.ref.getDownloadURL().then(url => {
-            this.picture = url;
-          });
-        }
-      );
-    }
-  },
+  methods: {},
   watch: {
     workersList: function() {
       const currentWorkerId = this.$route.params.id;
