@@ -8,6 +8,7 @@ import workers from "../views/workers/poroshat-workers";
 import workerDetails from "../views/workers/worker-details";
 import users from "../views/users/manage-users";
 import computers from "../views/computers/computers-list.vue";
+import computerDetails from "../views/computers/computer-details";
 import login from "../views/login";
 import logout from "../views/logout";
 
@@ -45,6 +46,10 @@ const routes = [
   {
     path: "/computers",
     component: computers,
+  },
+  {
+    path: "/computers/:id",
+    component: computerDetails,
   },
   {
     path: "/logout",

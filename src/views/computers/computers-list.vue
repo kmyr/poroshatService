@@ -66,6 +66,9 @@
             </button>
           </td>
         </tr>
+        <tr>
+          <div class="container">تعداد سیستم ها: {{computers.length}}</div>
+        </tr>
       </tbody>
     </table>
     <div class="d-flex flex bd-highlight mb-12 flex-button-section">
