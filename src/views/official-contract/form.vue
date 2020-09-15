@@ -3,7 +3,14 @@
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="poroshatUserInfoForm">
-          <fields></fields>
+          <select class="form-control" v-model="selectedWorker" id="useSavedWorkers">
+            <option
+              v-for="(worker,i) in workersList"
+              :key="i"
+              :value="worker._ID"
+            >{{worker.firstName}} {{worker.lastName}}</option>
+          </select>
+          <fields :selectedWorker="currentWorker"></fields>
 
           <label>تاریخ شروع قرارداد</label>
           <div class="form-row">
@@ -97,6 +104,7 @@
 <script>
 import $ from "jquery";
 import postData from "../../actions/postData";
+import getData from "../../actions/getData";
 import { salaryList } from "../../datastore/globalData";
 import { formFields } from "../../datastore/globalData";
 import fields from "../forms/contractFields";
@@ -109,15 +117,20 @@ export default {
         useOldSalary: false,
         selectedSalary: null
       },
-      userInfo: {}
+      userInfo: {},
+      workersList: [],
+      selectedWorker: "",
+      currentWorker: null
     };
   },
 
   components: { fields },
 
-  mixins: [postData],
+  mixins: [postData, getData],
 
   created() {
+    this.getData("savedWorkers", this.workersList);
+
     this.userInfo = {
       startDate: {
         month: "",
@@ -163,6 +176,15 @@ export default {
   },
 
   watch: {
+    selectedWorker: function() {
+      for (let i = 0; i < this.workersList.length; i++) {
+        const currentWorker = this.workersList[i];
+        if (currentWorker._ID == this.selectedWorker) {
+          this.currentWorker = currentWorker;
+        }
+      }
+    },
+
     "userInfo.startDate.month": function() {
       if (this.userInfo.startDate.month > 12) {
         this.userInfo.startDate.month = 12;

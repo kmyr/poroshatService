@@ -12,7 +12,6 @@ export default {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            console.log();
             const data = { ...doc.data(), _ID: doc.id };
             arr.push(data);
           });

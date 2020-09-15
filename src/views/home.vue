@@ -34,6 +34,11 @@ export default {
               title: "همکاران پروشات فیلتر"
             }
           ]
+        },
+        {
+          title: "سیستم ها",
+          icon: "fa fa-desktop",
+          href: "/computers"
         }
       ]
     };

@@ -137,7 +137,7 @@
 
         <label>تلفن همراه</label>
         <input
-          :name="required"
+          name="required"
           v-model="prepareWorker.phoneNumber"
           type="text"
           class="form-control"
@@ -175,7 +175,8 @@ export default {
   },
   props: {
     editingWorkerInfo: Object,
-    specialInfo: Boolean
+    specialInfo: Boolean,
+    selectedWorker: Object
   },
 
   mixins: [postData, updateData, getData, dataValidate],
@@ -245,12 +246,24 @@ export default {
       },
       immediate: true
     },
+
     specialInfo: {
       handler(status) {
         if (status == null || status == undefined) {
           this.showSpecialInfo = true;
         } else {
           this.showSpecialInfo = status;
+        }
+      },
+      immediate: true
+    },
+
+    selectedWorker: {
+      handler(status) {
+        if (status == null || status == undefined) {
+          return;
+        } else {
+          this.prepareWorker = status;
         }
       },
       immediate: true
