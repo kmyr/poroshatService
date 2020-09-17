@@ -45,8 +45,6 @@ export default {
 
         if (currentComputer._ID == currentComputerId) {
           this.showingComputer = currentComputer;
-        } else {
-          alert("s");
         }
       }
     }
