@@ -4,7 +4,7 @@
       @click="goBack('/computers')"
       class="btn btn-outline-danger"
       style="margin-bottom:10px"
-    >BACK</button>
+    >بازگشت</button>
     <ul class="list-group">
       <li class="list-group-item active">{{showingComputer.deviceName}}</li>
       <li class="list-group-item">Device Type: {{showingComputer.deviceType}}</li>
