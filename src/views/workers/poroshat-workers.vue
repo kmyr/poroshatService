@@ -184,7 +184,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../assets/style/persons/table.css");
-@import url("../../assets/style/persons/modal.css");
-@import url("../../assets/style/persons/form.css");
+@import url("../../assets/style/items/table.css");
+@import url("../../assets/style/items/modal.css");
+@import url("../../assets/style/items/form.css");
 </style>

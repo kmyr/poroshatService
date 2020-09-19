@@ -76,5 +76,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("../../assets/style/persons/user-details.css");
+@import url("../../assets/style/items/user-details.css");
 </style>

@@ -1,0 +1,80 @@
+/* IMS table height */
+.headerTableIMS #firstCol {
+  width: 35%;
+}
+.headerTableIMS #middleCol {
+  width: 50%;
+}
+.headerTableIMS {
+  border: 1px dotted #000;
+  width: 100% !important;
+  height: 150px;
+}
+.headerTableIMS tr,
+.headerTableIMS td {
+  border: 1px dotted #000;
+}
+#secondRow,
+#thirdRow {
+  height: 40px;
+}
+
+/* IMS table body */
+.IMStable {
+  width: 100%;
+  direction: rtl;
+}
+.IMStable tr {
+  min-height: 34px;
+}
+.IMStable tr,
+.IMStable td {
+  border: 1px solid #000;
+}
+.IMStable td {
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.IMStable #firstCol {
+  width: 5% !important;
+  transform: rotate(90deg);
+}
+.IMStable #firstCol p {
+  width: 200%;
+  padding-top: 5px;
+}
+#IMStallParts {
+  height: 70px;
+}
+#computersDetailsSheet {
+  width: 75%;
+  margin-left: 10%;
+}
+.IMSheaderLogo {
+  width: 100%;
+}
+.IMSfooterSign {
+  color: rgb(84, 68, 141);
+  bottom: 0 !important;
+  position: absolute;
+  right: 0;
+  padding: 5px;
+  border: 3px dotted rgb(84, 68, 141);
+}
+
+@media print {
+  #computersDetailsSheet {
+    width: 100%;
+    height: 40.9cm;
+    margin: 0;
+    margin-bottom: 1%;
+  }
+
+  .body-part {
+    padding: 25px;
+  }
+  .details-sheet {
+    padding: 0;
+    margin: 2%;
+  }
+}
