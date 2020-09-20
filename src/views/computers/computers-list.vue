@@ -67,7 +67,9 @@
           </td>
         </tr>
         <tr>
-          <div class="container">تعداد سیستم ها: {{computers.length}}</div>
+          <td colspan="5">
+            <div class="container text-center">تعداد سیستم ها: {{computers.length}}</div>
+          </td>
         </tr>
       </tbody>
     </table>
