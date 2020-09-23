@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user,i) in users" :key="i">
+        <tr v-for="(user, i) in users" :key="i">
           <th>{{ user.name }}</th>
           <td>{{ user.email }}</td>
           <td>{{ user.userPassword }}</td>
@@ -69,17 +69,30 @@
     </table>
 
     <div class="d-flex flex bd-highlight mb-12 flex-button-section">
-      <button @click="goBack('/')" class="btn btn-danger backBtn" id="usersTable-backBtn">بازگشت</button>
+      <button
+        @click="goBack('/')"
+        class="btn btn-danger backBtn"
+        id="usersTable-backBtn"
+      >
+        بازگشت
+      </button>
       <button
         type="button"
         class="btn btn-success addUserBtn"
         id="addUserBtn"
         @click="newUserModal()"
-      >افزودن</button>
+      >
+        افزودن
+      </button>
     </div>
     <!-- Modal -->
 
-    <b-modal id="userActionModal" class="modal" :title="modalStatus.title" hide-footer>
+    <b-modal
+      id="userActionModal"
+      class="modal"
+      :title="modalStatus.title"
+      hide-footer
+    >
       <form id="userActionsForm">
         <label>نام و نام خانوادگی</label>
         <input
@@ -125,18 +138,24 @@
           class="btn btn-primary"
           v-if="modalStatus.newUser"
           @click="inputValidation('submitUser')"
-        >ثبت</button>
+        >
+          ثبت
+        </button>
         <button
           type="button"
           class="btn btn-primary"
           v-if="!modalStatus.newUser"
           @click="inputValidation('updateUser')"
-        >ویرایش</button>
+        >
+          ویرایش
+        </button>
         <button
           type="button"
           class="btn btn-outline-dark"
           @click="toggleModal('userActionModal')"
-        >لغو</button>
+        >
+          لغو
+        </button>
       </div>
     </b-modal>
   </div>
@@ -231,7 +250,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../assets/style/persons/table.css");
-@import url("../../assets/style/persons/modal.css");
-@import url("../../assets/style/persons/form.css");
+@import url("../../assets/style/items/table.css");
+@import url("../../assets/style/items/modal.css");
+@import url("../../assets/style/items/form.css");
 </style>
