@@ -140,7 +140,7 @@ export default {
   methods: {
     editComputerModal(computer) {
       this.modalStatus = {
-        title: ` ویرایش اطلاعات ${computer.deviceName}`,
+        title: `${computer.deviceName} ویرایش اطلاعات `,
         newComputer: false
       };
       this.editingComputer = computer;

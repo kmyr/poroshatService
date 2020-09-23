@@ -7,9 +7,14 @@
     >بازگشت</button>
     <button
       @click="printPage()"
-      class="btn btn-outline-primary hide-on-print"
+      class="btn btn-outline-success hide-on-print"
       style="margin-bottom:10px"
     >پرینت</button>
+    <button
+      @click="editComputerModal(showingComputer)"
+      class="btn btn-outline-primary hide-on-print"
+      style="margin-bottom:10px"
+    >ویرایش</button>
 
     <div class="sheet" id="computersDetailsSheet">
       <div class="header">
@@ -138,30 +143,70 @@
         </div>
       </div>
     </div>
+    <b-modal id="computerActionModal" class="modal" :title="modalStatus.title" hide-footer>
+      <fields :editingComputerInfo="editingComputer"></fields>
+
+      <hr class="my-4" />
+
+      <div class="d-flex flex-row-reverse bd-highlight mb-2" id="btnGroup">
+        <button type="button" class="btn btn-primary" @click="updateComputer()">ویرایش</button>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          @click="toggleModal('computerActionModal')"
+        >لغو</button>
+      </div>
+    </b-modal>
   </div>
 </template>
 <script>
+import $ from "jquery";
+import { formFields } from "../../datastore/globalData";
 import getData from "../../actions/getData";
+import fields from "../forms/computersInfoFields";
 export default {
   data() {
     return {
       computersList: [],
-      showingComputer: {}
+      showingComputer: {},
+      modalStatus: "",
+      editingComputer: {}
     };
   },
   mixins: [getData],
+
+  components: { fields },
+
   created() {
     this.getData("savedComputersInfo", this.computersList);
+    this.scrollTop();
   },
 
   methods: {
+    scrollTop() {
+      $("html,body").animate({ scrollTop: 0 }, "slow");
+    },
     goBack(target) {
       this.$router.push(target);
     },
     printPage() {
       window.print();
+    },
+    editComputerModal(computer) {
+      this.modalStatus = {
+        title: `${computer.deviceName} ویرایش اطلاعات `
+      };
+      this.editingComputer = computer;
+      this.toggleModal("computerActionModal");
+    },
+    updateComputer() {
+      formFields.$emit("updateComputerEmit");
+    },
+    toggleModal(action) {
+      this.$root.$emit("bv::toggle::modal", action, "#btnToggle");
     }
   },
+
   watch: {
     computersList: function() {
       const currentComputerId = this.$route.params.id;
