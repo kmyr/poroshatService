@@ -3,12 +3,17 @@
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="poroshatUserInfoForm">
-          <select class="form-control" v-model="selectedWorker" id="useSavedWorkers">
+          <select
+            class="form-control"
+            v-model="selectedWorker"
+            id="useSavedWorkers"
+          >
             <option
-              v-for="(worker,i) in workersList"
+              v-for="(worker, i) in workersList"
               :key="i"
               :value="worker._ID"
-            >{{worker.firstName}} {{worker.lastName}}</option>
+              >{{ worker.firstName }} {{ worker.lastName }}</option
+            >
           </select>
           <fields :selectedWorker="currentWorker"></fields>
 
@@ -52,7 +57,8 @@
               v-for="(salary, i) in salaryOptions.salaryList"
               :key="i"
               :value="salary.sumOfSalary"
-            >{{salary.sumOfSalary}}-{{salary.description}}</option>
+              >{{ salary.sumOfSalary }}-{{ salary.description }}</option
+            >
           </select>
           <select
             name="salary"
@@ -64,7 +70,8 @@
               v-for="(salary, i) in salaryOptions.salaryListOldVersion"
               :key="i"
               :value="salary.sumOfSalary"
-            >{{salary.sumOfSalary}}-{{salary.description}}</option>
+              >{{ salary.sumOfSalary }}-{{ salary.description }}</option
+            >
           </select>
           <div class="form-check">
             <input
@@ -77,7 +84,8 @@
               id="perviousSalary-label"
               class="checkbox-label"
               for="perviousSalaryCheckbox"
-            >پایه سنوات قدیمی</label>
+              >پایه سنوات قدیمی</label
+            >
           </div>
           <br />
           <br />
@@ -88,14 +96,18 @@
             @click="goBack('/')"
             type="button"
             class="btn btn-outline-danger backBtn"
-          >بازگشت</button>
+          >
+            بازگشت
+          </button>
           <br />
           <button
             id
             @click="submitContractForm()"
             type="button"
             class="btn btn-primary submitBtn"
-          >ثبت</button>
+          >
+            ثبت
+          </button>
         </div>
       </div>
     </form>
@@ -155,8 +167,11 @@ export default {
 
       this.userInfo.periodDate--;
 
-      this.$parent.$data.poroshatOfficialContractInfo = this.userInfo;
-      this.$router.push("/official-contract/preview");
+      localStorage.setItem(
+        "preparingContractUserInfo",
+        JSON.stringify(this.userInfo)
+      );
+      this.$router.push(`/official-contract/preview`);
       $("html,body").animate({ scrollTop: 0 }, "slow");
     },
 

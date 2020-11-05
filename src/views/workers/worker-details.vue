@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3 class="center-text" id="worker-name">{{showingWorker.firstName}} {{showingWorker.lastName}}</h3>
+    <h3 class="center-text" id="worker-name">
+      {{ showingWorker.firstName }} {{ showingWorker.lastName }}
+    </h3>
     <hr />
     <div>
       <div class="container">
@@ -13,10 +15,18 @@
               accept="image/*"
               id="profilePicture"
             />
-            <label class="custom-file-label" for="profilePicture">عکس پرسنلی</label>
+            <label class="custom-file-label" for="profilePicture"
+              >عکس پرسنلی</label
+            >
           </div>
-          <div v-if="imageData!=null" class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" @click="onUpload">بارگذاری</button>
+          <div v-if="imageData != null" class="input-group-append">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              @click="onUpload"
+            >
+              بارگذاری
+            </button>
           </div>
         </div>
         <br />
@@ -24,7 +34,7 @@
           <div
             class="progress-bar"
             role="progressbar"
-            :style="'width:'+  uploadValue.toFixed()+'%'"
+            :style="'width:' + uploadValue.toFixed() + '%'"
           ></div>
         </div>
       </div>

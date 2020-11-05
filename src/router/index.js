@@ -17,50 +17,50 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: home,
+    component: home
   },
   {
     path: "/login",
-    component: login,
+    component: login
   },
   {
     path: "/official-contract",
-    component: form,
+    component: form
   },
   {
     path: "/official-contract/preview",
-    component: preview,
+    component: preview
   },
   {
     path: "/workers",
-    component: workers,
+    component: workers
   },
   {
     path: "/workers/:id",
-    component: workerDetails,
+    component: workerDetails
   },
   {
     path: "/users",
-    component: users,
+    component: users
   },
   {
     path: "/computers",
-    component: computers,
+    component: computers
   },
   {
     path: "/computers/:id",
-    component: computerDetails,
+    component: computerDetails
   },
   {
     path: "/logout",
-    component: logout,
-  },
+    component: logout
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

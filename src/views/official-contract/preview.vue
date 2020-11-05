@@ -1,12 +1,24 @@
 <template>
   <div class="preview-sheet">
-    <button id class="btn btn-outline-primary hide-on-print" @click="printSheet">پرینت</button>
+    <button
+      id
+      class="btn btn-outline-primary hide-on-print"
+      @click="printSheet"
+    >
+      پرینت
+    </button>
     <button
       id="cancelBtn"
       class="btn btn-outline-danger hide-on-print"
-      @click="goBack('/official-contract')"
-    >انصراف</button>
-    <button class="btn btn-primary hide-on-print" id="scrollTop" @click="scrollTop()">
+      @click="cancel('../official-contract')"
+    >
+      انصراف
+    </button>
+    <button
+      class="btn btn-primary hide-on-print"
+      id="scrollTop"
+      @click="scrollTop()"
+    >
       <svg
         width="1em"
         height="1em"
@@ -32,18 +44,18 @@
             <span class="headerDateValue">
               <span>
                 1399/{{ userInfo.startDate.month }}/{{
-                userInfo.startDate.day
+                  userInfo.startDate.day
                 }}
-                :
-              </span>تاریخ
+                : </span
+              >تاریخ
             </span>
             <br />
-            <span class="headerNumberValue">
-              <span>:</span>شماره
-            </span>
+            <span class="headerNumberValue"> <span>:</span>شماره </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
+            <span class="titr" style="font-size: 22px"
+              >فرم قراردادکار موقت</span
+            >
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -57,7 +69,9 @@
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
           مي گردد
           <br />آقای/خانم:
-          <span class="bold">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+          <span class="bold"
+            >{{ userInfo.firstName }} {{ userInfo.lastName }}</span
+          >
           فرزند:
           <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
@@ -72,17 +86,15 @@
           <span class="titr">ماده 1) مـوضـوع قـرارداد</span>
           <br />عبارتست از انجـام وظايف ذيـل تـوسـط همکار در پسـت سـازمـانـي،
           تحـت عنـوان
-          <span
-            class="bold"
-          >{{ userInfo.role }}</span>
+          <span class="bold">{{ userInfo.role }}</span>
           و هم چنین انجام ساير امـور محـوله و وظايف مرتبـط با شغـل كـارمنـد
           براسـاس دستـورات كـارفـرمـا
           <br />
           <span class="titr">ماده 2) محل خدمت و انجام موضوع قـرارداد</span>
           <br />
-          محل خدمت و انجام موضوع قرارداد، در {{ userInfo.employmentPlace }} مي باشد
-          ليكن با توجه به بنـد « د » ماده 10 قانون كار،‌ همکار اختيار تغيير محل
-          خدمت خـود را به كارفرما تفويض مي نمايد. بنابراين كارفرما حـق خواهد
+          محل خدمت و انجام موضوع قرارداد، در {{ userInfo.employmentPlace }} مي
+          باشد ليكن با توجه به بنـد « د » ماده 10 قانون كار،‌ همکار اختيار تغيير
+          محل خدمت خـود را به كارفرما تفويض مي نمايد. بنابراين كارفرما حـق خواهد
           داشت با توجه نياز شركت، در هر زمان كه اقتضا نمايد محل خدمت كارمند را
           تغيير دهد. چنانچه همکار در واحد جديد حاضر به ادامه همكاري نباشد، اين
           موضوع به منزله استعفاي كارمند تلقي مي‌گرد؛ و همچنین همکار ضامن میشود
@@ -99,7 +111,9 @@
             <tbody>
               <tr>
                 <td class="salaryTableTitle">حقوق پایه</td>
-                <td class="salarySectionTable">{{ userInfo.salary.baseSalary }}</td>
+                <td class="salarySectionTable">
+                  {{ userInfo.salary.baseSalary }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
@@ -114,12 +128,16 @@
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق مسکن</td>
-                <td class="salarySectionTable">{{ userInfo.salary.housing }}</td>
+                <td class="salarySectionTable">
+                  {{ userInfo.salary.housing }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق عائله مندی و اولاد</td>
-                <td class="salarySectionTable">{{ userInfo.salary.children }}</td>
+                <td class="salarySectionTable">
+                  {{ userInfo.salary.children }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
@@ -127,7 +145,9 @@
                   جمع کل:
                   <span class="bold">{{ userInfo.salary.salaryLetter }}</span>
                 </td>
-                <td class="salarySectionTable" colspan="2">{{ userInfo.salary.sumOfSalary }}</td>
+                <td class="salarySectionTable" colspan="2">
+                  {{ userInfo.salary.sumOfSalary }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -141,7 +161,7 @@
           <span class="titr">ماده 5) مـدت قـرارداد</span>
           <br />
           مـدت قـرارداد از تـاريـخ 1399/{{ userInfo.startDate.month }}/{{
-          userInfo.startDate.day
+            userInfo.startDate.day
           }}
           لغـايـت 1399/{{ userInfo.startDate.month }}/{{ currentFinishedDay }}
           مي بـاشـد
@@ -177,13 +197,13 @@
               یا تعطیل فعالیت، پایان پروژه، یا احکام مراجع صالحه اداری و قضایی
             </li>
             <li>عدم رضایت کارفرما از همکار</li>
-            <li>طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)</li>
+            <li>
+              طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)
+            </li>
           </ol>
         </div>
         <div class="footer">
-          <div class="footerNumber">
-            <span>PF0013 :</span>کد فرم
-          </div>
+          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -195,18 +215,18 @@
             <span class="headerDateValue">
               <span>
                 1399/{{ userInfo.startDate.month }}/{{
-                userInfo.startDate.day
+                  userInfo.startDate.day
                 }}
-                :
-              </span>تاریخ
+                : </span
+              >تاریخ
             </span>
             <br />
-            <span class="headerNumberValue">
-              <span>:</span>شماره
-            </span>
+            <span class="headerNumberValue"> <span>:</span>شماره </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
+            <span class="titr" style="font-size: 22px"
+              >فرم قراردادکار موقت</span
+            >
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -217,7 +237,9 @@
         <div class="body-part">
           <span class="titr">ماده 7) تعهدات همکار</span>
           <ol style="direction: rtl">
-            <li>انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما</li>
+            <li>
+              انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما
+            </li>
             <li>رعایت کلیة ضوابط و مقررات قانونی و داخلی شرکت</li>
             <li>
               در صورت عدم تمایل به همکاری 30 روز قبل از اتمام قرارداد باید
@@ -277,7 +299,9 @@
               معذوریت از کار، بروز حادثه ناشی از کار، بیماری، فوت و سایر تسهیلات
               مقرر در قانون،تابع قانون کار و تأمین اجتماعی خواهد بود
             </li>
-            <li>کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند</li>
+            <li>
+              کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند
+            </li>
             <li>
               هرگاه برای کارفرما اثبات گردد که همکار به هر طریق ممکن اطلاعات
               فنی، مهندسی، تحقیقاتی و یا اوراق، مدارك و اسناد مالی، اقتصادی و
@@ -333,33 +357,36 @@
           </table>
         </div>
         <div class="footer">
-          <div class="footerNumber">
-            <span>PF0013 :</span>کد فرم
-          </div>
+          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
       </div>
     </div>
 
-    <div class="file" v-for="(month, i) in parseInt(userInfo.periodDate)" :key="i">
+    <div
+      class="file"
+      v-for="(month, i) in parseInt(userInfo.periodDate)"
+      :key="i"
+    >
       <div class="sheet" id="sheet">
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
               <span>
                 1399/{{
-                allMonths[parseInt(userInfo.startDate.month) + month - 1].number
-                }}/1 :
-              </span>تاریخ
+                  allMonths[parseInt(userInfo.startDate.month) + month - 1]
+                    .number
+                }}/1 : </span
+              >تاریخ
             </span>
             <br />
-            <span class="headerNumberValue">
-              <span>:</span>شماره
-            </span>
+            <span class="headerNumberValue"> <span>:</span>شماره </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
+            <span class="titr" style="font-size: 22px"
+              >فرم قراردادکار موقت</span
+            >
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -373,7 +400,9 @@
           ديگر قرارداد كه اختصاراً « همکار » ناميده مي شود، با مشخصات زير منعقد
           مي گردد
           <br />آقای/خانم:
-          <span class="bold">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+          <span class="bold"
+            >{{ userInfo.firstName }} {{ userInfo.lastName }}</span
+          >
           فرزند:
           <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
@@ -388,17 +417,15 @@
           <span class="titr">ماده 1) مـوضـوع قـرارداد</span>
           <br />عبارتست از انجـام وظايف ذيـل تـوسـط همکار در پسـت سـازمـانـي،
           تحـت عنـوان
-          <span
-            class="bold"
-          >{{ userInfo.role }}</span>
+          <span class="bold">{{ userInfo.role }}</span>
           و هم چنین انجام ساير امـور محـوله و وظايف مرتبـط با شغـل كـارمنـد
           براسـاس دستـورات كـارفـرمـا
           <br />
           <span class="titr">ماده 2) محل خدمت و انجام موضوع قـرارداد</span>
           <br />
-          محل خدمت و انجام موضوع قرارداد، در {{ userInfo.employmentPlace }} مي باشد
-          ليكن با توجه به بنـد « د » ماده 10 قانون كار،‌ همکار اختيار تغيير محل
-          خدمت خـود را به كارفرما تفويض مي نمايد. بنابراين كارفرما حـق خواهد
+          محل خدمت و انجام موضوع قرارداد، در {{ userInfo.employmentPlace }} مي
+          باشد ليكن با توجه به بنـد « د » ماده 10 قانون كار،‌ همکار اختيار تغيير
+          محل خدمت خـود را به كارفرما تفويض مي نمايد. بنابراين كارفرما حـق خواهد
           داشت با توجه نياز شركت، در هر زمان كه اقتضا نمايد محل خدمت كارمند را
           تغيير دهد. چنانچه همکار در واحد جديد حاضر به ادامه همكاري نباشد، اين
           موضوع به منزله استعفاي كارمند تلقي مي‌گرد؛ و همچنین همکار ضامن میشود
@@ -415,7 +442,9 @@
             <tbody>
               <tr>
                 <td class="salaryTableTitle">حقوق پایه</td>
-                <td class="salarySectionTable">{{ userInfo.salary.baseSalary }}</td>
+                <td class="salarySectionTable">
+                  {{ userInfo.salary.baseSalary }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
@@ -430,12 +459,16 @@
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق مسکن</td>
-                <td class="salarySectionTable">{{ userInfo.salary.housing }}</td>
+                <td class="salarySectionTable">
+                  {{ userInfo.salary.housing }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق عائله مندی و اولاد</td>
-                <td class="salarySectionTable">{{ userInfo.salary.children }}</td>
+                <td class="salarySectionTable">
+                  {{ userInfo.salary.children }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
@@ -443,7 +476,9 @@
                   جمع کل:
                   <span class="bold">{{ userInfo.salary.salaryLetter }}</span>
                 </td>
-                <td class="salarySectionTable" colspan="2">{{ userInfo.salary.sumOfSalary }}</td>
+                <td class="salarySectionTable" colspan="2">
+                  {{ userInfo.salary.sumOfSalary }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -457,10 +492,12 @@
           <span class="titr">ماده 5) مـدت قـرارداد</span>
           <br />
           مـدت قـرارداد از تـاريـخ 1399/{{
-          allMonths[parseInt(userInfo.startDate.month) + month - 1].number
+            allMonths[parseInt(userInfo.startDate.month) + month - 1].number
           }}/1 لغـايـت 1399/{{
-          allMonths[parseInt(userInfo.startDate.month) + month - 1].number
-          }}/{{ allMonths[parseInt(userInfo.startDate.month) + month - 1].days }}
+            allMonths[parseInt(userInfo.startDate.month) + month - 1].number
+          }}/{{
+            allMonths[parseInt(userInfo.startDate.month) + month - 1].days
+          }}
           مي بـاشـد
           <br />
           <span class="titr">ماده 6) موارد فسـخ قـرارداد</span>
@@ -494,13 +531,13 @@
               یا تعطیل فعالیت، پایان پروژه، یا احکام مراجع صالحه اداری و قضایی
             </li>
             <li>عدم رضایت کارفرما از همکار</li>
-            <li>طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)</li>
+            <li>
+              طبق بند ""ز"" و "" ح"" (اصلاحیه ماده 21 قانون کار مصوب 87/08/25)
+            </li>
           </ol>
         </div>
         <div class="footer">
-          <div class="footerNumber">
-            <span>PF0013 :</span>کد فرم
-          </div>
+          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -512,17 +549,18 @@
             <span class="headerDateValue">
               <span>
                 1399/{{
-                allMonths[parseInt(userInfo.startDate.month) + month - 1].number
-                }}/1 :
-              </span>تاریخ
+                  allMonths[parseInt(userInfo.startDate.month) + month - 1]
+                    .number
+                }}/1 : </span
+              >تاریخ
             </span>
             <br />
-            <span class="headerNumberValue">
-              <span>:</span>شماره
-            </span>
+            <span class="headerNumberValue"> <span>:</span>شماره </span>
           </div>
           <div class="headerTitle">
-            <span class="titr" style="font-size: 22px">فرم قراردادکار موقت</span>
+            <span class="titr" style="font-size: 22px"
+              >فرم قراردادکار موقت</span
+            >
             <br />
             <span class="titr">صنایع پالایش پروشات پالاد</span>
           </div>
@@ -533,7 +571,9 @@
         <div class="body-part">
           <span class="titr">ماده 7) تعهدات همکار</span>
           <ol style="direction: rtl">
-            <li>انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما</li>
+            <li>
+              انجام امور محوله به نحو احسن طبق شرح وظایف محوله از طرف کارفرما
+            </li>
             <li>رعایت کلیة ضوابط و مقررات قانونی و داخلی شرکت</li>
             <li>
               در صورت عدم تمایل به همکاری 30 روز قبل از اتمام قرارداد باید
@@ -593,7 +633,9 @@
               معذوریت از کار، بروز حادثه ناشی از کار، بیماری، فوت و سایر تسهیلات
               مقرر در قانون،تابع قانون کار و تأمین اجتماعی خواهد بود
             </li>
-            <li>کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند</li>
+            <li>
+              کلیه همکاران می بایست تضمین لازم و مناسب با شغل خویش را بسپارند
+            </li>
             <li>
               هرگاه برای کارفرما اثبات گردد که همکار به هر طریق ممکن اطلاعات
               فنی، مهندسی، تحقیقاتی و یا اوراق، مدارك و اسناد مالی، اقتصادی و
@@ -649,9 +691,7 @@
           </table>
         </div>
         <div class="footer">
-          <div class="footerNumber">
-            <span>PF0013 :</span>کد فرم
-          </div>
+          <div class="footerNumber"><span>PF0013 :</span>کد فرم</div>
           <div class="footerDate">تاریخ آخرین بازنگری: ۹۸/۰۱/۲۸</div>
           <div class="footerEdit">ویرایش: ۰۰۱</div>
         </div>
@@ -683,6 +723,7 @@ export default {
     };
   },
   created() {
+    console.log(this.userInfo);
     this.checkData();
     this.setLastDayOfMonth();
   },
@@ -690,6 +731,16 @@ export default {
     this.showOnScroll();
   },
   methods: {
+    checkData() {
+      this.userInfo = JSON.parse(
+        localStorage.getItem("preparingContractUserInfo")
+      );
+      if (this.userInfo == undefined || this.userInfo == null) {
+        this.$router.push("/official-contract");
+      }
+      document.title = `قرارداد ${this.userInfo.firstName}  ${this.userInfo.lastName}`;
+    },
+
     setLastDayOfMonth() {
       if (this.userInfo.startDate.month <= 6) {
         this.currentFinishedDay = 31;
@@ -700,18 +751,16 @@ export default {
         this.currentFinishedDay = 30;
       }
     },
-    checkData() {
-      this.userInfo = this.$parent.$data.poroshatOfficialContractInfo;
-      if (this.userInfo == null) {
-        this.$router.push("/official-contract");
-      }
-    },
+
     printSheet() {
       window.print();
     },
-    goBack(target) {
+
+    cancel(target) {
+      localStorage.removeItem("preparingContractUserInfo");
       this.$router.push(target);
     },
+
     showOnScroll() {
       $(document).scroll(function() {
         var y = $(this).scrollTop();
@@ -722,6 +771,7 @@ export default {
         }
       });
     },
+
     scrollTop() {
       $("html,body").animate({ scrollTop: 0 }, "slow");
     }

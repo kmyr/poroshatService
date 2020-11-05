@@ -28,8 +28,14 @@
       />
       <span v-if="showSpecialInfo">
         <label>جنسیت</label>
-        <select name="required" class="form-control" v-model="prepareWorker.gender">
-          <option v-for="(gender,i) in dropdownData.genderList" :key="i">{{gender}}</option>
+        <select
+          name="required"
+          class="form-control"
+          v-model="prepareWorker.gender"
+        >
+          <option v-for="(gender, i) in dropdownData.genderList" :key="i">{{
+            gender
+          }}</option>
         </select>
       </span>
 
@@ -90,8 +96,14 @@
       </span>
 
       <label>تحصیلات</label>
-      <select name="required" class="form-control" v-model="prepareWorker.education">
-        <option v-for="(education,i) in dropdownData.educationList" :key="i">{{education}}</option>
+      <select
+        name="required"
+        class="form-control"
+        v-model="prepareWorker.education"
+      >
+        <option v-for="(education, i) in dropdownData.educationList" :key="i">{{
+          education
+        }}</option>
       </select>
 
       <label>سمت</label>
@@ -106,17 +118,19 @@
         <label>واحد مربوطه</label>
         <br />
         <br />
-        <template v-for="(department,i) in dropdownData.departmentList">
+        <template v-for="(department, i) in dropdownData.departmentList">
           <div class="form-check checkbox-section" :key="i">
             <input
               type="checkbox"
               name="departmentCheck"
-              :id="'departmentIndex'+ i"
+              :id="'departmentIndex' + i"
               :value="department"
               v-model="prepareWorker.department[i].status"
               class="form-check-input checkbox"
             />
-            <label :for="'departmentIndex'+ i" class="checkbox-label">{{department.name}}</label>
+            <label :for="'departmentIndex' + i" class="checkbox-label">{{
+              department.name
+            }}</label>
             <br />
             <br />
           </div>
@@ -124,7 +138,11 @@
       </span>
 
       <label>محل اشتغال</label>
-      <select name="required" class="form-control" v-model="prepareWorker.employmentPlace">
+      <select
+        name="required"
+        class="form-control"
+        v-model="prepareWorker.employmentPlace"
+      >
         <option>تولید</option>
         <option>دفتر مرکزی</option>
         <option>دفتر فنی مهندسی</option>
@@ -133,7 +151,12 @@
 
       <span v-if="showSpecialInfo">
         <label>تلفن ثابت</label>
-        <input v-model="prepareWorker.tel" type="text" class="form-control" maxlength="8" />
+        <input
+          v-model="prepareWorker.tel"
+          type="text"
+          class="form-control"
+          maxlength="8"
+        />
 
         <label>تلفن همراه</label>
         <input
