@@ -9,7 +9,7 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 
 Vue.use(VueSidebarMenu);
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "http://192.168.165.187:3000";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
