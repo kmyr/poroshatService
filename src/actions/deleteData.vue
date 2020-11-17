@@ -1,12 +1,16 @@
 <script>
-import db from "../datastore/firebaseInit";
+import axios from "axios";
 
 export default {
   methods: {
-    async deleteData(doc, obj) {
-      db.collection(doc)
-        .doc(obj._ID)
-        .delete();
+    deleteData(document, obj) {
+      axios
+        .delete(`${document}/${obj._id}`, obj)
+        .then(res => {
+          console.log(res);
+          location.reload();
+        })
+        .catch(err => console.log(err));
     }
   }
 };

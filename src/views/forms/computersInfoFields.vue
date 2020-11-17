@@ -19,17 +19,14 @@
         style="margin-bottom:15px"
       />
 
-      <label>کاربر دستگاه</label>
-      <select
-        name="deviceOwner"
+      <label>Motherboard</label>
+      <input
+        name="required"
+        v-model="prepareInfo.motherboard"
+        type="text"
         class="form-control"
-        v-model="prepareInfo.deviceOwner"
-      >
-        <option value="none">-</option>
-        <option v-for="(worker, i) in workers" :key="i" :value="worker._ID"
-          >{{ worker.firstName }} {{ worker.lastName }}
-        </option>
-      </select>
+        style="margin-bottom:15px"
+      />
 
       <label>Ram</label>
       <select name="required" class="form-control" v-model="prepareInfo.ram">
@@ -110,8 +107,7 @@ export default {
   data() {
     return {
       prepareInfo: {},
-      isEditing: false,
-      workers: []
+      isEditing: false
     };
   },
   props: {
@@ -120,9 +116,7 @@ export default {
 
   mixins: [postData, updateData, getData, dataValidate],
 
-  created() {
-    this.getData("savedWorkers", this.workers);
-  },
+  created() {},
 
   mounted() {
     formFields.$on("newComputerEmit", () => {
@@ -139,9 +133,9 @@ export default {
       this.detectEmptyData();
       if (this.detectEmptyData() == true) {
         if (command == "newComputer") {
-          this.postData("savedComputersInfo", this.prepareInfo, true);
+          this.postData("computers", this.prepareInfo, true);
         } else if (command == "updateComputer") {
-          this.updateData("savedComputersInfo", this.prepareInfo);
+          this.updateData("computers", this.prepareInfo);
         }
       }
     }

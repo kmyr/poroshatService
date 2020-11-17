@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
@@ -7,6 +8,8 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 // const moment = require('moment-jalaali')
 
 Vue.use(VueSidebarMenu);
+
+axios.defaults.baseURL = "http://localhost:3000";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);

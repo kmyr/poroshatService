@@ -3,27 +3,23 @@
     <table class="table users-table" id="workersTable">
       <thead class="thead-dark" id="workersTableHead">
         <tr>
-          <th scope="col">نام دستگاه</th>
-          <th scope="col">Ram</th>
-          <th scope="col">Storage</th>
-          <th scope="col">CPU</th>
+          <th scope="col">نام</th>
+          <th scope="col">تعداد</th>
+          <th scope="col">وضعیت</th>
+          <th scope="col">نام کاربر</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(computer, i) in computers" :key="i">
-          <th>
-            <router-link :to="'/computers/' + computer._id">{{
-              computer.deviceName
-            }}</router-link>
-          </th>
-          <td>{{ computer.ram }}</td>
-          <td>{{ computer.storage }}</td>
-          <td>{{ computer.cpu }}</td>
+        <tr v-for="(stuff, i) in stuffList" :key="i">
+          <th>{{stuff.stuffName}}</th>
+          <td>{{ stuff.amount }}</td>
+          <td>{{ stuff.status }}</td>
+          <td>{{ stuff.stuffOwner }}</td>
           <td>
             <button
               class="btn btn-outline-danger actionBtn"
-              @click="deleteComputer(computer)"
+              @click="deleteStuff(stuff)"
               ref="btnToggle"
             >
               <span class="glyphicon">
@@ -43,7 +39,7 @@
               </span>
             </button>
             <button
-              @click="editComputerModal(computer)"
+              @click="editStuffModal(stuff)"
               class="btn btn-outline-primary actionBtn"
               ref="btnToggle"
             >
@@ -71,7 +67,7 @@
         <tr>
           <td colspan="5">
             <div class="container text-center">
-              تعداد سیستم ها: {{ computers.length }}
+              تعداد لوازم ها: {{ stuffList.length }}
             </div>
           </td>
         </tr>
@@ -89,7 +85,7 @@
         type="button"
         class="btn btn-success addUserBtn"
         id="addWorkerBtn"
-        @click="newComputerModal()"
+        @click="newStuffModal()"
       >
         افزودن
       </button>
@@ -97,12 +93,12 @@
     <!-- Modal -->
 
     <b-modal
-      id="computerActionModal"
+      id="stuffActionModal"
       class="modal"
       :title="modalStatus.title"
       hide-footer
     >
-      <fields :editingComputerInfo="editingComputer"></fields>
+      <fields :editingStuff="editingStuff"></fields>
 
       <hr class="my-4" />
 
@@ -110,23 +106,23 @@
         <button
           type="button"
           class="btn btn-primary"
-          v-if="modalStatus.newComputer"
-          @click="saveComputer()"
+          v-if="modalStatus.newStuff"
+          @click="saveStuff()"
         >
           ثبت
         </button>
         <button
           type="button"
           class="btn btn-primary"
-          v-if="!modalStatus.newComputer"
-          @click="updateComputer()"
+          v-if="!modalStatus.newStuff"
+          @click="updateStuff()"
         >
           ویرایش
         </button>
         <button
           type="button"
           class="btn btn-outline-dark"
-          @click="toggleModal('computerActionModal')"
+          @click="toggleModal('stuffActionModal')"
         >
           لغو
         </button>
@@ -141,16 +137,16 @@ import getData from "../../actions/getData";
 import postData from "../../actions/postData";
 import updateData from "../../actions/updateData";
 import deleteData from "../../actions/deleteData";
-import fields from "../forms/computersInfoFields";
+import fields from "../forms/stuffFields";
 
 export default {
   data() {
     return {
-      computers: [],
-      editingComputer: null,
+      stuffList: [],
+      editingStuff: null,
       modalStatus: {
         title: "همکار جدید",
-        newComputer: true
+        newStuff: true
       }
     };
   },
@@ -159,49 +155,38 @@ export default {
 
   mixins: [getData, postData, updateData, deleteData],
   created() {
-    this.getData("computers", this.computers);
-    // for (let i = 0; i < this.computers.length; i++) {
-    //   const mydata = this.computers[i];
-    //   axios
-    //     .post("http://localhost:3000/computers", mydata)
-    //     .then(function(response) {
-    //       console.log(response);
-    //     })
-    //     .catch(function(error) {
-    //       console.log(error);
-    //     });
-    // }
+    this.getData("stuff", this.stuffList);
   },
 
   methods: {
-    editComputerModal(computer) {
+    editStuffModal(stuff) {
       this.modalStatus = {
-        title: `${computer.deviceName} ویرایش اطلاعات `,
-        newComputer: false
+        title: `${stuff.stuffName} ویرایش اطلاعات `,
+        newStuff: false
       };
-      this.editingComputer = computer;
-      this.toggleModal("computerActionModal");
+      this.editingStuff = stuff;
+      this.toggleModal("stuffActionModal");
     },
-    updateComputer() {
-      formFields.$emit("updateComputerEmit");
+    updateStuff() {
+      formFields.$emit("updateStuffEmit");
     },
-    newComputerModal() {
+    newStuffModal() {
       this.modalStatus = {
-        title: "سیستم جدید",
-        newComputer: true
+        title: "محصول جدید",
+        newStuff: true
       };
       this.clearForm();
-      this.toggleModal("computerActionModal");
+      this.toggleModal("stuffActionModal");
     },
-    saveComputer() {
-      formFields.$emit("newComputerEmit");
+    saveStuff() {
+      formFields.$emit("newStuffEmit");
     },
     clearForm() {
-      this.editingComputer = null;
+      this.editingStuff = null;
     },
-    deleteComputer(computer) {
-      if (confirm(` Delete ${computer.deviceName}?`)) {
-        this.deleteData("computers", computer);
+    deleteStuff(stuff) {
+      if (confirm(` Delete ${stuff.stuffName}?`)) {
+        this.deleteData("stuff", stuff);
       }
     },
     goBack(target) {

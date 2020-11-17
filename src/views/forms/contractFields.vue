@@ -234,9 +234,9 @@ export default {
       this.detectEmptyData();
       if (this.detectEmptyData() == true) {
         if (command == "newWorker") {
-          this.postData("savedWorkers", this.prepareWorker, true);
+          this.postData("workers", this.prepareWorker, true);
         } else if (command == "updateWorker") {
-          this.updateData("savedWorkers", this.prepareWorker);
+          this.updateData("workers", this.prepareWorker);
         }
       }
     },

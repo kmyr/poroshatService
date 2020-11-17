@@ -23,8 +23,8 @@
     </button>
 
     <div class="hide-on-print">
-      USER: {{ showingComputer.deviceUsername }} - PASSWORD:
-      {{ showingComputer.devicePassword }}
+      USER: {{ showingComputer.deviceUsername }} <br />
+      PASSWORD: {{ showingComputer.devicePassword }}
     </div>
     <div class="sheet" id="computersDetailsSheet">
       <div class="header">
@@ -214,7 +214,6 @@ import fields from "../forms/computersInfoFields";
 export default {
   data() {
     return {
-      computersList: [],
       showingComputer: {},
       modalStatus: "",
       editingComputer: {}
@@ -225,7 +224,7 @@ export default {
   components: { fields },
 
   created() {
-    this.getData("savedComputersInfo", this.computersList);
+    this.getDocument("computers", this.$route.params.id, this.computersList);
     this.scrollTop();
   },
 
@@ -255,20 +254,12 @@ export default {
   },
 
   watch: {
-    computersList: function() {
-      const currentComputerId = this.$route.params.id;
-
-      for (let i = 0; i < this.computersList.length; i++) {
-        const currentComputer = this.computersList[i];
-
-        if (currentComputer._ID == currentComputerId) {
-          this.showingComputer = currentComputer;
-        }
-      }
+    obj: function() {
+      this.showingComputer = this.obj;
     }
   }
 };
 </script>
-<style  scoped>
+<style scoped>
 @import url("../../assets/style/items/computers-details.css");
 </style>

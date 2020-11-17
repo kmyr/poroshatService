@@ -65,7 +65,7 @@ export default {
   mixins: [getData, postData],
 
   created() {
-    this.getData("savedWorkers", this.workersList);
+    this.getData("workers", this.workersList);
   },
 
   methods: {},

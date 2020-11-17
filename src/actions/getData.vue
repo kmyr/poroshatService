@@ -1,31 +1,20 @@
 <script>
-import db from "../datastore/firebaseInit";
+import axios from "axios";
 export default {
   data() {
     return {
-      showingWorker: {}
+      obj: {}
     };
   },
   methods: {
     getData(document, arr) {
-      db.collection(document)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            const data = { ...doc.data(), _ID: doc.id };
-            arr.push(data);
-          });
-        });
+      axios
+        .get(`${document}`)
+        .then(res => res.data.map(item => arr.push(item)));
     },
-    getDocument(document, docId, object) {
-      db.collection(document)
-        .doc(docId)
-        .get()
-        .then(doc => {
-          const data = { ...doc.data(), _ID: doc.id };
-          object = [data];
-          console.log(object);
-        });
+    getDocument(document, docId) {
+      console.log(`${document}/${docId}`);
+      axios.get(`${document}/${docId}`).then(res => (this.obj = res.data));
     }
   }
 };

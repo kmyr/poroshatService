@@ -3,11 +3,7 @@
     <form class="contractForm">
       <div class="col-md-12">
         <div class="form-group" id="poroshatUserInfoForm">
-          <select
-            class="form-control"
-            v-model="selectedWorker"
-            id="useSavedWorkers"
-          >
+          <select class="form-control" v-model="selectedWorker" id="useworkers">
             <option
               v-for="(worker, i) in workersList"
               :key="i"
@@ -141,7 +137,7 @@ export default {
   mixins: [postData, getData],
 
   created() {
-    this.getData("savedWorkers", this.workersList);
+    this.getData("workers", this.workersList);
 
     this.userInfo = {
       startDate: {

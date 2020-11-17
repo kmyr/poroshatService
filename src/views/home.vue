@@ -39,6 +39,11 @@ export default {
           title: "سیستم ها",
           icon: "fa fa-desktop",
           href: "/computers"
+        },
+                {
+          title: "لوازم جانبی",
+          icon: "fa fa-cubes",
+          href: "/stuff"
         }
       ]
     };

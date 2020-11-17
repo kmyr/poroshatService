@@ -137,7 +137,7 @@ export default {
   components: { fields },
   mixins: [getData, postData, updateData, deleteData],
   created() {
-    this.getData("savedWorkers", this.workers);
+    this.getData("workers", this.workers);
   },
 
   methods: {
@@ -170,7 +170,7 @@ export default {
     },
     deleteWorker(worker) {
       if (confirm(`${worker.firstName} ${worker.lastName} پاک شود؟`)) {
-        this.deleteData("savedWorkers", worker);
+        this.deleteData("workers", worker);
         this.postData("deleteItemsLog", worker, true);
       }
     },

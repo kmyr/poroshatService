@@ -1,12 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import home from "../views/home";
-//poroshatfilter
+
 import form from "../views/official-contract/form";
 import preview from "../views/official-contract/preview";
 import workers from "../views/workers/poroshat-workers";
 import workerDetails from "../views/workers/worker-details";
 import users from "../views/users/manage-users";
+import stuff from "../views/stuff/stuff-list.vue";
 import computers from "../views/computers/computers-list.vue";
 import computerDetails from "../views/computers/computer-details";
 import login from "../views/login";
@@ -42,6 +43,10 @@ const routes = [
   {
     path: "/users",
     component: users
+  },
+  {
+    path: "/stuff",
+    component: stuff
   },
   {
     path: "/computers",
