@@ -8,11 +8,8 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 // const moment = require('moment-jalaali')
 
 Vue.use(VueSidebarMenu);
-if (localStorage.databaseADDRESS == undefined) {
-  localStorage.databaseADDRESS == "http://192.168.165.187:3000"
-}
 
-axios.defaults.baseURL = localStorage.databaseADDRESS;
+axios.defaults.baseURL = "http://192.168.165.187:3000";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
