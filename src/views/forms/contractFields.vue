@@ -4,144 +4,69 @@
       <label>نام</label>
       <input
         name="required"
-        v-model="prepareWorker.firstName"
+        v-model="userInfo.firstName"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
       <label>نام خانوادگی</label>
       <input
         name="required"
-        v-model="prepareWorker.lastName"
+        v-model="userInfo.lastName"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>نام پدر</label>
       <input
         name="required"
-        v-model="prepareWorker.fatherName"
+        v-model="userInfo.fatherName"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
-      <span v-if="showSpecialInfo">
-        <label>جنسیت</label>
-        <select
-          name="required"
-          class="form-control"
-          v-model="prepareWorker.gender"
-        >
-          <option v-for="(gender, i) in dropdownData.genderList" :key="i">{{
-            gender
-          }}</option>
-        </select>
-      </span>
 
       <label>تاریخ تولد</label>
       <input
         name="required"
-        v-model="prepareWorker.birthdayDate"
+        v-model="userInfo.birthDate"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
-      <span v-if="showSpecialInfo">
-        <label>محل تولد</label>
-        <input
-          name="required"
-          v-model="prepareWorker.birthPlace"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-      </span>
 
       <label>کد ملی</label>
       <input
         name="required"
-        v-model="prepareWorker.idCard"
+        v-model="userInfo.idCard"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
         maxlength="10"
       />
-      <span v-if="showSpecialInfo">
-        <label>محل صدور</label>
-        <input
-          name="required"
-          v-model="prepareWorker.issuePlace"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-        <label>تابعیت</label>
-        <input
-          name="required"
-          v-model="prepareWorker.citizenship"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-
-        <label>دین</label>
-        <input
-          name="required"
-          v-model="prepareWorker.religion"
-          type="text"
-          class="form-control"
-          style="margin-bottom:15px"
-        />
-      </span>
 
       <label>تحصیلات</label>
-      <select
-        name="required"
-        class="form-control"
-        v-model="prepareWorker.education"
-      >
-        <option v-for="(education, i) in dropdownData.educationList" :key="i">{{
-          education
-        }}</option>
+      <select name="required" class="form-control" v-model="userInfo.diploma">
+        <option v-for="(diploma, i) in dropdownData.diplomaList" :key="i">
+          {{ diploma }}
+        </option>
       </select>
 
       <label>سمت</label>
       <input
         name="required"
-        v-model="prepareWorker.role"
+        v-model="userInfo.role"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
-      <span v-if="showSpecialInfo">
-        <label>واحد مربوطه</label>
-        <br />
-        <br />
-        <template v-for="(department, i) in dropdownData.departmentList">
-          <div class="form-check checkbox-section" :key="i">
-            <input
-              type="checkbox"
-              name="departmentCheck"
-              :id="'departmentIndex' + i"
-              :value="department"
-              v-model="prepareWorker.department[i].status"
-              class="form-check-input checkbox"
-            />
-            <label :for="'departmentIndex' + i" class="checkbox-label">{{
-              department.name
-            }}</label>
-            <br />
-            <br />
-          </div>
-        </template>
-      </span>
 
       <label>محل اشتغال</label>
       <select
         name="required"
         class="form-control"
-        v-model="prepareWorker.employmentPlace"
+        v-model="userInfo.employmentPlace"
       >
         <option>تولید</option>
         <option>دفتر مرکزی</option>
@@ -149,40 +74,94 @@
         <option>انبار</option>
       </select>
 
-      <span v-if="showSpecialInfo">
-        <label>تلفن ثابت</label>
-        <input
-          v-model="prepareWorker.tel"
-          type="text"
-          class="form-control"
-          maxlength="8"
-        />
-
-        <label>تلفن همراه</label>
-        <input
-          name="required"
-          v-model="prepareWorker.phoneNumber"
-          type="text"
-          class="form-control"
-          maxlength="11"
-        />
-      </span>
-
       <label>آدرس محل سکونت</label>
       <input
         name="required"
-        v-model="prepareWorker.address"
+        v-model="userInfo.address"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
+
+      <label>تاریخ شروع قرارداد</label>
+      <div class="form-row">
+        <div class="col">
+          <input
+            name="startMonth"
+            type="number"
+            class="form-control"
+            placeholder="ماه"
+            v-model="userInfo.startDate.month"
+          />
+        </div>
+        <div class="col">
+          <input
+            name="startDay"
+            type="number"
+            class="form-control"
+            placeholder="روز"
+            v-model="userInfo.startDate.day"
+          />
+        </div>
+      </div>
+      <label>(ماه) مدت قرارداد</label>
+      <input
+        name="contractPeriod"
+        v-model="userInfo.periodDate"
+        type="number"
+        class="form-control"
+      />
+
+      <label>حقوق</label>
+      <select
+        name="salary"
+        class="form-control"
+        v-model="userInfo.salary"
+        v-if="!salaryOptions.useOldSalary"
+      >
+        <option
+          v-for="(salary, i) in salaryOptions.salaryList"
+          :key="i"
+          :value="salary.sumOfSalary"
+        >
+          {{ salary.sumOfSalary }}-{{ salary.description }}
+        </option>
+      </select>
+      <select
+        name="salary"
+        class="form-control"
+        v-model="userInfo.salary"
+        v-if="salaryOptions.useOldSalary"
+      >
+        <option
+          v-for="(salary, i) in salaryOptions.salaryListOldVersion"
+          :key="i"
+          :value="salary.sumOfSalary"
+        >
+          {{ salary.sumOfSalary }}-{{ salary.description }}
+        </option>
+      </select>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input checkbox"
+          v-model="salaryOptions.useOldSalary"
+          id="perviousSalaryCheckbox"
+        />
+        <label
+          id="perviousSalary-label"
+          class="checkbox-label"
+          for="perviousSalaryCheckbox"
+          >پایه سنوات قدیمی</label
+        >
+      </div>
     </form>
   </div>
 </template>
 <script>
-// import $ from "jquery";
+import $ from "jquery";
 import { formFields } from "../../datastore/globalData";
-import { education, gender, department } from "../../datastore/globalData";
+import { diploma, gender, salaryList } from "../../datastore/globalData";
 import postData from "../../actions/postData";
 import getData from "../../actions/getData";
 import updateData from "../../actions/updateData";
@@ -190,107 +169,107 @@ import dataValidate from "../../mixins/dataValidations";
 export default {
   data() {
     return {
-      prepareWorker: {},
+      salaryOptions: {
+        salaryListOldVersion: null,
+        salaryList: null,
+        useOldSalary: false,
+        selectedSalary: null,
+      },
+
+      userInfo: {},
       dropdownData: null,
-      isEditing: false,
-      showSpecialInfo: true
     };
-  },
-  props: {
-    editingWorkerInfo: Object,
-    specialInfo: Boolean,
-    selectedWorker: Object
   },
 
   mixins: [postData, updateData, getData, dataValidate],
+
   created() {
-    this.dropdownData = {
-      educationList: education,
-      genderList: gender,
-      departmentList: department
+    this.userInfo = {
+      startDate: {
+        month: "",
+        day: "",
+      },
     };
-    this.setDepartmentDefaults();
+
+    this.dropdownData = {
+      diplomaList: diploma,
+      genderList: gender,
+    };
+
+    this.salaryOptions = {
+      salaryList: salaryList.newSalaryList,
+      salaryListOldVersion: salaryList.salaryListOldVersion,
+    };
   },
 
   mounted() {
-    formFields.$on("newWorkerEmit", () => {
-      this.inputValidation("newWorker");
-    });
-
-    formFields.$on("updateWorkerEmit", () => {
-      this.inputValidation("updateWorker");
-    });
-
     formFields.$on("submitContractForm", () => {
-      this.$parent.$data.userInfo = {
-        ...this.$parent.$data.userInfo,
-        ...this.prepareWorker
-      };
+      this.inputValidation();
     });
   },
 
   methods: {
-    inputValidation(command) {
+    inputValidation() {
       this.detectEmptyData();
       if (this.detectEmptyData() == true) {
-        if (command == "newWorker") {
-          this.postData("workers", this.prepareWorker, true);
-        } else if (command == "updateWorker") {
-          this.updateData("workers", this.prepareWorker);
+        this.findOutSelectedSalary();
+        this.userInfo.periodDate !== 1 ? this.userInfo.periodDate-- : null;
+        localStorage.setItem(
+          "preparingContractUserInfo",
+          JSON.stringify(this.userInfo)
+        );
+        this.$router.push(`/official-contract/preview`);
+        $("html,body").animate({ scrollTop: 0 }, "slow");
+      }
+    },
+
+    findOutSelectedSalary() {
+      let selectedSalaryList = this.salaryOptions.salaryList;
+
+      if (this.salaryOptions.useOldSalary) {
+        selectedSalaryList = this.salaryOptions.salaryListOldVersion;
+      }
+      for (let i = 0; i < selectedSalaryList.length; i++) {
+        const selectedSalary = selectedSalaryList[i];
+        if (selectedSalary.sumOfSalary == this.userInfo.salary) {
+          this.userInfo.salary = selectedSalary;
         }
       }
     },
-    setDepartmentDefaults() {
-      if (!this.isEditing) {
-        let dataValue = [];
-        for (let i = 0; i < this.dropdownData.departmentList.length; i++) {
-          const departmentItem = this.dropdownData.departmentList[i];
-          dataValue.push({
-            name: departmentItem.name,
-            title: departmentItem.title,
-            status: false
-          });
-        }
-        this.prepareWorker.department = dataValue;
-      }
-    }
   },
 
   watch: {
-    editingWorkerInfo: {
-      handler(worker) {
-        if (worker == null || worker == undefined) {
-          this.prepareWorker = {};
-          this.isEditing = false;
-        } else {
-          this.prepareWorker = worker;
-          this.isEditing = true;
-        }
-      },
-      immediate: true
+    "userInfo.startDate.month": function () {
+      if (this.userInfo.startDate.month > 12) {
+        this.userInfo.startDate.month = 12;
+      } else if (this.userInfo.startDate.month < 1) {
+        this.userInfo.startDate.month = "";
+      }
     },
 
-    specialInfo: {
-      handler(status) {
-        if (status == null || status == undefined) {
-          this.showSpecialInfo = true;
-        } else {
-          this.showSpecialInfo = status;
+    "userInfo.startDate.day": function () {
+      if (
+        this.userInfo.startDate.month >= 7 &&
+        this.userInfo.startDate.month <= 12
+      ) {
+        if (this.userInfo.startDate.day > 30) {
+          this.userInfo.startDate.day = 30;
         }
-      },
-      immediate: true
+      } else {
+        if (this.userInfo.startDate.day > 31) {
+          this.userInfo.startDate.day = 31;
+        } else if (this.userInfo.startDate.day < 1) {
+          this.userInfo.startDate.day = "";
+        }
+      }
     },
 
-    selectedWorker: {
-      handler(status) {
-        if (status == null || status == undefined) {
-          return;
-        } else {
-          this.prepareWorker = status;
-        }
-      },
-      immediate: true
-    }
-  }
+    "userInfo.periodDate": function () {
+      const remainingMonth = 13 - parseInt(this.userInfo.startDate.month);
+      if (this.userInfo.periodDate > remainingMonth) {
+        this.userInfo.periodDate = remainingMonth;
+      }
+    },
+  },
 };
 </script>

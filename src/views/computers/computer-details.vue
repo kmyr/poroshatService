@@ -224,7 +224,7 @@ export default {
   components: { fields },
 
   created() {
-    this.getDocument("computers", this.$route.params.id, this.computersList);
+    this.getDocument("computers", this.$route.params.id);
     this.scrollTop();
   },
 

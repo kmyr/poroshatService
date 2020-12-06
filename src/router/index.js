@@ -4,7 +4,7 @@ import home from "../views/home";
 
 import form from "../views/official-contract/form";
 import preview from "../views/official-contract/preview";
-import workers from "../views/workers/poroshat-workers";
+import workers from "../views/workers/workers-list";
 import workerDetails from "../views/workers/worker-details";
 import users from "../views/users/manage-users";
 import stuff from "../views/stuff/stuff-list.vue";

@@ -75,11 +75,11 @@
           فرزند:
           <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
-          <span class="bold">{{ userInfo.birthdayDate }}</span>
+          <span class="bold">{{ userInfo.birthDate }}</span>
           شماره ملی:
           <span class="bold">{{ userInfo.idCard }}</span>
           میزان تحصیلات:
-          <span class="bold">{{ userInfo.education }}</span>
+          <span class="bold">{{ userInfo.diploma }}</span>
           <br />به نشانی:
           <span class="bold">{{ userInfo.address }}</span>
           <br />
@@ -406,11 +406,11 @@
           فرزند:
           <span class="bold">{{ userInfo.fatherName }}</span>
           متولد:
-          <span class="bold">{{ userInfo.birthdayDate }}</span>
+          <span class="bold">{{ userInfo.birthDate }}</span>
           شماره ملی:
           <span class="bold">{{ userInfo.idCard }}</span>
           میزان تحصیلات:
-          <span class="bold">{{ userInfo.education }}</span>
+          <span class="bold">{{ userInfo.diploma }}</span>
           <br />به نشانی:
           <span class="bold">{{ userInfo.address }}</span>
           <br />
@@ -701,31 +701,19 @@
 </template>
 <script>
 import $ from "jquery";
+import {allMonths} from "../../datastore/globalData"
 export default {
   data() {
     return {
       info: null,
-      allMonths: [
-        { name: "فروردین", number: 1, days: 31 },
-        { name: "اردیبهشت", number: 2, days: 31 },
-        { name: "خرداد", number: 3, days: 31 },
-        { name: "تیر", number: 4, days: 31 },
-        { name: "مرداد", number: 5, days: 31 },
-        { name: "شهریور", number: 6, days: 31 },
-        { name: "مهر", number: 7, days: 30 },
-        { name: "آبان", number: 8, days: 30 },
-        { name: "آذر", number: 9, days: 30 },
-        { name: "دی", number: 10, days: 30 },
-        { name: "بهمن", number: 11, days: 30 },
-        { name: "اسفند", number: 12, days: 30 }
-      ],
+      allMonths: [],
       currentFinishedDay: ""
     };
   },
   created() {
-    console.log(this.userInfo);
     this.checkData();
     this.setLastDayOfMonth();
+    this.allMonths = allMonths
   },
   mounted() {
     this.showOnScroll();

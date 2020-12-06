@@ -7,7 +7,7 @@
           <th scope="col">تعداد</th>
           <th scope="col">وضعیت</th>
           <th scope="col">نام کاربر</th>
-          <th scope="col"></th>
+          <th scope="col">تعداد لوازم ها: {{ stuffList.length }}</th>
         </tr>
       </thead>
       <tbody>
@@ -62,13 +62,6 @@
                 </svg>
               </span>
             </button>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="5">
-            <div class="container text-center">
-              تعداد لوازم ها: {{ stuffList.length }}
-            </div>
           </td>
         </tr>
       </tbody>
@@ -131,7 +124,7 @@
   </div>
 </template>
 <script>
-// import $ from "jquery";
+import $ from "jquery";
 import { formFields } from "../../datastore/globalData";
 import getData from "../../actions/getData";
 import postData from "../../actions/postData";
@@ -194,6 +187,15 @@ export default {
     },
     toggleModal(action) {
       this.$root.$emit("bv::toggle::modal", action, "#btnToggle");
+    }
+  },
+
+
+  watch: {
+    stuffList: () => {
+        $(document).ready(() => {
+          $("#workersTable").tablesorter();
+        })  
     }
   }
 };

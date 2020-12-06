@@ -65,22 +65,12 @@ export default {
   mixins: [getData, postData],
 
   created() {
-    this.getData("workers", this.workersList);
+    this.getDocument("computers", this.$route.params.id, this.computersList);
   },
 
   methods: {},
   watch: {
-    workersList: function() {
-      const currentWorkerId = this.$route.params.id;
 
-      for (let i = 0; i < this.workersList.length; i++) {
-        const currentWorker = this.workersList[i];
-
-        if (currentWorker._ID == currentWorkerId) {
-          this.showingWorker = currentWorker;
-        }
-      }
-    }
   }
 };
 </script>

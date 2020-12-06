@@ -12,8 +12,8 @@ export default {
       poroshatOfficialContractInfo: null,
       userStatus: {
         logedIn: "false",
-        username: ""
-      }
+        username: "",
+      },
     };
   },
   beforeCreate() {
@@ -22,10 +22,14 @@ export default {
     }
   },
   created() {
+    alert(this.$router.currentRoute.path)
     this.checkLogedIn();
   },
   mounted() {
-    userActions.$on("userLogedIn", user => {
+    if (this.$router.currentRoute !== "preview") {
+      localStorage.removeItem("preparingContractUserInfo");
+    }
+    userActions.$on("userLogedIn", (user) => {
       localStorage.logedIn = "true";
       localStorage.username = user.name;
       localStorage.userRole = user.accessLevel;
@@ -41,8 +45,8 @@ export default {
           this.$router.push("/login");
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style></style>

@@ -10,6 +10,7 @@
           <th scope="col">کد ملی</th>
           <th scope="col">محل اشتغال</th>
           <th scope="col">تحصیلات</th>
+          <th scope="col">سیستم</th>
           <th scope="col">آدرس</th>
           <th scope="col"></th>
         </tr>
@@ -17,14 +18,15 @@
       <tbody>
         <tr v-for="(worker, i) in workers" :key="i">
           <th>
-            <router-link :to="'/workers/'+ worker._ID">{{ worker.firstName }} {{ worker.lastName }}</router-link>
+            <router-link :to="'/workers/'+ worker._id">{{ worker.firstName }} {{ worker.lastName }}</router-link>
           </th>
           <td>{{ worker.fatherName }}</td>
-          <td>{{ worker.birthdayDate }}</td>
+          <td>{{ worker.birthDate }}</td>
           <td>{{ worker.role }}</td>
           <td>{{ worker.idCard }}</td>
           <td>{{ worker.employmentPlace }}</td>
           <td>{{ worker.education }}</td>
+          <td>{{ worker.workerComputer }}</td>
           <td>{{ worker.address }}</td>
           <td>
             <button
@@ -121,7 +123,7 @@ import getData from "../../actions/getData";
 import postData from "../../actions/postData";
 import updateData from "../../actions/updateData";
 import deleteData from "../../actions/deleteData";
-import fields from "../forms/contractFields";
+import fields from "../forms/generalFields";
 export default {
   data() {
     return {
@@ -137,7 +139,7 @@ export default {
   components: { fields },
   mixins: [getData, postData, updateData, deleteData],
   created() {
-    this.getData("workers", this.workers);
+    this.getData("employees", this.workers);
   },
 
   methods: {
@@ -170,7 +172,7 @@ export default {
     },
     deleteWorker(worker) {
       if (confirm(`${worker.firstName} ${worker.lastName} پاک شود؟`)) {
-        this.deleteData("workers", worker);
+        this.deleteData("employees", worker);
         this.postData("deleteItemsLog", worker, true);
       }
     },

@@ -7,7 +7,7 @@
         v-model="prepareInfo.deviceName"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>نوع دستگاه</label>
@@ -16,7 +16,7 @@
         v-model="prepareInfo.deviceType"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>Motherboard</label>
@@ -25,7 +25,7 @@
         v-model="prepareInfo.motherboard"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>Ram</label>
@@ -49,7 +49,7 @@
         v-model="prepareInfo.storage"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>CPU</label>
@@ -58,7 +58,7 @@
         v-model="prepareInfo.cpu"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>Graphic</label>
@@ -67,7 +67,7 @@
         v-model="prepareInfo.graphic"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
 
       <label>Display</label>
@@ -76,22 +76,35 @@
         v-model="prepareInfo.display"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
+
+      <label>Device Owner</label>
+      <select
+        name="required"
+        class="form-control"
+        v-model="prepareInfo.deviceOwner"
+      >
+        <option>none</option>
+        <option v-for="(worker, i) in workers" :key="i" :value="worker._id">
+          {{ `${worker.firstName} ${worker.lastName}` }}
+        </option>
+      </select>
+      <br />
+
       <label>Username</label>
       <input
         v-model="prepareInfo.deviceUsername"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
-
       <label>Password</label>
       <input
         v-model="prepareInfo.devicePassword"
         type="text"
         class="form-control"
-        style="margin-bottom:15px"
+        style="margin-bottom: 15px"
       />
     </form>
   </div>
@@ -107,16 +120,25 @@ export default {
   data() {
     return {
       prepareInfo: {},
-      isEditing: false
+      isEditing: false,
+      workers: [],
+      deviceOwnerInfo: {},
+      lastDeviceOwner: "",
     };
   },
   props: {
-    editingComputerInfo: Object
+    editingComputerInfo: Object,
   },
 
   mixins: [postData, updateData, getData, dataValidate],
 
-  created() {},
+  created() {
+    this.getData("employees", this.workers);
+    if (this.prepareInfo.deviceOwner !== "none") {
+      this.lastDeviceOwner = this.prepareInfo.deviceOwner;
+      this.getDocument("/employees", this.prepareInfo.deviceOwner);
+    }
+  },
 
   mounted() {
     formFields.$on("newComputerEmit", () => {
@@ -131,6 +153,12 @@ export default {
   methods: {
     inputValidation(command) {
       this.detectEmptyData();
+      if (this.prepareInfo.deviceOwner !== "none") {
+        this.deviceOwnerInfo.workerComputer = this.prepareInfo._id;
+        this.updateData("/employees", this.deviceOwnerInfo);
+      } else {
+        this.deviceOwnerInfo.workerComputer = "";
+      }
       if (this.detectEmptyData() == true) {
         if (command == "newComputer") {
           this.postData("computers", this.prepareInfo, true);
@@ -138,7 +166,7 @@ export default {
           this.updateData("computers", this.prepareInfo);
         }
       }
-    }
+    },
   },
 
   watch: {
@@ -152,8 +180,32 @@ export default {
           this.isEditing = true;
         }
       },
-      immediate: true
-    }
-  }
+      immediate: true,
+    },
+    "prepareInfo.deviceOwner": function () {
+      if (this.prepareInfo.deviceOwner !== "none") {
+        this.getDocument("/employees", this.prepareInfo.deviceOwner);
+      }
+      if (this.prepareInfo.deviceOwner == "none") {
+        if (this.deviceOwnerInfo.workerComputer == this.prepareInfo._id) {
+          this.deviceOwnerInfo.workerComputer = "";
+          this.updateData("/employees", this.deviceOwnerInfo);
+        }
+      }
+    },
+    obj: function () {
+      this.deviceOwnerInfo = this.obj;
+    },
+    workers: function () {
+      this.workers.map((worker, i) => {
+        if (
+          worker.workerComputer !== "" &&
+          this.prepareInfo.deviceOwner !== worker._id
+        ) {
+          this.workers.splice(i, 1);
+        }
+      });
+    },
+  },
 };
 </script>

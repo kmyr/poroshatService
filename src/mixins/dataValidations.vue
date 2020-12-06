@@ -8,16 +8,16 @@ export default {
     detectEmptyData() {
       let emptyInputs = 0;
       let emptySelects = 0;
-      $("input[name='required']").each(function() {
+      $("input[name='required']").each(function () {
         emptyInputs++;
         if ($(this).val() == "") {
           $(this)
-            .filter(function() {
+            .filter(function () {
               return this.value == "";
             })
             .addClass("is-invalid");
           $(this)
-            .filter(function() {
+            .filter(function () {
               return this.value !== "";
             })
             .removeClass("is-invalid");
@@ -25,13 +25,13 @@ export default {
           emptyInputs--;
 
           $(this)
-            .filter(function() {
+            .filter(function () {
               return this.value !== "";
             })
             .removeClass("is-invalid");
         }
       });
-      $("select[name='required']").each(function() {
+      $("select[name='required']").each(function () {
         emptySelects++;
         const thisElement = $(this).children(":selected");
 
@@ -46,7 +46,7 @@ export default {
       if (emptyInputs == 0 && emptySelects == 0) {
         return true;
       }
-    }
-  }
+    },
+  },
 };
 </script>

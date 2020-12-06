@@ -7,7 +7,7 @@
           <th scope="col">Ram</th>
           <th scope="col">Storage</th>
           <th scope="col">CPU</th>
-          <th scope="col"></th>
+          <th scope="col">تعداد سیستم ها: {{ computers.length }}</th>
         </tr>
       </thead>
       <tbody>
@@ -69,11 +69,7 @@
           </td>
         </tr>
         <tr>
-          <td colspan="5">
-            <div class="container text-center">
-              تعداد سیستم ها: {{ computers.length }}
-            </div>
-          </td>
+
         </tr>
       </tbody>
     </table>
@@ -94,8 +90,8 @@
         افزودن
       </button>
     </div>
-    <!-- Modal -->
 
+    <!-- Modal -->
     <b-modal
       id="computerActionModal"
       class="modal"
@@ -135,7 +131,7 @@
   </div>
 </template>
 <script>
-// import $ from "jquery";
+import $ from "jquery";
 import { formFields } from "../../datastore/globalData";
 import getData from "../../actions/getData";
 import postData from "../../actions/postData";
@@ -158,20 +154,11 @@ export default {
   components: { fields },
 
   mixins: [getData, postData, updateData, deleteData],
+
   created() {
-    this.getData("computers", this.computers);
-    // for (let i = 0; i < this.computers.length; i++) {
-    //   const mydata = this.computers[i];
-    //   axios
-    //     .post("http://localhost:3000/computers", mydata)
-    //     .then(function(response) {
-    //       console.log(response);
-    //     })
-    //     .catch(function(error) {
-    //       console.log(error);
-    //     });
-    // }
+    this.getData("computers", this.computers)
   },
+
 
   methods: {
     editComputerModal(computer) {
@@ -209,6 +196,15 @@ export default {
     },
     toggleModal(action) {
       this.$root.$emit("bv::toggle::modal", action, "#btnToggle");
+    }
+  },
+
+  watch: {
+        computers: () => {
+         $(document).ready(() => {
+           $("#workersTable").tablesorter();
+         })  
+
     }
   }
 };
