@@ -10,7 +10,7 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 Vue.use(tableSorter);
 Vue.use(VueSidebarMenu);
 
-axios.defaults.baseURL = "http://185.128.136.215/";
+axios.defaults.baseURL = "http://localhost:3000";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -24,3 +24,13 @@ new Vue({
   router,
   render: (h) => h(App),
 }).$mount("#app");
+
+module.exports = {
+  apps: [
+    {
+      name: "WEB",
+      script: "./node_modules/@vue/cli-service/bin/vue-cli-service.js",
+      args: "serve",
+    },
+  ],
+};

@@ -22,7 +22,6 @@ export default {
     }
   },
   created() {
-    alert(this.$router.currentRoute.path)
     this.checkLogedIn();
   },
   mounted() {
