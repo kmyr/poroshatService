@@ -10,7 +10,7 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 Vue.use(tableSorter);
 Vue.use(VueSidebarMenu);
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "http://185.128.136.215/";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
