@@ -10,7 +10,7 @@
     <button
       id="cancelBtn"
       class="btn btn-outline-danger hide-on-print"
-      @click="cancel('../official-contract')"
+      @click="cancel('/')"
     >
       انصراف
     </button>
@@ -112,31 +112,35 @@
               <tr>
                 <td class="salaryTableTitle">حقوق پایه</td>
                 <td class="salarySectionTable">
-                  {{ userInfo.salary.baseSalary }}
+                  {{ thousandSeprator(userInfo.salary.baseSalary) }}
                 </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">پایه سنوات</td>
-                <td class="salarySectionTable">{{ userInfo.salary.years }}</td>
+                <td class="salarySectionTable">
+                  {{ thousandSeprator(userInfo.salary.years) }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">بن کارگری</td>
-                <td class="salarySectionTable">{{ userInfo.salary.worker }}</td>
+                <td class="salarySectionTable">
+                  {{ thousandSeprator(userInfo.salary.worker) }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق مسکن</td>
                 <td class="salarySectionTable">
-                  {{ userInfo.salary.housing }}
+                  {{ thousandSeprator(userInfo.salary.housing) }}
                 </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق عائله مندی و اولاد</td>
                 <td class="salarySectionTable">
-                  {{ userInfo.salary.children }}
+                  {{ thousandSeprator(userInfo.salary.children) }}
                 </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
@@ -146,7 +150,7 @@
                   <span class="bold">{{ userInfo.salary.salaryLetter }}</span>
                 </td>
                 <td class="salarySectionTable" colspan="2">
-                  {{ userInfo.salary.sumOfSalary }}
+                  {{ thousandSeprator(userInfo.salary.totalSalary) }}
                 </td>
               </tr>
             </tbody>
@@ -329,7 +333,7 @@
             </li>
           </ol>
           <article>
-            <p class="bold" style=" text-align: right !important">
+            <p class="bold" style="text-align: right !important">
               همکار اقرار می نماید که با آگاهی کامل و در کمال صحت و سلامت کامل
               عقلی، به کلیه جوانب قرارداد و شرایط معمول و جاری شرکت/کارگاه آگاهی
               کامل دارد و موظف است کلیه قوانین و مقررات و آئین نامه های داخلی
@@ -443,31 +447,35 @@
               <tr>
                 <td class="salaryTableTitle">حقوق پایه</td>
                 <td class="salarySectionTable">
-                  {{ userInfo.salary.baseSalary }}
+                  {{ thousandSeprator(userInfo.salary.baseSalary) }}
                 </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">پایه سنوات</td>
-                <td class="salarySectionTable">{{ userInfo.salary.years }}</td>
+                <td class="salarySectionTable">
+                  {{ thousandSeprator(userInfo.salary.years) }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">بن کارگری</td>
-                <td class="salarySectionTable">{{ userInfo.salary.worker }}</td>
+                <td class="salarySectionTable">
+                  {{ thousandSeprator(userInfo.salary.worker) }}
+                </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق مسکن</td>
                 <td class="salarySectionTable">
-                  {{ userInfo.salary.housing }}
+                  {{ thousandSeprator(userInfo.salary.housing) }}
                 </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
               <tr>
                 <td class="salaryTableTitle">حق عائله مندی و اولاد</td>
                 <td class="salarySectionTable">
-                  {{ userInfo.salary.children }}
+                  {{ thousandSeprator(userInfo.salary.children) }}
                 </td>
                 <td class="salaryCurrency">ریال</td>
               </tr>
@@ -477,7 +485,7 @@
                   <span class="bold">{{ userInfo.salary.salaryLetter }}</span>
                 </td>
                 <td class="salarySectionTable" colspan="2">
-                  {{ userInfo.salary.sumOfSalary }}
+                  {{ thousandSeprator(userInfo.salary.totalSalary) }}
                 </td>
               </tr>
             </tbody>
@@ -663,7 +671,7 @@
             </li>
           </ol>
           <article>
-            <p class="bold" style=" text-align: right !important">
+            <p class="bold" style="text-align: right !important">
               همکار اقرار می نماید که با آگاهی کامل و در کمال صحت و سلامت کامل
               عقلی، به کلیه جوانب قرارداد و شرایط معمول و جاری شرکت/کارگاه آگاهی
               کامل دارد و موظف است کلیه قوانین و مقررات و آئین نامه های داخلی
@@ -700,25 +708,31 @@
   </div>
 </template>
 <script>
+import numeral from "numeral";
 import $ from "jquery";
-import {allMonths} from "../../datastore/globalData"
+import { allMonths } from "../../datastore/globalData";
+
 export default {
   data() {
     return {
       info: null,
       allMonths: [],
-      currentFinishedDay: ""
+      currentFinishedDay: "",
     };
   },
   created() {
     this.checkData();
     this.setLastDayOfMonth();
-    this.allMonths = allMonths
+    this.allMonths = allMonths;
   },
   mounted() {
     this.showOnScroll();
   },
   methods: {
+    thousandSeprator(number) {
+      return numeral(parseInt(number)).format("0,0");
+    },
+
     checkData() {
       this.userInfo = JSON.parse(
         localStorage.getItem("preparingContractUserInfo")
@@ -750,7 +764,7 @@ export default {
     },
 
     showOnScroll() {
-      $(document).scroll(function() {
+      $(document).scroll(function () {
         var y = $(this).scrollTop();
         if (y > 200) {
           $("#scrollTop").fadeIn();
@@ -762,8 +776,8 @@ export default {
 
     scrollTop() {
       $("html,body").animate({ scrollTop: 0 }, "slow");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

@@ -1,25 +1,35 @@
-.users-table{
-    direction: rtl !important;
-    float: right;
-    text-align: right !important;
-
-}
-.actionBtn {
-    border: 0 !important;
-}
-.addUserBtn {
-    margin-left: 15px;
-    margin-top: 5px;
+.farsi-table {
+  direction: rtl !important;
+  float: right;
+  text-align: right !important;
 }
 
-
-.backBtn {
-    left: 0 !important;
+.farsi-table thead th {
+    border: 0;
 }
-.flex-button-section {
-    /* width: 10px !important; */
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 10px;
+
+.action-btn {
+  border: 0 !important;
+}
+/* 
+.add-item-btn {
+  margin-left: 15px;
+  margin-top: 5px;
+  right: 0 !important;
+}
+
+.back-btn {
+  left: 0 !important;
+}
+
+.action-buttons-section {
+  width: 100%;
+} */
+.head-buttons-section {
+    /* background-color: ; */
+    padding: 15px 15px 0 15px;
+}
+.rightClickSection {
+    width: 100%;
+    height: 100%;
 }

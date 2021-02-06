@@ -1,23 +1,14 @@
 <script>
-import axios from "axios";
-
+import db from "../datastore/firebaseInit";
 export default {
   methods: {
-    updateData(document, obj, passedID) {
-      let targetID = null;
-      if (passedID !== undefined) {
-        targetID = passedID;
-        console.log(targetID);
-      } else {
-        targetID = obj._id;
-      }
-      axios
-        .patch(`${document}/${targetID}`, obj)
-        .then((res) => {
-          console.log(res);
-          // location.reload();
-        })
-        .catch((err) => console.log(err));
+    updateData(document, obj, reloadPage) {
+      db.collection(document)
+        .doc(obj._ID)
+        .update(obj)
+        .then(() => {
+          reloadPage ? location.reload() : "";
+        });
     },
   },
 };

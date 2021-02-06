@@ -1,4 +1,5 @@
 import Vue from "vue";
+
 import axios from "axios";
 import tableSorter from "tablesorter";
 import App from "./App.vue";
@@ -10,7 +11,7 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 Vue.use(tableSorter);
 Vue.use(VueSidebarMenu);
 
-axios.defaults.baseURL = "https://185.128.136.215";
+axios.defaults.baseURL = "http://185.128.136.215";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -25,4 +26,4 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 
-console.log('By Kamyar Poureatesam');
+console.log("By Kamyar Poureatesam");

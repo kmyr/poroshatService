@@ -87,7 +87,7 @@
       <div class="form-row">
         <div class="col">
           <input
-            name="startMonth"
+            name="required"
             type="number"
             class="form-control"
             placeholder="ماه"
@@ -96,7 +96,7 @@
         </div>
         <div class="col">
           <input
-            name="startDay"
+            name="required"
             type="number"
             class="form-control"
             placeholder="روز"
@@ -106,59 +106,76 @@
       </div>
       <label>(ماه) مدت قرارداد</label>
       <input
-        name="contractPeriod"
+        name="required"
         v-model="userInfo.periodDate"
         type="number"
         class="form-control"
       />
-
-      <label>حقوق</label>
-      <select
-        name="salary"
+      <hr />
+      <label>پایه حقوق</label>
+      <input
+        name="base-salary"
+        :placeholder="thousandSeprator(salaryOptions.salaryDetails.baseSalary)"
+        v-model="salaryOptions.customizeSalary.finalSalary.baseSalary"
+        type="text"
         class="form-control"
-        v-model="userInfo.salary"
-        v-if="!salaryOptions.useOldSalary"
-      >
-        <option
-          v-for="(salary, i) in salaryOptions.salaryList"
-          :key="i"
-          :value="salary.sumOfSalary"
-        >
-          {{ salary.sumOfSalary }}-{{ salary.description }}
-        </option>
-      </select>
-      <select
-        name="salary"
-        class="form-control"
-        v-model="userInfo.salary"
-        v-if="salaryOptions.useOldSalary"
-      >
-        <option
-          v-for="(salary, i) in salaryOptions.salaryListOldVersion"
-          :key="i"
-          :value="salary.sumOfSalary"
-        >
-          {{ salary.sumOfSalary }}-{{ salary.description }}
-        </option>
-      </select>
-      <div class="form-check">
+      />
+      <label>عائله مندی</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input
+              type="checkbox"
+              v-model="salaryOptions.customizeSalary.calculateChildren"
+            />
+          </div>
+        </div>
         <input
-          type="checkbox"
-          class="form-check-input checkbox"
-          v-model="salaryOptions.useOldSalary"
-          id="perviousSalaryCheckbox"
+          type="text"
+          class="form-control"
+          v-model="salaryOptions.customizeSalary.finalSalary.children"
         />
-        <label
-          id="perviousSalary-label"
-          class="checkbox-label"
-          for="perviousSalaryCheckbox"
-          >پایه سنوات قدیمی</label
-        >
+      </div>
+      <label>بن کارگری</label>
+      <input
+        name="base-salary"
+        :placeholder="thousandSeprator(salaryOptions.salaryDetails.worker)"
+        v-model="salaryOptions.customizeSalary.finalSalary.worker"
+        type="text"
+        class="form-control"
+      />
+      <label>حق مسکن</label>
+      <input
+        name="base-salary"
+        :placeholder="thousandSeprator(salaryOptions.salaryDetails.housing)"
+        v-model="salaryOptions.customizeSalary.finalSalary.housing"
+        type="text"
+        class="form-control"
+      />
+      <label>سنوات</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input
+              type="checkbox"
+              v-model="salaryOptions.customizeSalary.calculateYears"
+            />
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="yearsBase"
+          v-model="salaryOptions.customizeSalary.finalSalary.years"
+          aria-label="calculate childrens"
+        />
       </div>
     </form>
   </div>
 </template>
 <script>
+import numeral from "numeral";
+import Num2persian from "num2persian";
 import $ from "jquery";
 import { formFields } from "../../datastore/globalData";
 import { diploma, gender, salaryList } from "../../datastore/globalData";
@@ -166,13 +183,21 @@ import postData from "../../actions/postData";
 import getData from "../../actions/getData";
 import updateData from "../../actions/updateData";
 import dataValidate from "../../mixins/dataValidations";
+
 export default {
   data() {
     return {
       salaryOptions: {
-        salaryListOldVersion: null,
-        salaryList: null,
-        useOldSalary: false,
+        customizeSalary: {
+          finalSalary: {
+            years: "",
+            worker: "",
+            housing: "",
+            children: "",
+            baseSalary: "",
+          },
+        },
+        salaryDetails: null,
         selectedSalary: null,
       },
 
@@ -197,8 +222,8 @@ export default {
     };
 
     this.salaryOptions = {
-      salaryList: salaryList.newSalaryList,
-      salaryListOldVersion: salaryList.salaryListOldVersion,
+      salaryDetails: salaryList.salaryDetails,
+      customizeSalary: this.salaryOptions.customizeSalary,
     };
   },
 
@@ -209,36 +234,94 @@ export default {
   },
 
   methods: {
+    thousandSeprator(number) {
+      return numeral(parseInt(number)).format("0,0");
+    },
+
     inputValidation() {
       this.detectEmptyData();
       if (this.detectEmptyData() == true) {
-        this.findOutSelectedSalary();
+        this.calculateSalary();
         this.userInfo.periodDate !== 1 ? this.userInfo.periodDate-- : null;
         localStorage.setItem(
           "preparingContractUserInfo",
           JSON.stringify(this.userInfo)
         );
-        this.$router.push(`/official-contract/preview`);
+        this.$router.push(`/preview`);
         $("html,body").animate({ scrollTop: 0 }, "slow");
       }
     },
 
-    findOutSelectedSalary() {
-      let selectedSalaryList = this.salaryOptions.salaryList;
+    calculateSalary() {
+      const customizedSalary = this.salaryOptions.customizeSalary;
+      const salaryDetails = this.salaryOptions.salaryDetails;
+      let totalSalary = 0;
 
-      if (this.salaryOptions.useOldSalary) {
-        selectedSalaryList = this.salaryOptions.salaryListOldVersion;
+      if (
+        customizedSalary.totalSalary !== undefined ||
+        customizedSalary.salaryLetter !== undefined
+      ) {
+        delete customizedSalary.totalSalary;
+        delete customizedSalary.salaryLetter;
       }
-      for (let i = 0; i < selectedSalaryList.length; i++) {
-        const selectedSalary = selectedSalaryList[i];
-        if (selectedSalary.sumOfSalary == this.userInfo.salary) {
-          this.userInfo.salary = selectedSalary;
-        }
+
+      if (
+        customizedSalary.calculateChildren &&
+        customizedSalary.finalSalary.children !== ""
+      ) {
+        customizedSalary.finalSalary.children =
+          customizedSalary.finalSalary.children * salaryDetails.childrenBase;
+        customizedSalary.calculateChildren = false;
       }
+
+      customizedSalary.finalSalary.children == ""
+        ? delete customizedSalary.finalSalary.children
+        : "";
+
+      customizedSalary.finalSalary.baseSalary == ""
+        ? (customizedSalary.finalSalary.baseSalary = salaryDetails.baseSalary)
+        : "";
+
+      customizedSalary.finalSalary.worker == ""
+        ? (customizedSalary.finalSalary.worker = salaryDetails.worker)
+        : "";
+
+      customizedSalary.finalSalary.housing == ""
+        ? (customizedSalary.finalSalary.housing = salaryDetails.housing)
+        : "";
+
+      customizedSalary.finalSalary.years == "" &&
+      !customizedSalary.calculateYears
+        ? delete customizedSalary.finalSalary.years
+        : "";
+
+      for (const fields in customizedSalary.finalSalary) {
+        totalSalary =
+          parseInt(totalSalary) +
+          parseInt(customizedSalary.finalSalary[fields]);
+      }
+      customizedSalary.salaryLetter = Num2persian(totalSalary) + " ریال";
+      customizedSalary.totalSalary = totalSalary;
+
+      this.userInfo.salary = {
+        ...customizedSalary.finalSalary,
+        salaryLetter: customizedSalary.salaryLetter,
+        totalSalary: customizedSalary.totalSalary,
+      };
     },
   },
 
   watch: {
+    "salaryOptions.customizeSalary.calculateYears": function () {
+      const customizedSalary = this.salaryOptions.customizeSalary;
+      const salaryDetails = this.salaryOptions.salaryDetails;
+
+      if (!customizedSalary.calculateYears) {
+        delete customizedSalary.finalSalary.years;
+      } else if (customizedSalary.calculateYears) {
+        customizedSalary.finalSalary.years = salaryDetails.years;
+      }
+    },
     "userInfo.startDate.month": function () {
       if (this.userInfo.startDate.month > 12) {
         this.userInfo.startDate.month = 12;
