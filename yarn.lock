@@ -11518,6 +11518,13 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-persian-datetime-picker@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/vue-persian-datetime-picker/-/vue-persian-datetime-picker-2.6.0.tgz#beac31dd774e7da71ef92055df07ca9a027ba1ff"
+  integrity sha512-helk+/puOyZ7Xm+XH9mNaEwkML1tPvOxd2rFNhRkxrYBtI2Y33YEyYAzRklC3jddq+kQQp3GgPX9lAENI79Rcg==
+  dependencies:
+    moment-jalaali "^0.9.2"
+
 vue-property-decorator@^7.0.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-7.3.0.tgz#d50d67f0b0f1c814f9f2fba36d6eeccbcc62dbb6"

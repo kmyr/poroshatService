@@ -45,7 +45,7 @@ export const allMonths = [
   { name: "آذر", number: 9, days: 30 },
   { name: "دی", number: 10, days: 30 },
   { name: "بهمن", number: 11, days: 30 },
-  { name: "اسفند", number: 12, days: 30 },
+  { name: "اسفند", number: 12, days: 29 },
 ];
 
 //emits

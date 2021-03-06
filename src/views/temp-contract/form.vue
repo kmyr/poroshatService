@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import fields from "../forms/contractFields";
+import fields from "../forms/tempContractFields";
 import { formFields } from "../../datastore/globalData";
 export default {
   data() {
@@ -44,7 +44,7 @@ export default {
     },
 
     submitContractForm() {
-      formFields.$emit("submitContractForm");
+      formFields.$emit("submitTempContractForm");
     },
   },
 

@@ -33,6 +33,7 @@
     "simple-excel-to-json": "^2.2.1",
     "tablesorter": "^2.31.3",
     "vue": "^2.6.11",
+    "vue-persian-datetime-picker": "^2.6.0",
     "vue-resource": "^1.5.1",
     "vue-right-click": "^3.0.1",
     "vue-router": "^3.2.0",
