@@ -10,6 +10,12 @@ export default {
       poroshatOfficialContractInfo: null,
     };
   },
+  created() {
+    if (!localStorage.savedContracts) {
+      const savedContracts = [];
+      localStorage.setItem("savedContracts", JSON.stringify(savedContracts));
+    }
+  },
 };
 </script>
 <style></style>

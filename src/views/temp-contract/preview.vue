@@ -15,6 +15,13 @@
       انصراف
     </button>
     <button
+      id="cancelBtn"
+      class="btn btn-outline-success hide-on-print"
+      @click="saveContract()"
+    >
+      ذخیره قرارداد
+    </button>
+    <button
       class="btn btn-primary hide-on-print"
       id="scrollTop"
       @click="scrollTop()"
@@ -215,7 +222,7 @@
         </div>
       </div>
 
-      <div class="sheet second-sheet">
+      <div style="margin-bottom: 0" class="sheet second-sheet">
         <div class="header">
           <div class="headerDate">
             <span class="headerDateValue">
@@ -374,6 +381,7 @@
 <script>
 import numeral from "numeral";
 import $ from "jquery";
+import saveContract from "../actions/saveContract.actions";
 import { allMonths } from "../../datastore/globalData";
 
 export default {
@@ -388,6 +396,7 @@ export default {
     this.checkData();
     this.allMonths = allMonths;
   },
+  mixins: [saveContract],
   mounted() {
     this.showOnScroll();
   },
@@ -401,7 +410,7 @@ export default {
         localStorage.getItem("preparingTempContractUserInfo")
       );
       if (this.userInfo == undefined || this.userInfo == null) {
-        this.$router.push("/official-contract");
+        this.$router.push("/form-temp");
       }
       document.title = `قرارداد ${this.userInfo.firstName}  ${this.userInfo.lastName}`;
     },
@@ -411,7 +420,7 @@ export default {
     },
 
     cancel(target) {
-      localStorage.removeItem("preparingContractUserInfo");
+      localStorage.removeItem("preparingTempContractUserInfo");
       this.$router.push(target);
     },
 

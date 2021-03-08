@@ -17,6 +17,7 @@ const routes = [
   { path: "/", component: index },
   {
     path: "/preview",
+    name: "preview-contract",
     component: preview,
   },
   {
@@ -25,6 +26,7 @@ const routes = [
   },
   {
     path: "/preview-temp",
+    name: "preview-temp-contract",
     component: previewTemp,
   },
 ];

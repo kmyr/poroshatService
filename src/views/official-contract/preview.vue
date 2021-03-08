@@ -15,6 +15,13 @@
       انصراف
     </button>
     <button
+      id="cancelBtn"
+      class="btn btn-outline-success hide-on-print"
+      @click="saveContract()"
+    >
+      ذخیره قرارداد
+    </button>
+    <button
       class="btn btn-primary hide-on-print"
       id="scrollTop"
       @click="scrollTop()"
@@ -710,6 +717,7 @@
 <script>
 import numeral from "numeral";
 import $ from "jquery";
+import saveContract from "../actions/saveContract.actions";
 import { allMonths } from "../../datastore/globalData";
 
 export default {
@@ -725,6 +733,7 @@ export default {
     this.setLastDayOfMonth();
     this.allMonths = allMonths;
   },
+  mixins: [saveContract],
   mounted() {
     this.showOnScroll();
   },
